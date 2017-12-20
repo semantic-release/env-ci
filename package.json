@@ -1,0 +1,91 @@
+{
+  "name": "env-ci",
+  "description": "Get environment variables exposed by CI services",
+  "version": "0.0.0-development",
+  "author": "Pierre Vanduynslager (https://github.com/pvdlg)",
+  "bugs": {
+    "url": "https://github.com/pvdlg/github-parser/issues"
+  },
+  "dependencies": {
+    "execa": "^0.8.0"
+  },
+  "devDependencies": {
+    "ava": "^0.23.0",
+    "codecov": "^3.0.0",
+    "eslint-config-prettier": "^2.3.0",
+    "eslint-plugin-prettier": "^2.3.0",
+    "nyc": "^11.1.0",
+    "prettier": "~1.8.2",
+    "semantic-release": "^11.0.0",
+    "tempy": "^0.2.1",
+    "xo": "^0.18.2"
+  },
+  "engines": {
+    "node": ">=4"
+  },
+  "files": [
+    "lib",
+    "index.js"
+  ],
+  "homepage": "https://github.com/pvdlg/env-ci#readme",
+  "keywords": [
+    "appveyor",
+    "buildkite",
+    "ci",
+    "circle",
+    "codeship",
+    "drone",
+    "environment",
+    "gitlab",
+    "jenkins",
+    "semaphore",
+    "shippable",
+    "travis",
+    "variable",
+    "wercker"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "nyc": {
+    "include": [
+      "lib/**/*.js",
+      "index.js"
+    ],
+    "reporter": [
+      "json",
+      "text",
+      "html"
+    ],
+    "all": true
+  },
+  "prettier": {
+    "printWidth": 120,
+    "singleQuote": true,
+    "bracketSpacing": false,
+    "trailingComma": "es5"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pvdlg/env-ci.git"
+  },
+  "scripts": {
+    "codecov": "codecov -f coverage/coverage-final.json",
+    "lint": "xo",
+    "semantic-release": "semantic-release",
+    "test": "xo && nyc ava -v"
+  },
+  "xo": {
+    "extends": [
+      "prettier"
+    ],
+    "plugins": [
+      "prettier"
+    ],
+    "rules": {
+      "prettier/prettier": 2
+    }
+  }
+}
