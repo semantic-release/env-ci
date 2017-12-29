@@ -17,7 +17,9 @@ $ npm install --save env-ci
 ## Usage
 
 ```js
-const {isCi, service, commit, build, branch, job, pr, isPr, slug, root} = require('env-ci');
+const envCi = require('env-ci');
+
+const {isCi, service, commit, build, branch, job, pr, isPr, slug, root} = envCi();
 ```
 
 ## Variables
