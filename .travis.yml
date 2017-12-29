@@ -19,12 +19,14 @@ install:
 script:
   - npm run test
 
+after_success:
+  - npm run codecov
+
 jobs:
   include:
     - stage: release
       node_js: node
       os: linux
-      script: npm run test
+      script: skip
       after_success:
-        - npm run codecov
         - npm run semantic-release
