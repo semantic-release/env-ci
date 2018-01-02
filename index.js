@@ -4,7 +4,7 @@ const git = require('./lib/git');
 
 const services = {
   travis: require('./lib/travis'),
-  circle: require('./lib/circle'),
+  circleci: require('./lib/circleci'),
   appveyor: require('./lib/appveyor'),
   wercker: require('./lib/wercker'),
   codeship: require('./lib/codeship'),
