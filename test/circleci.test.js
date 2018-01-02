@@ -1,5 +1,5 @@
 import test from 'ava';
-import circle from '../lib/circle';
+import circle from '../lib/circleci';
 
 test('Push', t => {
   process.env.CIRCLECI = 'true';

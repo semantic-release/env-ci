@@ -39,18 +39,18 @@ const {isCi, service, commit, build, branch, job, pr, isPr, slug, root} = envCi(
 
 ## Supported CI
 
-| Service                                                     | `isCi` | `service` | `commit` | `build` | `branch` | `job` | `pr` | `isPr` | `slug` | `root` |
-|-------------------------------------------------------------|:------:|:---------:|:--------:|:-------:|:--------:|:-----:|:----:|:------:|:------:|:------:|
-| [AppVeyor](https://www.appveyor.com)                        | ✅      |     ✅     |    ✅     |    ✅    |    ✅     |   ✅   |  ✅   |   ✅    |   ✅    |   ✅    |
-| [Buildkite](https://buildkite.com)                          | ✅      |     ✅     |    ✅     |    ✅    |    ✅     |   ❌   |  ✅   |   ✅    |   ✅    |   ✅    |
-| [Circleci](https://circleci.com)                            | ✅      |     ✅     |    ✅     |    ✅    |    ✅     |   ✅   |  ✅   |   ✅    |   ✅    |   ❌    |
-| [Codeship](https://codeship.com)                            | ✅      |     ✅     |    ✅     |    ✅    |    ✅     |   ❌   |  ❌   |   ❌    |   ✅    |   ❌    |
-| [Drone](http://try.drone.io)                                | ✅      |     ✅     |    ✅     |    ✅    |    ✅     |   ✅   |  ✅   |   ✅    |   ✅    |   ❌    |
-| [Gitlab CI](https://about.gitlab.com/features/gitlab-ci-cd) | ✅      |     ✅     |    ✅     |    ✅    |    ✅     |   ✅   |  ❌   |   ❌    |   ✅    |   ✅    |
-| [Jenkins](https://jenkins-ci.org)                           | ✅      |     ✅     |    ✅     |    ✅    |    ✅     |   ❌   |  ❌   |   ❌    |   ✅    |   ✅    |
-| [Semaphore](https://semaphoreci.com)                        | ✅      |     ✅     |    ✅     |    ✅    |    ✅     |   ✅   |  ✅   |   ✅    |   ✅    |   ✅    |
-| [Shippable](https://www.shippable.com)                      | ✅      |     ✅     |    ✅     |    ✅    |    ✅     |   ✅   |  ✅   |   ✅    |   ✅    |   ✅    |
-| [Travis](https://travis-ci.org/)                            | ✅      |     ✅     |    ✅     |    ✅    |    ✅     |   ✅   |  ✅   |   ✅    |   ✅    |   ✅    |
-| [Wercker](http://www.wercker.com/)                          | ✅      |     ✅     |    ✅     |    ✅    |    ✅     |   ❌   |  ❌   |   ❌    |   ✅    |   ✅    |
+| CI Service                                                                                                |  `service`  | `isCi` | `commit` | `build` | `branch` | `job` | `pr` | `isPr` | `slug` | `root` |
+|-----------------------------------------------------------------------------------------------------------|:-----------:|:------:|:--------:|:-------:|:--------:|:-----:|:----:|:------:|:------:|:------:|
+| [AppVeyor]( https://www.appveyor.com/docs/environment-variables)                                          | `appveyor`  |   ✅    |    ✅     |    ✅    |    ✅     |   ✅   |  ✅   |   ✅    |   ✅    |   ✅    |
+| [Buildkite](https://buildkite.com/docs/builds/environment-variables)                                      | `buildkite` |   ✅    |    ✅     |    ✅    |    ✅     |   ❌   |  ✅   |   ✅    |   ✅    |   ✅    |
+| [Circleci](https://circleci.com/docs/1.0/environment-variables)                                           | `circleci`  |   ✅    |    ✅     |    ✅    |    ✅     |   ✅   |  ✅   |   ✅    |   ✅    |   ❌    |
+| [Codeship](https://documentation.codeship.com/basic/builds-and-configuration/set-environment-variables)   | `codeship`  |   ✅    |    ✅     |    ✅    |    ✅     |   ❌   |  ❌   |   ❌    |   ✅    |   ❌    |
+| [Drone](http://readme.drone.io/0.5/usage/environment-reference)                                           |   `drone`   |   ✅    |    ✅     |    ✅    |    ✅     |   ✅   |  ✅   |   ✅    |   ✅    |   ❌    |
+| [Gitlab CI](https://docs.gitlab.com/ce/ci/variables/README.html)                                          |  `gitlab`   |   ✅    |    ✅     |    ✅    |    ✅     |   ✅   |  ❌   |   ❌    |   ✅    |   ✅    |
+| [Jenkins](https://wiki.jenkins.io/display/JENKINS/Building+a+software+project)                            |  `jenkins`  |   ✅    |    ✅     |    ✅    |    ✅     |   ❌   |  ❌   |   ❌    |   ✅    |   ✅    |
+| [Semaphore](https://semaphoreci.com/docs/available-environment-variables.html)                            | `semaphore` |   ✅    |    ✅     |    ✅    |    ✅     |   ✅   |  ✅   |   ✅    |   ✅    |   ✅    |
+| [Shippable](http://docs.shippable.com/ci/env-vars/#stdEnv)                                                | `shippable` |   ✅    |    ✅     |    ✅    |    ✅     |   ✅   |  ✅   |   ✅    |   ✅    |   ✅    |
+| [Travis](https://docs.travis-ci.com/user/environment-variables)                                           |  `travis`   |   ✅    |    ✅     |    ✅    |    ✅     |   ✅   |  ✅   |   ✅    |   ✅    |   ✅    |
+| [Wercker](http://devcenter.wercker.com/docs/environment-variables/available-env-vars#hs_cos_wrapper_name) |  `wercker`  |   ✅    |    ✅     |    ✅    |    ✅     |   ❌   |  ❌   |   ❌    |   ✅    |   ✅    |
 
 If none of the above CI services is detected, `commit` and `branch` are determined based on the local Git repository, and `isCi` is determined based on  the `CI` environment variable.
