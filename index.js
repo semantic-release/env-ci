@@ -14,6 +14,7 @@ const services = {
   drone: require('./lib/drone'),
   buildkite: require('./lib/buildkite'),
   gitlab: require('./lib/gitlab'),
+  bamboo: require('./lib/bamboo'),
 };
 
 module.exports = () => {
