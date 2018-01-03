@@ -15,6 +15,7 @@ const services = {
   buildkite: require('./lib/buildkite'),
   gitlab: require('./lib/gitlab'),
   bamboo: require('./lib/bamboo'),
+  teamcity: require('./lib/teamcity'),
 };
 
 module.exports = () => {

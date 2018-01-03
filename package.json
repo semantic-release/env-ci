@@ -7,13 +7,14 @@
     "url": "https://github.com/pvdlg/github-parser/issues"
   },
   "dependencies": {
-    "execa": "^0.8.0"
+    "execa": "^0.8.0",
+    "java-properties": "^0.2.9"
   },
   "devDependencies": {
     "ava": "^0.24.0",
     "codecov": "^3.0.0",
-    "eslint-config-prettier": "^2.3.0",
-    "eslint-plugin-prettier": "^2.3.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-prettier": "^2.4.0",
     "nyc": "^11.1.0",
     "prettier": "~1.9.2",
     "semantic-release": "^11.0.0",
@@ -80,13 +81,7 @@
   },
   "xo": {
     "extends": [
-      "prettier"
-    ],
-    "plugins": [
-      "prettier"
-    ],
-    "rules": {
-      "prettier/prettier": 2
-    }
+      "plugin:prettier/recommended"
+    ]
   }
 }
