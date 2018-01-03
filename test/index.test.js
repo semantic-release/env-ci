@@ -17,6 +17,7 @@ test.beforeEach(() => {
   delete process.env.JENKINS_URL;
   delete process.env.SEMAPHORE;
   delete process.env.SHIPPABLE;
+  delete process.env.TEAMCITY_VERSION;
   delete process.env.TRAVIS;
   delete process.env.WERCKER_MAIN_PIPELINE_STARTED;
   delete process.env.bamboo_agentId;
@@ -101,6 +102,14 @@ test.serial('Shippable', t => {
   const env = m();
   t.is(env.isCi, true);
   t.is(env.service, 'shippable');
+});
+
+test.serial('TeamCity', t => {
+  process.env.TEAMCITY_VERSION = '2017.1.2 (build 46812)';
+
+  const env = m();
+  t.is(env.isCi, true);
+  t.is(env.service, 'teamcity');
 });
 
 test.serial('Travis', t => {

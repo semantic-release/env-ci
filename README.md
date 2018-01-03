@@ -51,6 +51,7 @@ const {isCi, service, commit, build, branch, job, pr, isPr, slug, root} = envCi(
 | [Jenkins](https://wiki.jenkins.io/display/JENKINS/Building+a+software+project)                            |  `jenkins`  |   ✅    |    ✅     |    ✅    |    ✅     |   ❌   |  ❌   |   ❌    |   ✅    |   ✅    |
 | [Semaphore](https://semaphoreci.com/docs/available-environment-variables.html)                            | `semaphore` |   ✅    |    ✅     |    ✅    |    ✅     |   ✅   |  ✅   |   ✅    |   ✅    |   ✅    |
 | [Shippable](http://docs.shippable.com/ci/env-vars/#stdEnv)                                                | `shippable` |   ✅    |    ✅     |    ✅    |    ✅     |   ✅   |  ✅   |   ✅    |   ✅    |   ✅    |
+| [TeamCity](https://confluence.jetbrains.com/display/TCD10/Predefined+Build+Parameters)                    | `teamcity`  |   ✅    |    ✅     |    ✅    |    ✅     |   ❌   |  ❌   |   ❌    |   ✅    |   ✅    |
 | [Travis](https://docs.travis-ci.com/user/environment-variables)                                           |  `travis`   |   ✅    |    ✅     |    ✅    |    ✅     |   ✅   |  ✅   |   ✅    |   ✅    |   ✅    |
 | [Wercker](http://devcenter.wercker.com/docs/environment-variables/available-env-vars#hs_cos_wrapper_name) |  `wercker`  |   ✅    |    ✅     |    ✅    |    ✅     |   ❌   |  ❌   |   ❌    |   ✅    |   ✅    |
 
