@@ -19,6 +19,7 @@ test.beforeEach(() => {
   delete process.env.SHIPPABLE;
   delete process.env.TRAVIS;
   delete process.env.WERCKER_MAIN_PIPELINE_STARTED;
+  delete process.env.bamboo_agentId;
 });
 
 test.afterEach.always(() => {
@@ -116,6 +117,15 @@ test.serial('Wercker', t => {
   const env = m();
   t.is(env.isCi, true);
   t.is(env.service, 'wercker');
+});
+
+test.serial('Bamboo', t => {
+  // eslint-disable-next-line camelcase
+  process.env.bamboo_agentId = 'some bamboo agent id';
+
+  const env = m();
+  t.is(env.isCi, true);
+  t.is(env.service, 'bamboo');
 });
 
 test.serial('Unknown CI and Git repository', async t => {

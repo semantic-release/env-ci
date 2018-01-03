@@ -30,6 +30,7 @@
   "homepage": "https://github.com/pvdlg/env-ci#readme",
   "keywords": [
     "appveyor",
+    "bamboo",
     "buildkite",
     "ci",
     "circle",
