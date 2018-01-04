@@ -3,19 +3,19 @@
 const git = require('./lib/git');
 
 const services = {
-  travis: require('./lib/travis'),
-  circleci: require('./lib/circleci'),
   appveyor: require('./lib/appveyor'),
-  wercker: require('./lib/wercker'),
+  bamboo: require('./lib/bamboo'),
+  buildkite: require('./lib/buildkite'),
+  circleci: require('./lib/circleci'),
   codeship: require('./lib/codeship'),
+  drone: require('./lib/drone'),
+  gitlab: require('./lib/gitlab'),
   jenkins: require('./lib/jenkins'),
   semaphore: require('./lib/semaphore'),
   shippable: require('./lib/shippable'),
-  drone: require('./lib/drone'),
-  buildkite: require('./lib/buildkite'),
-  gitlab: require('./lib/gitlab'),
-  bamboo: require('./lib/bamboo'),
   teamcity: require('./lib/teamcity'),
+  travis: require('./lib/travis'),
+  wercker: require('./lib/wercker'),
 };
 
 module.exports = () => {
