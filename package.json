@@ -42,6 +42,7 @@
     "jenkins",
     "semaphore",
     "shippable",
+    "teamcity",
     "travis",
     "variable",
     "wercker"
