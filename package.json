@@ -17,7 +17,7 @@
     "eslint-plugin-prettier": "^2.4.0",
     "nyc": "^11.1.0",
     "prettier": "~1.10.0",
-    "semantic-release": "^11.0.0",
+    "semantic-release": "^12.2.2",
     "tempy": "^0.2.1",
     "xo": "^0.18.2"
   },
