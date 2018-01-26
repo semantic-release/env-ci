@@ -11,7 +11,7 @@
     "java-properties": "^0.2.9"
   },
   "devDependencies": {
-    "ava": "^0.24.0",
+    "ava": "^0.25.0",
     "codecov": "^3.0.0",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-prettier": "^2.4.0",
