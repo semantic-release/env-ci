@@ -43,6 +43,7 @@ const {isCi, service, commit, build, branch, job, pr, isPr, slug, root} = envCi(
 |-----------------------------------------------------------------------------------------------------------|:-----------:|:------:|:--------:|:-------:|:--------:|:-----:|:----:|:------:|:------:|:------:|
 | [AppVeyor]( https://www.appveyor.com/docs/environment-variables)                                          | `appveyor`  |   ✅    |    ✅     |    ✅    |    ✅     |   ✅   |  ✅   |   ✅    |   ✅    |   ✅    |
 | [Bamboo](https://confluence.atlassian.com/bamboo/bamboo-variables-289277087.html)                         |  `bamboo`   |   ✅    |    ✅     |    ✅    |    ✅     |   ✅   |  ❌   |   ❌    |   ❌    |   ✅    |
+| [Bitrise](http://devcenter.bitrise.io/faq/available-environment-variables/#exposed-by-bitriseio)          |  `bitrise`  |   ✅    |    ✅     |    ✅    |    ✅     |   ❌   |  ✅   |   ✅    |   ✅    |   ❌    |
 | [Buildkite](https://buildkite.com/docs/builds/environment-variables)                                      | `buildkite` |   ✅    |    ✅     |    ✅    |    ✅     |   ❌   |  ✅   |   ✅    |   ✅    |   ✅    |
 | [Circleci](https://circleci.com/docs/1.0/environment-variables)                                           | `circleci`  |   ✅    |    ✅     |    ✅    |    ✅     |   ✅   |  ✅   |   ✅    |   ✅    |   ❌    |
 | [Codeship](https://documentation.codeship.com/basic/builds-and-configuration/set-environment-variables)   | `codeship`  |   ✅    |    ✅     |    ✅    |    ✅     |   ❌   |  ❌   |   ❌    |   ✅    |   ❌    |
