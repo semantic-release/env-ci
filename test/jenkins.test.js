@@ -6,6 +6,7 @@ test('Push', t => {
   process.env.GIT_COMMIT = '5678';
   process.env.GIT_BRANCH = 'master';
   process.env.BUILD_NUMBER = '91011';
+  process.env.BUILD_URL = 'http://jenkins.jenkins.example/buildResult';
   process.env.WORKSPACE = '/';
   delete process.env.BRANCH_NAME;
   delete process.env.ghprbActualCommit;
@@ -17,6 +18,7 @@ test('Push', t => {
     service: 'jenkins',
     commit: '5678',
     build: '91011',
+    buildUrl: 'http://jenkins.jenkins.example/buildResult',
     branch: 'master',
     root: '/',
     pr: undefined,
@@ -29,6 +31,7 @@ test('PR', t => {
   process.env.GIT_COMMIT = '5678';
   process.env.BRANCH_NAME = 'pr_branch';
   process.env.BUILD_NUMBER = '91011';
+  process.env.BUILD_URL = 'http://jenkins.jenkins.example/buildResult';
   process.env.WORKSPACE = '/';
   process.env.CHANGE_ID = '10';
   delete process.env.GIT_BRANCH;
@@ -40,6 +43,7 @@ test('PR', t => {
     service: 'jenkins',
     commit: '5678',
     build: '91011',
+    buildUrl: 'http://jenkins.jenkins.example/buildResult',
     branch: 'pr_branch',
     root: '/',
     pr: '10',
@@ -52,6 +56,7 @@ test('PR (PR builder)', t => {
   process.env.ghprbActualCommit = '5678';
   process.env.ghprbSourceBranch = 'pr_branch';
   process.env.BUILD_NUMBER = '91011';
+  process.env.BUILD_URL = 'http://jenkins.jenkins.example/buildResult';
   process.env.WORKSPACE = '/';
   process.env.ghprbPullId = '10';
   delete process.env.GIT_BRANCH;
@@ -63,6 +68,7 @@ test('PR (PR builder)', t => {
     service: 'jenkins',
     commit: '5678',
     build: '91011',
+    buildUrl: 'http://jenkins.jenkins.example/buildResult',
     branch: 'pr_branch',
     root: '/',
     pr: '10',

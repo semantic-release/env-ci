@@ -5,6 +5,7 @@ test('Push', t => {
   process.env.BUILDKITE = 'true';
   process.env.BUILDKITE_COMMIT = '5678';
   process.env.BUILDKITE_BUILD_NUMBER = '91011';
+  process.env.BUILDKITE_BUILD_URL = 'https://server.com/buildresult';
   process.env.BUILDKITE_BRANCH = 'master';
   process.env.BUILDKITE_PULL_REQUEST = 'false';
   process.env.BUILDKITE_BUILD_CHECKOUT_PATH = '/';
@@ -15,6 +16,7 @@ test('Push', t => {
     service: 'buildkite',
     commit: '5678',
     build: '91011',
+    buildUrl: 'https://server.com/buildresult',
     branch: 'master',
     root: '/',
     pr: undefined,
@@ -37,6 +39,7 @@ test('PR', t => {
     service: 'buildkite',
     commit: '5678',
     build: '91011',
+    buildUrl: 'https://server.com/buildresult',
     branch: 'master',
     root: '/',
     pr: '10',

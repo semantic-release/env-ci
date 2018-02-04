@@ -4,6 +4,7 @@ import circle from '../lib/circleci';
 test('Push', t => {
   process.env.CIRCLECI = 'true';
   process.env.CIRCLE_BUILD_NUM = '1234';
+  process.env.CIRCLE_BUILD_URL = 'https://server.com/buildresult';
   process.env.CIRCLE_SHA1 = '5678';
   process.env.CIRCLE_BRANCH = 'master';
   process.env.CIRCLE_NODE_INDEX = '1';
@@ -14,7 +15,8 @@ test('Push', t => {
   t.deepEqual(circle.configuration(), {
     service: 'circleci',
     commit: '5678',
-    build: '1234.1',
+    build: '1234',
+    buildUrl: 'https://server.com/buildresult',
     job: '1234.1',
     branch: 'master',
     pr: undefined,
@@ -36,7 +38,8 @@ test('PR', t => {
   t.deepEqual(circle.configuration(), {
     service: 'circleci',
     commit: '5678',
-    build: '1234.1',
+    build: '1234',
+    buildUrl: 'https://server.com/buildresult',
     job: '1234.1',
     branch: 'pr_branch',
     pr: '10',
