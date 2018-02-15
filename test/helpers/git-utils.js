@@ -9,12 +9,12 @@ import execa from 'execa';
  * @return {String} The path of the repository otherwise.
  */
 export async function gitRepo(branch = 'master') {
-  const dir = tempy.directory();
+	const dir = tempy.directory();
 
-  process.chdir(dir);
-  await execa('git', ['init']);
-  await execa('git', ['checkout', '-b', branch]);
-  return dir;
+	process.chdir(dir);
+	await execa('git', ['init']);
+	await execa('git', ['checkout', '-b', branch]);
+	return dir;
 }
 
 /**
@@ -25,6 +25,6 @@ export async function gitRepo(branch = 'master') {
  * @returns {String} The created commit sha.
  */
 export async function gitCommit(message = 'Test commit message') {
-  await execa('git', ['commit', '-m', message, '--allow-empty', '--no-gpg-sign']);
-  return execa.stdout('git', ['rev-parse', 'HEAD']);
+	await execa('git', ['commit', '-m', message, '--allow-empty', '--no-gpg-sign']);
+	return execa.stdout('git', ['rev-parse', 'HEAD']);
 }

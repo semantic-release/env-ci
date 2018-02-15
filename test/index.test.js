@@ -7,159 +7,159 @@ import {gitRepo, gitCommit} from './helpers/git-utils';
 const cwd = process.cwd();
 
 test.beforeEach(() => {
-  delete process.env.CI;
-  delete process.env.APPVEYOR;
-  delete process.env.BUILDKITE;
-  delete process.env.CIRCLECI;
-  delete process.env.CI_NAME;
-  delete process.env.DRONE;
-  delete process.env.GITLAB_CI;
-  delete process.env.JENKINS_URL;
-  delete process.env.SEMAPHORE;
-  delete process.env.SHIPPABLE;
-  delete process.env.TEAMCITY_VERSION;
-  delete process.env.TRAVIS;
-  delete process.env.WERCKER_MAIN_PIPELINE_STARTED;
-  delete process.env.bamboo_agentId;
+	delete process.env.CI;
+	delete process.env.APPVEYOR;
+	delete process.env.BUILDKITE;
+	delete process.env.CIRCLECI;
+	delete process.env.CI_NAME;
+	delete process.env.DRONE;
+	delete process.env.GITLAB_CI;
+	delete process.env.JENKINS_URL;
+	delete process.env.SEMAPHORE;
+	delete process.env.SHIPPABLE;
+	delete process.env.TEAMCITY_VERSION;
+	delete process.env.TRAVIS;
+	delete process.env.WERCKER_MAIN_PIPELINE_STARTED;
+	delete process.env.bamboo_agentId;
 });
 
 test.afterEach.always(() => {
-  // Restore the current working directory
-  process.chdir(cwd);
+	// Restore the current working directory
+	process.chdir(cwd);
 });
 
 test.serial('Appveyor', t => {
-  process.env.APPVEYOR = 'true';
+	process.env.APPVEYOR = 'true';
 
-  const env = m();
-  t.is(env.isCi, true);
-  t.is(env.service, 'appveyor');
+	const env = m();
+	t.is(env.isCi, true);
+	t.is(env.service, 'appveyor');
 });
 
 test.serial('Buildkite', t => {
-  process.env.BUILDKITE = 'true';
+	process.env.BUILDKITE = 'true';
 
-  const env = m();
-  t.is(env.isCi, true);
-  t.is(env.service, 'buildkite');
+	const env = m();
+	t.is(env.isCi, true);
+	t.is(env.service, 'buildkite');
 });
 
 test.serial('Circle CI', t => {
-  process.env.CIRCLECI = 'true';
+	process.env.CIRCLECI = 'true';
 
-  const env = m();
-  t.is(env.isCi, true);
-  t.is(env.service, 'circleci');
+	const env = m();
+	t.is(env.isCi, true);
+	t.is(env.service, 'circleci');
 });
 
 test.serial('Codeship', t => {
-  process.env.CI_NAME = 'codeship';
+	process.env.CI_NAME = 'codeship';
 
-  const env = m();
-  t.is(env.isCi, true);
-  t.is(env.service, 'codeship');
+	const env = m();
+	t.is(env.isCi, true);
+	t.is(env.service, 'codeship');
 });
 
 test.serial('Drone', t => {
-  process.env.DRONE = 'true';
+	process.env.DRONE = 'true';
 
-  const env = m();
-  t.is(env.isCi, true);
-  t.is(env.service, 'drone');
+	const env = m();
+	t.is(env.isCi, true);
+	t.is(env.service, 'drone');
 });
 
 test.serial('Gitlab', t => {
-  process.env.GITLAB_CI = 'true';
+	process.env.GITLAB_CI = 'true';
 
-  const env = m();
-  t.is(env.isCi, true);
-  t.is(env.service, 'gitlab');
+	const env = m();
+	t.is(env.isCi, true);
+	t.is(env.service, 'gitlab');
 });
 
 test.serial('Jenkins', async t => {
-  process.env.JENKINS_URL = 'http://jenkins.jenkins.example/';
-  await gitRepo();
-  await gitCommit();
+	process.env.JENKINS_URL = 'http://jenkins.jenkins.example/';
+	await gitRepo();
+	await gitCommit();
 
-  const env = m();
-  t.is(env.isCi, true);
-  t.is(env.service, 'jenkins');
+	const env = m();
+	t.is(env.isCi, true);
+	t.is(env.service, 'jenkins');
 });
 
 test.serial('Semaphore', async t => {
-  process.env.SEMAPHORE = 'true';
-  await gitRepo();
-  await gitCommit();
+	process.env.SEMAPHORE = 'true';
+	await gitRepo();
+	await gitCommit();
 
-  const env = m();
-  t.is(env.isCi, true);
-  t.is(env.service, 'semaphore');
+	const env = m();
+	t.is(env.isCi, true);
+	t.is(env.service, 'semaphore');
 });
 
 test.serial('Shippable', t => {
-  process.env.SHIPPABLE = 'true';
+	process.env.SHIPPABLE = 'true';
 
-  const env = m();
-  t.is(env.isCi, true);
-  t.is(env.service, 'shippable');
+	const env = m();
+	t.is(env.isCi, true);
+	t.is(env.service, 'shippable');
 });
 
 test.serial('TeamCity', t => {
-  process.env.TEAMCITY_VERSION = '2017.1.2 (build 46812)';
+	process.env.TEAMCITY_VERSION = '2017.1.2 (build 46812)';
 
-  const env = m();
-  t.is(env.isCi, true);
-  t.is(env.service, 'teamcity');
+	const env = m();
+	t.is(env.isCi, true);
+	t.is(env.service, 'teamcity');
 });
 
 test.serial('Travis', t => {
-  process.env.TRAVIS = 'true';
+	process.env.TRAVIS = 'true';
 
-  const env = m();
-  t.is(env.isCi, true);
-  t.is(env.service, 'travis');
+	const env = m();
+	t.is(env.isCi, true);
+	t.is(env.service, 'travis');
 });
 
 test.serial('Wercker', t => {
-  process.env.WERCKER_MAIN_PIPELINE_STARTED = '123456';
+	process.env.WERCKER_MAIN_PIPELINE_STARTED = '123456';
 
-  const env = m();
-  t.is(env.isCi, true);
-  t.is(env.service, 'wercker');
+	const env = m();
+	t.is(env.isCi, true);
+	t.is(env.service, 'wercker');
 });
 
 test.serial('Bamboo', t => {
-  // eslint-disable-next-line camelcase
-  process.env.bamboo_agentId = 'some bamboo agent id';
+	// eslint-disable-next-line camelcase
+	process.env.bamboo_agentId = 'some bamboo agent id';
 
-  const env = m();
-  t.is(env.isCi, true);
-  t.is(env.service, 'bamboo');
+	const env = m();
+	t.is(env.isCi, true);
+	t.is(env.service, 'bamboo');
 });
 
 test.serial('Unknown CI and Git repository', async t => {
-  process.env.CI = 'true';
-  await gitRepo();
-  await gitCommit();
+	process.env.CI = 'true';
+	await gitRepo();
+	await gitCommit();
 
-  const env = m();
-  t.is(env.isCi, true);
-  t.falsy(env.service);
+	const env = m();
+	t.is(env.isCi, true);
+	t.falsy(env.service);
 });
 
 test.serial('Unknown CI and not a Git repository', t => {
-  process.env.CI = 'true';
-  process.chdir(tempy.directory());
-  const env = m();
+	process.env.CI = 'true';
+	process.chdir(tempy.directory());
+	const env = m();
 
-  t.is(env.isCi, true);
-  t.falsy(env.service);
+	t.is(env.isCi, true);
+	t.falsy(env.service);
 });
 
 test.serial('Not CI', t => {
-  process.chdir(tempy.directory());
-  const env = m();
+	process.chdir(tempy.directory());
+	const env = m();
 
-  t.is(env.isCi, false);
-  t.falsy(env.service);
+	t.is(env.isCi, false);
+	t.falsy(env.service);
 });
