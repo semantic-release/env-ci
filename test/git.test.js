@@ -6,16 +6,16 @@ import {gitRepo, gitCommit} from './helpers/git-utils';
 const cwd = process.cwd();
 
 test.beforeEach(async () => {
-  await gitRepo('master');
+	await gitRepo('master');
 });
 
 test.afterEach.always(() => {
-  // Restore the current working directory
-  process.chdir(cwd);
+	// Restore the current working directory
+	process.chdir(cwd);
 });
 
 test.serial('Git repository', async t => {
-  const commit = await gitCommit();
+	const commit = await gitCommit();
 
-  t.deepEqual(git.configuration(), {commit, branch: 'master'});
+	t.deepEqual(git.configuration(), {commit, branch: 'master'});
 });
