@@ -7,15 +7,14 @@
     "url": "https://github.com/pvdlg/github-parser/issues"
   },
   "dependencies": {
-    "execa": "^0.9.0",
-    "java-properties": "^0.2.9",
-    "npm": "^5.7.1"
+    "execa": "^0.10.0",
+    "java-properties": "^0.2.9"
   },
   "devDependencies": {
     "ava": "^0.25.0",
     "codecov": "^3.0.0",
     "nyc": "^11.1.0",
-    "semantic-release": "^12.2.2",
+    "semantic-release": "^15.0.0",
     "tempy": "^0.2.1",
     "xo": "^0.20.0"
   },
