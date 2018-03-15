@@ -9,6 +9,7 @@ const cwd = process.cwd();
 test.beforeEach(() => {
 	delete process.env.CI;
 	delete process.env.APPVEYOR;
+	delete process.env.BITBUCKET_BUILD_NUMBER;
 	delete process.env.BUILDKITE;
 	delete process.env.CIRCLECI;
 	delete process.env.CI_NAME;
@@ -34,6 +35,14 @@ test.serial('Appveyor', t => {
 	const env = m();
 	t.is(env.isCi, true);
 	t.is(env.service, 'appveyor');
+});
+
+test.serial('Bitbucket', t => {
+	process.env.BITBUCKET_BUILD_NUMBER = '123456';
+
+	const env = m();
+	t.is(env.isCi, true);
+	t.is(env.service, 'bitbucket');
 });
 
 test.serial('Buildkite', t => {
