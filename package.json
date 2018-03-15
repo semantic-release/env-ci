@@ -8,7 +8,8 @@
   },
   "dependencies": {
     "execa": "^0.9.0",
-    "java-properties": "^0.2.9"
+    "java-properties": "^0.2.9",
+    "npm": "^5.7.1"
   },
   "devDependencies": {
     "ava": "^0.25.0",
