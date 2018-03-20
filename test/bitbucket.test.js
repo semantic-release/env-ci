@@ -2,7 +2,6 @@ import test from 'ava';
 import bitbucket from '../lib/bitbucket';
 
 test('Push', t => {
-	process.env.CI = 'true';
 	process.env.BITBUCKET_COMMIT = 'b5ce5ce';
 	process.env.BITBUCKET_BUILD_NUMBER = '1964';
 	process.env.BITBUCKET_BRANCH = 'master';
@@ -11,7 +10,6 @@ test('Push', t => {
 
 	t.deepEqual(bitbucket.configuration(), {
 		service: 'bitbucket',
-		isCi: 'true',
 		commit: 'b5ce5ce',
 		build: '1964',
 		buildUrl: 'https://bitbucket.org/owner/repo/addon/pipelines/home#!/results/1964',
@@ -22,7 +20,6 @@ test('Push', t => {
 });
 
 test('PR', t => {
-	process.env.CI = 'true';
 	process.env.BITBUCKET_COMMIT = 'b5ce5ce';
 	process.env.BITBUCKET_BUILD_NUMBER = '1964';
 	process.env.BITBUCKET_BRANCH = 'master';
@@ -31,7 +28,6 @@ test('PR', t => {
 
 	t.deepEqual(bitbucket.configuration(), {
 		service: 'bitbucket',
-		isCi: 'true',
 		commit: 'b5ce5ce',
 		build: '1964',
 		buildUrl: 'https://bitbucket.org/owner/repo/addon/pipelines/home#!/results/1964',

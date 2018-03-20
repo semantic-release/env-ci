@@ -5,7 +5,7 @@ const git = require('./lib/git');
 const services = {
 	appveyor: require('./lib/appveyor'),
 	bamboo: require('./lib/bamboo'),
-	bitbucket: require('./lib/bitrise'),
+	bitbucket: require('./lib/bitbucket'),
 	bitrise: require('./lib/bitrise'),
 	buildkite: require('./lib/buildkite'),
 	circleci: require('./lib/circleci'),
