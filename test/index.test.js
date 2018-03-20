@@ -36,6 +36,14 @@ test.serial('Appveyor', t => {
 	t.is(env.service, 'appveyor');
 });
 
+test.serial('Bitbucket', t => {
+	process.env.CI = 'true';
+
+	const env = m();
+	t.is(env.isCi, true);
+	t.is(env.service, 'bitbucket');
+});
+
 test.serial('Buildkite', t => {
 	process.env.BUILDKITE = 'true';
 
