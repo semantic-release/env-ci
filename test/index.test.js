@@ -9,7 +9,9 @@ const cwd = process.cwd();
 test.beforeEach(() => {
 	delete process.env.CI;
 	delete process.env.APPVEYOR;
+	delete process.env.bamboo_agentId;
 	delete process.env.BITBUCKET_BUILD_NUMBER;
+	delete process.env.BITRISE_IO;
 	delete process.env.BUILDKITE;
 	delete process.env.CIRCLECI;
 	delete process.env.CI_NAME;
@@ -21,7 +23,6 @@ test.beforeEach(() => {
 	delete process.env.TEAMCITY_VERSION;
 	delete process.env.TRAVIS;
 	delete process.env.WERCKER_MAIN_PIPELINE_STARTED;
-	delete process.env.bamboo_agentId;
 });
 
 test.afterEach.always(() => {
@@ -37,12 +38,28 @@ test.serial('Appveyor', t => {
 	t.is(env.service, 'appveyor');
 });
 
+test.serial('Bamboo', t => {
+	process.env.bamboo_agentId = 'some bamboo agent id'; // eslint-disable-line camelcase
+
+	const env = m();
+	t.is(env.isCi, true);
+	t.is(env.service, 'bamboo');
+});
+
 test.serial('Bitbucket', t => {
 	process.env.BITBUCKET_BUILD_NUMBER = '123456';
 
 	const env = m();
 	t.is(env.isCi, true);
 	t.is(env.service, 'bitbucket');
+});
+
+test.serial('Bitrise', t => {
+	process.env.BITRISE_IO = 'true';
+
+	const env = m();
+	t.is(env.isCi, true);
+	t.is(env.service, 'bitrise');
 });
 
 test.serial('Buildkite', t => {
@@ -135,15 +152,6 @@ test.serial('Wercker', t => {
 	const env = m();
 	t.is(env.isCi, true);
 	t.is(env.service, 'wercker');
-});
-
-test.serial('Bamboo', t => {
-	// eslint-disable-next-line camelcase
-	process.env.bamboo_agentId = 'some bamboo agent id';
-
-	const env = m();
-	t.is(env.isCi, true);
-	t.is(env.service, 'bamboo');
 });
 
 test.serial('Unknown CI and Git repository', async t => {
