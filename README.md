@@ -20,6 +20,18 @@ $ npm install --save env-ci
 const envCi = require('env-ci');
 
 const {isCi, name, service, commit, build, buildUrl, branch, job, jobUrl, pr, isPr, slug, root} = envCi();
+
+if (isCI) {
+  console.log(`Building branch ${branch} of repo ${slug} on ${name}`);
+
+  if (isPr) {
+    console.log(`Building Pull Request #${pr}`);
+  }
+
+  if (service === 'travis') {
+    // Do something specific to Travis CI
+  }
+}
 ```
 
 ## Variables
