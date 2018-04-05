@@ -13,6 +13,7 @@ test('Push', t => {
 	delete process.env.CI_PULL_REQUEST;
 
 	t.deepEqual(circle.configuration(), {
+		name: 'CircleCI',
 		service: 'circleci',
 		commit: '5678',
 		build: '1234',
@@ -36,6 +37,7 @@ test('PR', t => {
 	process.env.CI_PULL_REQUEST = 'uri/pr/10';
 
 	t.deepEqual(circle.configuration(), {
+		name: 'CircleCI',
 		service: 'circleci',
 		commit: '5678',
 		build: '1234',

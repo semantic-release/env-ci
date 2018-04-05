@@ -10,6 +10,7 @@ test('Push', t => {
 	process.env.CI_REPO_NAME = 'owner/repo';
 
 	t.deepEqual(codeship.configuration(), {
+		name: 'Codeship',
 		service: 'codeship',
 		commit: '5678',
 		build: '91011',

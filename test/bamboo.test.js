@@ -12,6 +12,7 @@ test('Push', t => {
 	process.env.bamboo_buildResultsUrl = 'https://server.com/buildresult';
 
 	t.deepEqual(bamboo.configuration(), {
+		name: 'Bamboo',
 		service: 'bamboo',
 		commit: '5678',
 		build: '91011',

@@ -12,6 +12,7 @@ test('Push', t => {
 	process.env.TRAVIS_REPO_SLUG = 'owner/repo';
 
 	t.deepEqual(travis.configuration(), {
+		name: 'Travis CI',
 		service: 'travis',
 		commit: '5678',
 		build: '91011',
@@ -35,6 +36,7 @@ test('PR', t => {
 	process.env.TRAVIS_REPO_SLUG = 'owner/repo';
 
 	t.deepEqual(travis.configuration(), {
+		name: 'Travis CI',
 		service: 'travis',
 		commit: '5678',
 		build: '91011',

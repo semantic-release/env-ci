@@ -15,6 +15,7 @@ test('Push', t => {
 	delete process.env.ghprbPullId;
 
 	t.deepEqual(jenkins.configuration(), {
+		name: 'Jenkins',
 		service: 'jenkins',
 		commit: '5678',
 		build: '91011',
@@ -40,6 +41,7 @@ test('PR', t => {
 	delete process.env.ghprbPullId;
 
 	t.deepEqual(jenkins.configuration(), {
+		name: 'Jenkins',
 		service: 'jenkins',
 		commit: '5678',
 		build: '91011',
@@ -65,6 +67,7 @@ test('PR (PR builder)', t => {
 	delete process.env.CHANGE_ID;
 
 	t.deepEqual(jenkins.configuration(), {
+		name: 'Jenkins',
 		service: 'jenkins',
 		commit: '5678',
 		build: '91011',

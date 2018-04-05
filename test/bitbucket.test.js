@@ -9,6 +9,7 @@ test('Push', t => {
 	process.env.BITBUCKET_CLONE_DIR = '/';
 
 	t.deepEqual(bitbucket.configuration(), {
+		name: 'Bitbucket Pipelines',
 		service: 'bitbucket',
 		commit: 'b5ce5ce',
 		build: '1964',
@@ -27,6 +28,7 @@ test('PR', t => {
 	process.env.BITBUCKET_CLONE_DIR = '/';
 
 	t.deepEqual(bitbucket.configuration(), {
+		name: 'Bitbucket Pipelines',
 		service: 'bitbucket',
 		commit: 'b5ce5ce',
 		build: '1964',

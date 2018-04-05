@@ -11,6 +11,7 @@ test('Push', t => {
 	process.env.WERCKER_GIT_REPOSITORY = 'repo';
 
 	t.deepEqual(wercker.configuration(), {
+		name: 'Wercker',
 		service: 'wercker',
 		commit: '5678',
 		build: '123456',

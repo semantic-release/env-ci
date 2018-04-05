@@ -11,6 +11,7 @@ test('Push', t => {
 	process.env.BITRISE_APP_SLUG = 'owner/repo';
 
 	t.deepEqual(bitrise.configuration(), {
+		name: 'Bitrise',
 		service: 'bitrise',
 		commit: '5678',
 		build: '91011',
@@ -32,6 +33,7 @@ test('PR', t => {
 	process.env.BITRISE_APP_SLUG = 'owner/repo';
 
 	t.deepEqual(bitrise.configuration(), {
+		name: 'Bitrise',
 		service: 'bitrise',
 		commit: '5678',
 		build: '91011',

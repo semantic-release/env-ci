@@ -16,6 +16,7 @@ test('Push', t => {
 	fs.writeFileSync(propertiesFile, properties.join('\n') + '\n');
 
 	t.deepEqual(teamcity.configuration(), {
+		name: 'TeamCity',
 		service: 'teamcity',
 		commit: '5678',
 		build: '91011',
@@ -33,6 +34,7 @@ test('Push (no properties file)', t => {
 	delete process.env.TEAMCITY_BUILD_PROPERTIES_FILE;
 
 	t.deepEqual(teamcity.configuration(), {
+		name: 'TeamCity',
 		service: 'teamcity',
 		commit: '5678',
 		build: '91011',
