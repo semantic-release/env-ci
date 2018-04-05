@@ -13,6 +13,7 @@ test('Push', t => {
 	process.env.BUILDKITE_PROJECT_SLUG = 'repo';
 
 	t.deepEqual(buildkite.configuration(), {
+		name: 'Buildkite',
 		service: 'buildkite',
 		commit: '5678',
 		build: '91011',
@@ -36,6 +37,7 @@ test('PR', t => {
 	process.env.BUILDKITE_PROJECT_SLUG = 'repo';
 
 	t.deepEqual(buildkite.configuration(), {
+		name: 'Buildkite',
 		service: 'buildkite',
 		commit: '5678',
 		build: '91011',

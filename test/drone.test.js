@@ -13,6 +13,7 @@ test('Push', t => {
 	delete process.env.DRONE_BUILD_EVENT;
 
 	t.deepEqual(drone.configuration(), {
+		name: 'Drone',
 		service: 'drone',
 		commit: '5678',
 		build: '91011',
@@ -36,6 +37,7 @@ test('PR', t => {
 	process.env.DRONE_REPO_NAME = 'repo';
 
 	t.deepEqual(drone.configuration(), {
+		name: 'Drone',
 		service: 'drone',
 		commit: '5678',
 		build: '91011',

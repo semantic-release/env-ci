@@ -15,6 +15,7 @@ test('Push', t => {
 	delete process.env.BASE_BRANCH;
 
 	t.deepEqual(shippable.configuration(), {
+		name: 'Shippable',
 		service: 'shippable',
 		commit: '5678',
 		build: '91011',
@@ -42,6 +43,7 @@ test('PR', t => {
 	delete process.env.BRANCH;
 
 	t.deepEqual(shippable.configuration(), {
+		name: 'Shippable',
 		service: 'shippable',
 		commit: '5678',
 		build: '91011',

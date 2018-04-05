@@ -14,6 +14,7 @@ test('Push', t => {
 	process.env.CI_PROJECT_DIR = '/';
 
 	t.deepEqual(gitlab.configuration(), {
+		name: 'GitLab CI/CD',
 		service: 'gitlab',
 		commit: '5678',
 		build: 'job_name',

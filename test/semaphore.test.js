@@ -24,6 +24,7 @@ test.serial('Push', async t => {
 	delete process.env.PULL_REQUEST_NUMBER;
 
 	t.deepEqual(semaphore.configuration(), {
+		name: 'Semaphore',
 		service: 'semaphore',
 		commit,
 		build: '91011',
@@ -45,6 +46,7 @@ test.serial('PR', async t => {
 	process.env.SEMAPHORE_REPO_SLUG = 'owner/repo';
 
 	t.deepEqual(semaphore.configuration(), {
+		name: 'Semaphore',
 		service: 'semaphore',
 		commit,
 		build: '91011',

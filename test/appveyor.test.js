@@ -15,6 +15,7 @@ test('Push', t => {
 	delete process.env.APPVEYOR_PULL_REQUEST_NUMBER;
 
 	t.deepEqual(appveyor.configuration(), {
+		name: 'Appveyor',
 		service: 'appveyor',
 		commit: '5678',
 		build: '91011',
@@ -42,6 +43,7 @@ test('PR', t => {
 	process.env.APPVEYOR_REPO_BRANCH = 'master';
 
 	t.deepEqual(appveyor.configuration(), {
+		name: 'Appveyor',
 		service: 'appveyor',
 		commit: '5678',
 		build: '91011',
