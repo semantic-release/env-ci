@@ -9,6 +9,7 @@ const services = {
 	bitrise: require('./lib/bitrise'),
 	buildkite: require('./lib/buildkite'),
 	circleci: require('./lib/circleci'),
+	codebuild: require('./lib/codebuild'),
 	codeship: require('./lib/codeship'),
 	drone: require('./lib/drone'),
 	gitlab: require('./lib/gitlab'),
