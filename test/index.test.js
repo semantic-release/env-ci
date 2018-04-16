@@ -15,6 +15,7 @@ test.beforeEach(() => {
 	delete process.env.BUILDKITE;
 	delete process.env.CIRCLECI;
 	delete process.env.CI_NAME;
+	delete process.env.CODEBUILD_BUILD_ID;
 	delete process.env.DRONE;
 	delete process.env.GITLAB_CI;
 	delete process.env.JENKINS_URL;
@@ -76,6 +77,14 @@ test.serial('Circle CI', t => {
 	const env = m();
 	t.is(env.isCi, true);
 	t.is(env.service, 'circleci');
+});
+
+test.serial('AWS CodeBuild', t => {
+	process.env.CODEBUILD_BUILD_ID = 'env-ci:40cc72d2-acd5-46f4-a86b-6a3dcd2a39a0';
+
+	const env = m();
+	t.is(env.isCi, true);
+	t.is(env.service, 'codebuild');
 });
 
 test.serial('Codeship', t => {
