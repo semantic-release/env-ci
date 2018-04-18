@@ -25,7 +25,7 @@ test('Push', async t => {
 		service: 'codebuild',
 		commit,
 		build: 'env-ci:40cc72d2-acd5-46f4-a86b-6a3dcd2a39a0',
-		branch: 'master',
+		branch: undefined, // Branch detection only works on CodeBuild
 		buildUrl:
 			'https://console.aws.amazon.com/codebuild/home?region=us-east-1#/builds/env-ci:40cc72d2-acd5-46f4-a86b-6a3dcd2a39a0/view/new',
 		root: '/codebuild/output/src807365521/src/github.com/owner/repo',
