@@ -13,6 +13,7 @@
   "devDependencies": {
     "ava": "^0.25.0",
     "codecov": "^3.0.0",
+    "file-url": "^2.0.2",
     "nyc": "^11.1.0",
     "semantic-release": "^15.0.0",
     "tempy": "^0.2.1",

@@ -1,12 +1,12 @@
 import test from 'ava';
 import codebuild from '../lib/codebuild';
-import {gitRepo, gitCommit} from './helpers/git-utils';
+import {gitRepo, gitHead} from './helpers/git-utils';
 
 // Save the current working diretory
 const cwd = process.cwd();
 
 test.beforeEach(async () => {
-	await gitRepo();
+	await gitRepo(true);
 });
 
 test.afterEach.always(() => {
@@ -15,7 +15,6 @@ test.afterEach.always(() => {
 });
 
 test('Push', async t => {
-	const commit = await gitCommit();
 	process.env.CODEBUILD_BUILD_ID = 'env-ci:40cc72d2-acd5-46f4-a86b-6a3dcd2a39a0';
 	process.env.AWS_REGION = 'us-east-1';
 	process.env.PWD = '/codebuild/output/src807365521/src/github.com/owner/repo';
@@ -23,7 +22,7 @@ test('Push', async t => {
 	t.deepEqual(codebuild.configuration(), {
 		name: 'AWS CodeBuild',
 		service: 'codebuild',
-		commit,
+		commit: await gitHead(),
 		build: 'env-ci:40cc72d2-acd5-46f4-a86b-6a3dcd2a39a0',
 		branch: 'master',
 		buildUrl:

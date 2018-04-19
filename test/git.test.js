@@ -1,13 +1,9 @@
 import test from 'ava';
 import git from '../lib/git';
-import {gitRepo, gitCommit} from './helpers/git-utils';
+import {gitRepo, gitCommit, gitHead} from './helpers/git-utils';
 
 // Save the current working diretory
 const cwd = process.cwd();
-
-test.beforeEach(async () => {
-	await gitRepo('master');
-});
 
 test.afterEach.always(() => {
 	// Restore the current working directory
@@ -15,7 +11,14 @@ test.afterEach.always(() => {
 });
 
 test.serial('Git repository', async t => {
+	await gitRepo();
 	const commit = await gitCommit();
 
 	t.deepEqual(git.configuration(), {commit, branch: 'master'});
+});
+
+test.serial('Git repository with detached head', async t => {
+	await gitRepo(true);
+
+	t.deepEqual(git.configuration(), {commit: await gitHead(), branch: 'master'});
 });
