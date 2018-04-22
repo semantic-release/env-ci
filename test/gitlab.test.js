@@ -8,7 +8,7 @@ test('Push', t => {
 	process.env.CI_JOB_ID = '1213';
 	process.env.CI_PROJECT_URL = 'https://gitlab.com/owner/repo';
 	process.env.CI_COMMIT_REF_NAME = 'master';
-	process.env.CI_PROJECT_PATH_SLUG = 'owner/repo';
+	process.env.CI_PROJECT_PATH = 'owner/repo';
 	process.env.CI_PROJECT_DIR = '/';
 
 	t.deepEqual(gitlab.configuration(), {
