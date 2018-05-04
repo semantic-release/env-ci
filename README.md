@@ -74,3 +74,17 @@ if (isCI) {
 | [Wercker](http://devcenter.wercker.com/docs/environment-variables/available-env-vars#hs_cos_wrapper_name) |  `wercker`  |   ✅    |    ✅     |    ✅    |     ✅      |    ✅     |   ❌   |    ❌     |  ❌   |   ❌    |   ✅    |   ✅    |
 
 If none of the above CI services is detected, `commit` and `branch` are determined based on the local Git repository, and `isCi` is determined based on  the `CI` environment variable.
+
+## Caveats
+
+### Git `branch` determination
+
+Certain CI services don't provide an environment variable to determine the current Git branch being built.
+In such cases the branch is determined with the command `git rev-parse --abbrev-ref HEAD`.
+
+However, if the local repository is in a [detached head state](https://git-scm.com/docs/git-checkout#_detached_head) the branch cannot be determined directly. In such case, `env-ci` will look for the remote branches having the same HEAD as the local detached HEAD to determine the branch from which the detached HEAD was created.
+
+In the rare case where there is multiple remote branches with the same HEAD as the local detached HEAD, `env-ci` will arbitrarily pick the first one. This can lead to an inaccurate `branch` value for certain CI services in such circumstances.
+
+Affected CI services:
+- [AWS CodeBuild](https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-env-vars.html)
