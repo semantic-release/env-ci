@@ -10,7 +10,7 @@ test.afterEach.always(() => {
 	process.chdir(cwd);
 });
 
-test.serial('Git repository', async t => {
+test.serial('Git local repository', async t => {
 	await gitRepo();
 	const commit = await gitCommit();
 
@@ -23,7 +23,15 @@ test.serial('Git cloned repository', async t => {
 	t.deepEqual(git.configuration(), {commit: await gitHead(), branch: 'master'});
 });
 
-test.serial('Git repository with detached head', async t => {
+test.serial('Git local repository with detached head', async t => {
+	await gitRepo();
+	const commit = await gitCommit();
+	await gitCheckout('HEAD~0', false);
+
+	t.deepEqual(git.configuration(), {commit, branch: undefined});
+});
+
+test.serial('Git cloned repository with detached head', async t => {
 	await gitRepo(true);
 	await gitCheckout('HEAD~0', false);
 
