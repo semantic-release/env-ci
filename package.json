@@ -7,7 +7,7 @@
     "url": "https://github.com/pvdlg/github-parser/issues"
   },
   "dependencies": {
-    "execa": "^0.11.0",
+    "execa": "^1.0.0",
     "java-properties": "^0.2.9"
   },
   "devDependencies": {
