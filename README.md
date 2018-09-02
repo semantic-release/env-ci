@@ -71,6 +71,7 @@ if (isCI) {
 | [Shippable](http://docs.shippable.com/ci/env-vars/#stdEnv)                                                | `shippable` |   ✅    |    ✅     |    ✅    |     ✅      |    ✅     |   ✅   |    ❌     |  ✅   |   ✅    |   ✅    |   ✅    |
 | [TeamCity](https://confluence.jetbrains.com/display/TCD10/Predefined+Build+Parameters)                    | `teamcity`  |   ✅    |    ✅     |    ✅    |     ❌      |    ✅     |   ❌   |    ❌     |  ❌   |   ❌    |   ✅    |   ✅    |
 | [Travis CI](https://docs.travis-ci.com/user/environment-variables)                                        |  `travis`   |   ✅    |    ✅     |    ✅    |     ❌      |    ✅     |   ✅   |    ❌     |  ✅   |   ✅    |   ✅    |   ✅    |
+| [Visual Studio Team Services](https://docs.microsoft.com/en-us/vsts/pipelines/build/variables)            |  `vsts`     |   ✅    |    ✅     |    ✅    |     ❌      |    ✅     |   ❌   |    ❌     |  ✅   |   ✅    |   ❌    |   ✅    |
 | [Wercker](http://devcenter.wercker.com/docs/environment-variables/available-env-vars#hs_cos_wrapper_name) |  `wercker`  |   ✅    |    ✅     |    ✅    |     ✅      |    ✅     |   ❌   |    ❌     |  ❌   |   ❌    |   ✅    |   ✅    |
 
 If none of the above CI services is detected, `commit` and `branch` are determined based on the local Git repository, and `isCi` is determined based on  the `CI` environment variable.
