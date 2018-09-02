@@ -23,6 +23,7 @@ test.beforeEach(() => {
 	delete process.env.SHIPPABLE;
 	delete process.env.TEAMCITY_VERSION;
 	delete process.env.TRAVIS;
+	delete process.env.BUILD_BUILDURI;
 	delete process.env.WERCKER_MAIN_PIPELINE_STARTED;
 });
 
@@ -153,6 +154,14 @@ test.serial('Travis', t => {
 	const env = m();
 	t.is(env.isCi, true);
 	t.is(env.service, 'travis');
+});
+
+test.serial('Visual Studio Team Services', t => {
+	process.env.BUILD_BUILDURI = 'https://fabrikamfiber.visualstudio.com/_git/Scripts';
+
+	const env = m();
+	t.is(env.isCi, true);
+	t.is(env.service, 'vsts');
 });
 
 test.serial('Wercker', t => {

@@ -47,6 +47,7 @@
     "teamcity",
     "travis",
     "variable",
+    "vsts",
     "wercker"
   ],
   "license": "MIT",

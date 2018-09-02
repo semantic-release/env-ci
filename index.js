@@ -18,6 +18,7 @@ const services = {
 	shippable: require('./lib/shippable'),
 	teamcity: require('./lib/teamcity'),
 	travis: require('./lib/travis'),
+	vsts: require('./lib/vsts'),
 	wercker: require('./lib/wercker'),
 };
 
