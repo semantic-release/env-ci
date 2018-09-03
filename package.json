@@ -35,6 +35,7 @@
     "buildkite",
     "ci",
     "circle",
+    "cirrus",
     "codebuild",
     "codeship",
     "drone",
