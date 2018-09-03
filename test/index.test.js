@@ -14,6 +14,7 @@ test.beforeEach(() => {
 	delete process.env.BITRISE_IO;
 	delete process.env.BUILDKITE;
 	delete process.env.CIRCLECI;
+	delete process.env.CIRRUS_CI;
 	delete process.env.CODEBUILD_BUILD_ID;
 	delete process.env.CI_NAME;
 	delete process.env.DRONE;
@@ -78,6 +79,14 @@ test.serial('Circle CI', t => {
 	const env = m();
 	t.is(env.isCi, true);
 	t.is(env.service, 'circleci');
+});
+
+test.serial('Cirrus CI', t => {
+	process.env.CIRRUS_CI = 'true';
+
+	const env = m();
+	t.is(env.isCi, true);
+	t.is(env.service, 'cirrus');
 });
 
 test.serial('AWS CodeBuild', t => {
