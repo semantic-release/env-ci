@@ -88,6 +88,6 @@ export async function gitCommit(message = 'Test commit message') {
 /**
  * @return {String} The sha of the head commit in the current git repository.
  */
-export async function gitHead() {
+export function gitHead() {
 	return execa.stdout('git', ['rev-parse', 'HEAD']);
 }
