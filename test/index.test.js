@@ -12,6 +12,7 @@ test.beforeEach(() => {
 	delete process.env.bamboo_agentId;
 	delete process.env.BITBUCKET_BUILD_NUMBER;
 	delete process.env.BITRISE_IO;
+	delete process.env.BUDDY_WORKSPACE_ID;
 	delete process.env.BUILDKITE;
 	delete process.env.CIRCLECI;
 	delete process.env.CIRRUS_CI;
@@ -63,6 +64,14 @@ test.serial('Bitrise', t => {
 	const env = m();
 	t.is(env.isCi, true);
 	t.is(env.service, 'bitrise');
+});
+
+test.serial('Buddy', t => {
+	process.env.BUDDY_WORKSPACE_ID = '1234';
+
+	const env = m();
+	t.is(env.isCi, true);
+	t.is(env.service, 'buddy');
 });
 
 test.serial('Buildkite', t => {
