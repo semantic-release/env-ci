@@ -7,6 +7,7 @@ const services = {
 	bamboo: require('./lib/bamboo'),
 	bitbucket: require('./lib/bitbucket'),
 	bitrise: require('./lib/bitrise'),
+	buddy: require('./lib/buddy'),
 	buildkite: require('./lib/buildkite'),
 	circleci: require('./lib/circleci'),
 	cirrus: require('./lib/cirrus'),
