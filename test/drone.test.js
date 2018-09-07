@@ -1,18 +1,18 @@
 import test from 'ava';
 import drone from '../lib/drone';
 
-test('Push', t => {
-	process.env.DRONE = 'true';
-	process.env.DRONE_JOB_NUMBER = '1234';
-	process.env.DRONE_COMMIT_SHA = '5678';
-	process.env.DRONE_BUILD_NUMBER = '91011';
-	process.env.DRONE_BRANCH = 'master';
-	process.env.DRONE_REPO_OWNER = 'owner';
-	process.env.DRONE_REPO_NAME = 'repo';
-	delete process.env.DRONE_PULL_REQUEST;
-	delete process.env.DRONE_BUILD_EVENT;
+const env = {
+	DRONE: 'true',
+	DRONE_JOB_NUMBER: '1234',
+	DRONE_COMMIT_SHA: '5678',
+	DRONE_BUILD_NUMBER: '91011',
+	DRONE_BRANCH: 'master',
+	DRONE_REPO_OWNER: 'owner',
+	DRONE_REPO_NAME: 'repo',
+};
 
-	t.deepEqual(drone.configuration(), {
+test('Push', t => {
+	t.deepEqual(drone.configuration({env}), {
 		name: 'Drone',
 		service: 'drone',
 		commit: '5678',
@@ -26,25 +26,18 @@ test('Push', t => {
 });
 
 test('PR', t => {
-	process.env.DRONE = 'true';
-	process.env.DRONE_JOB_NUMBER = '1234';
-	process.env.DRONE_COMMIT_SHA = '5678';
-	process.env.DRONE_BUILD_NUMBER = '91011';
-	process.env.DRONE_BRANCH = 'master';
-	process.env.DRONE_PULL_REQUEST = '10';
-	process.env.DRONE_BUILD_EVENT = 'pull_request';
-	process.env.DRONE_REPO_OWNER = 'owner';
-	process.env.DRONE_REPO_NAME = 'repo';
-
-	t.deepEqual(drone.configuration(), {
-		name: 'Drone',
-		service: 'drone',
-		commit: '5678',
-		build: '91011',
-		branch: 'master',
-		job: '1234',
-		pr: '10',
-		isPr: true,
-		slug: 'owner/repo',
-	});
+	t.deepEqual(
+		drone.configuration({env: Object.assign({}, env, {DRONE_PULL_REQUEST: '10', DRONE_BUILD_EVENT: 'pull_request'})}),
+		{
+			name: 'Drone',
+			service: 'drone',
+			commit: '5678',
+			build: '91011',
+			branch: 'master',
+			job: '1234',
+			pr: '10',
+			isPr: true,
+			slug: 'owner/repo',
+		}
+	);
 });

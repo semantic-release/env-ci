@@ -1,20 +1,20 @@
 import test from 'ava';
 import shippable from '../lib/shippable';
 
-test('Push', t => {
-	process.env.SHIPPABLE = 'true';
-	process.env.JOB_NUMBER = '1234';
-	process.env.COMMIT = '5678';
-	process.env.BUILD_NUMBER = '91011';
-	process.env.BUILD_URL = 'https://server.com/buildresult';
-	process.env.BRANCH = 'master';
-	process.env.PULL_REQUEST = 'false';
-	process.env.IS_PULL_REQUEST = 'false';
-	process.env.SHIPPABLE_BUILD_DIR = '/';
-	process.env.SHIPPABLE_REPO_SLUG = 'owner/repo';
-	delete process.env.BASE_BRANCH;
+const env = {
+	SHIPPABLE: 'true',
+	JOB_NUMBER: '1234',
+	COMMIT: '5678',
+	BUILD_NUMBER: '91011',
+	BUILD_URL: 'https://server.com/buildresult',
+	PULL_REQUEST: 'false',
+	IS_PULL_REQUEST: 'false',
+	SHIPPABLE_BUILD_DIR: '/',
+	SHIPPABLE_REPO_SLUG: 'owner/repo',
+};
 
-	t.deepEqual(shippable.configuration(), {
+test('Push', t => {
+	t.deepEqual(shippable.configuration({env: Object.assign({}, env, {BRANCH: 'master'})}), {
 		name: 'Shippable',
 		service: 'shippable',
 		commit: '5678',
@@ -30,29 +30,22 @@ test('Push', t => {
 });
 
 test('PR', t => {
-	process.env.SHIPPABLE = 'true';
-	process.env.JOB_NUMBER = '1234';
-	process.env.COMMIT = '5678';
-	process.env.BUILD_NUMBER = '91011';
-	process.env.BUILD_URL = 'https://server.com/buildresult';
-	process.env.BASE_BRANCH = 'master';
-	process.env.PULL_REQUEST = '10';
-	process.env.IS_PULL_REQUEST = 'true';
-	process.env.SHIPPABLE_BUILD_DIR = '/';
-	process.env.SHIPPABLE_REPO_SLUG = 'owner/repo';
-	delete process.env.BRANCH;
-
-	t.deepEqual(shippable.configuration(), {
-		name: 'Shippable',
-		service: 'shippable',
-		commit: '5678',
-		build: '91011',
-		buildUrl: 'https://server.com/buildresult',
-		branch: 'master',
-		root: '/',
-		job: '1234',
-		pr: '10',
-		isPr: true,
-		slug: 'owner/repo',
-	});
+	t.deepEqual(
+		shippable.configuration({
+			env: Object.assign({}, env, {BASE_BRANCH: 'master', IS_PULL_REQUEST: 'true', PULL_REQUEST: '10'}),
+		}),
+		{
+			name: 'Shippable',
+			service: 'shippable',
+			commit: '5678',
+			build: '91011',
+			buildUrl: 'https://server.com/buildresult',
+			branch: 'master',
+			root: '/',
+			job: '1234',
+			pr: '10',
+			isPr: true,
+			slug: 'owner/repo',
+		}
+	);
 });

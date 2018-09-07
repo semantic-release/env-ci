@@ -34,7 +34,7 @@ if (isCI) {
 }
 ```
 
-## Variables
+## Supported variables
 
 | Variable   | Description                                                                       |
 |------------|-----------------------------------------------------------------------------------|
@@ -51,6 +51,8 @@ if (isCI) {
 | `isPr`     | `true` is the build has been triggered by a Pull Request, `false` otherwise       |
 | `slug`     | The slug (in form: owner_name/repo_name) of the repository currently being built. |
 | `root`     | The path to the directory where the repository is being built                     |
+
+**Note**: Some variables can be detected only on certain CI services. See [Supported CI](#supported-ci).
 
 ## Supported CI
 
@@ -76,7 +78,35 @@ if (isCI) {
 | [Visual Studio Team Services](https://docs.microsoft.com/en-us/vsts/pipelines/build/variables)                 |   `vsts`    |   ✅    |    ✅     |    ✅    |     ❌      |    ✅     |   ❌   |    ❌     |  ✅   |   ✅    |   ❌    |   ✅    |
 | [Wercker](http://devcenter.wercker.com/docs/environment-variables/available-env-vars#hs_cos_wrapper_name)      |  `wercker`  |   ✅    |    ✅     |    ✅    |     ✅      |    ✅     |   ❌   |    ❌     |  ❌   |   ❌    |   ✅    |   ✅    |
 
-If none of the above CI services is detected, `commit` and `branch` are determined based on the local Git repository, and `isCi` is determined based on  the `CI` environment variable.
+**Note**: If none of the above CI services is detected, `commit` and `branch` are determined based on the local Git repository, and `isCi` is determined based on  the `CI` environment variable.
+
+## API
+
+### envCi(options) => Result
+
+#### options
+
+Type: `Object`
+
+#### env
+
+Type: `Object`<br>
+Default: `process.env`
+
+The object to read environment variables from.
+
+#### cwd
+
+Type: `String`<br>
+Default: `process.cwd()`
+
+The current working directory in which to execute `git` commands used to determine the `commit` and `branch` [Result](#result) properties in case no [supported CI](#supported-ci) is detected.
+
+### Result
+
+Type: `Object`
+
+[Environment variables values](#supported-variables) exposed by the CI service.
 
 ## Caveats
 

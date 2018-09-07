@@ -1,5 +1,6 @@
 'use strict';
 
+const process = require('process');
 const git = require('./lib/git');
 
 const services = {
@@ -24,11 +25,11 @@ const services = {
 	wercker: require('./lib/wercker'),
 };
 
-module.exports = () => {
+module.exports = ({env = process.env, cwd = process.cwd()} = {}) => {
 	for (const name of Object.keys(services)) {
-		if (services[name].detect()) {
-			return Object.assign({isCi: true}, services[name].configuration());
+		if (services[name].detect({env, cwd})) {
+			return Object.assign({isCi: true}, services[name].configuration({env, cwd}));
 		}
 	}
-	return Object.assign({isCi: Boolean(process.env.CI)}, git.configuration());
+	return Object.assign({isCi: Boolean(env.CI)}, git.configuration({env, cwd}));
 };

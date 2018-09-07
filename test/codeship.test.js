@@ -1,15 +1,17 @@
 import test from 'ava';
 import codeship from '../lib/codeship';
 
-test('Push', t => {
-	process.env.CI_NAME = 'codeship';
-	process.env.CI_BUILD_NUMBER = '91011';
-	process.env.CI_BUILD_URL = 'https://server.com/buildresult';
-	process.env.CI_COMMIT_ID = '5678';
-	process.env.CI_BRANCH = 'master';
-	process.env.CI_REPO_NAME = 'owner/repo';
+const env = {
+	CI_NAME: 'codeship',
+	CI_BUILD_NUMBER: '91011',
+	CI_BUILD_URL: 'https://server.com/buildresult',
+	CI_COMMIT_ID: '5678',
+	CI_BRANCH: 'master',
+	CI_REPO_NAME: 'owner/repo',
+};
 
-	t.deepEqual(codeship.configuration(), {
+test('Push', t => {
+	t.deepEqual(codeship.configuration({env}), {
 		name: 'Codeship',
 		service: 'codeship',
 		commit: '5678',

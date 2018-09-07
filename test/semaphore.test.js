@@ -2,28 +2,19 @@ import test from 'ava';
 import semaphore from '../lib/semaphore';
 import {gitRepo, gitCommit} from './helpers/git-utils';
 
-// Save the current working diretory
-const cwd = process.cwd();
+const env = {
+	SEMAPHORE: 'true',
+	SEMAPHORE_BUILD_NUMBER: '91011',
+	BRANCH_NAME: 'master',
+	SEMAPHORE_PROJECT_DIR: '/',
+	SEMAPHORE_REPO_SLUG: 'owner/repo',
+};
 
-test.beforeEach(async () => {
-	await gitRepo();
-});
+test('Push', async t => {
+	const {cwd} = await gitRepo(true);
+	const commit = await gitCommit('Test commit message', {cwd});
 
-test.afterEach.always(() => {
-	// Restore the current working directory
-	process.chdir(cwd);
-});
-
-test.serial('Push', async t => {
-	const commit = await gitCommit();
-	process.env.SEMAPHORE = 'true';
-	process.env.SEMAPHORE_BUILD_NUMBER = '91011';
-	process.env.BRANCH_NAME = 'master';
-	process.env.SEMAPHORE_PROJECT_DIR = '/';
-	process.env.SEMAPHORE_REPO_SLUG = 'owner/repo';
-	delete process.env.PULL_REQUEST_NUMBER;
-
-	t.deepEqual(semaphore.configuration(), {
+	t.deepEqual(semaphore.configuration({env, cwd}), {
 		name: 'Semaphore',
 		service: 'semaphore',
 		commit,
@@ -36,16 +27,11 @@ test.serial('Push', async t => {
 	});
 });
 
-test.serial('PR', async t => {
-	const commit = await gitCommit();
-	process.env.SEMAPHORE = 'true';
-	process.env.SEMAPHORE_BUILD_NUMBER = '91011';
-	process.env.BRANCH_NAME = 'master';
-	process.env.PULL_REQUEST_NUMBER = '10';
-	process.env.SEMAPHORE_PROJECT_DIR = '/';
-	process.env.SEMAPHORE_REPO_SLUG = 'owner/repo';
+test('PR', async t => {
+	const {cwd} = await gitRepo(true);
+	const commit = await gitCommit('Test commit message', {cwd});
 
-	t.deepEqual(semaphore.configuration(), {
+	t.deepEqual(semaphore.configuration({env: Object.assign({}, env, {PULL_REQUEST_NUMBER: '10'}), cwd}), {
 		name: 'Semaphore',
 		service: 'semaphore',
 		commit,

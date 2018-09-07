@@ -2,38 +2,30 @@ import test from 'ava';
 import git from '../lib/git';
 import {gitRepo, gitCommit, gitHead, gitCheckout} from './helpers/git-utils';
 
-// Save the current working diretory
-const cwd = process.cwd();
+test('Git local repository', async t => {
+	const {cwd} = await gitRepo();
+	const commit = await gitCommit('Test commit message', {cwd});
 
-test.afterEach.always(() => {
-	// Restore the current working directory
-	process.chdir(cwd);
+	t.deepEqual(git.configuration({cwd}), {commit, branch: 'master'});
 });
 
-test.serial('Git local repository', async t => {
-	await gitRepo();
-	const commit = await gitCommit();
+test('Git cloned repository', async t => {
+	const {cwd} = await gitRepo(true);
 
-	t.deepEqual(git.configuration(), {commit, branch: 'master'});
+	t.deepEqual(git.configuration({cwd}), {commit: await gitHead({cwd}), branch: 'master'});
 });
 
-test.serial('Git cloned repository', async t => {
-	await gitRepo(true);
+test('Git local repository with detached head', async t => {
+	const {cwd} = await gitRepo();
+	const commit = await gitCommit('Test commit message', {cwd});
+	await gitCheckout('HEAD~0', false, {cwd});
 
-	t.deepEqual(git.configuration(), {commit: await gitHead(), branch: 'master'});
+	t.deepEqual(git.configuration({cwd}), {commit, branch: undefined});
 });
 
-test.serial('Git local repository with detached head', async t => {
-	await gitRepo();
-	const commit = await gitCommit();
-	await gitCheckout('HEAD~0', false);
+test('Git cloned repository with detached head', async t => {
+	const {cwd} = await gitRepo(true);
+	await gitCheckout('HEAD~0', false, {cwd});
 
-	t.deepEqual(git.configuration(), {commit, branch: undefined});
-});
-
-test.serial('Git cloned repository with detached head', async t => {
-	await gitRepo(true);
-	await gitCheckout('HEAD~0', false);
-
-	t.deepEqual(git.configuration(), {commit: await gitHead(), branch: 'master'});
+	t.deepEqual(git.configuration({cwd}), {commit: await gitHead({cwd}), branch: 'master'});
 });

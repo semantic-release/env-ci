@@ -1,16 +1,18 @@
 import test from 'ava';
 import wercker from '../lib/wercker';
 
-test('Push', t => {
-	process.env.WERCKER_MAIN_PIPELINE_STARTED = '123456';
-	process.env.WERCKER_RUN_URL = 'https://server.com/buildresult';
-	process.env.WERCKER_GIT_COMMIT = '5678';
-	process.env.WERCKER_GIT_BRANCH = 'master';
-	process.env.WERCKER_ROOT = '/';
-	process.env.WERCKER_GIT_OWNER = 'owner';
-	process.env.WERCKER_GIT_REPOSITORY = 'repo';
+const env = {
+	WERCKER_MAIN_PIPELINE_STARTED: '123456',
+	WERCKER_RUN_URL: 'https://server.com/buildresult',
+	WERCKER_GIT_COMMIT: '5678',
+	WERCKER_GIT_BRANCH: 'master',
+	WERCKER_ROOT: '/',
+	WERCKER_GIT_OWNER: 'owner',
+	WERCKER_GIT_REPOSITORY: 'repo',
+};
 
-	t.deepEqual(wercker.configuration(), {
+test('Push', t => {
+	t.deepEqual(wercker.configuration({env}), {
 		name: 'Wercker',
 		service: 'wercker',
 		commit: '5678',

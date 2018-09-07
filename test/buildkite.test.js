@@ -1,18 +1,20 @@
 import test from 'ava';
 import buildkite from '../lib/buildkite';
 
-test('Push', t => {
-	process.env.BUILDKITE = 'true';
-	process.env.BUILDKITE_COMMIT = '5678';
-	process.env.BUILDKITE_BUILD_NUMBER = '91011';
-	process.env.BUILDKITE_BUILD_URL = 'https://server.com/buildresult';
-	process.env.BUILDKITE_BRANCH = 'master';
-	process.env.BUILDKITE_PULL_REQUEST = 'false';
-	process.env.BUILDKITE_BUILD_CHECKOUT_PATH = '/';
-	process.env.BUILDKITE_ORGANIZATION_SLUG = 'owner';
-	process.env.BUILDKITE_PROJECT_SLUG = 'repo';
+const env = {
+	BUILDKITE: 'true',
+	BUILDKITE_COMMIT: '5678',
+	BUILDKITE_BUILD_NUMBER: '91011',
+	BUILDKITE_BUILD_URL: 'https://server.com/buildresult',
+	BUILDKITE_BRANCH: 'master',
+	BUILDKITE_PULL_REQUEST: 'false',
+	BUILDKITE_BUILD_CHECKOUT_PATH: '/',
+	BUILDKITE_ORGANIZATION_SLUG: 'owner',
+	BUILDKITE_PROJECT_SLUG: 'repo',
+};
 
-	t.deepEqual(buildkite.configuration(), {
+test('Push', t => {
+	t.deepEqual(buildkite.configuration({env}), {
 		name: 'Buildkite',
 		service: 'buildkite',
 		commit: '5678',
@@ -27,16 +29,7 @@ test('Push', t => {
 });
 
 test('PR', t => {
-	process.env.BUILDKITE = 'true';
-	process.env.BUILDKITE_COMMIT = '5678';
-	process.env.BUILDKITE_BUILD_NUMBER = '91011';
-	process.env.BUILDKITE_BRANCH = 'master';
-	process.env.BUILDKITE_PULL_REQUEST = '10';
-	process.env.BUILDKITE_BUILD_CHECKOUT_PATH = '/';
-	process.env.BUILDKITE_ORGANIZATION_SLUG = 'owner';
-	process.env.BUILDKITE_PROJECT_SLUG = 'repo';
-
-	t.deepEqual(buildkite.configuration(), {
+	t.deepEqual(buildkite.configuration({env: Object.assign({}, env, {BUILDKITE_PULL_REQUEST: '10'})}), {
 		name: 'Buildkite',
 		service: 'buildkite',
 		commit: '5678',
