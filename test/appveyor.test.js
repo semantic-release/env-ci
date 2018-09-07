@@ -1,20 +1,21 @@
 import test from 'ava';
 import appveyor from '../lib/appveyor';
 
-test('Push', t => {
-	process.env.APPVEYOR = 'true';
-	process.env.APPVEYOR_JOB_NUMBER = '1234';
-	process.env.APPVEYOR_JOB_ID = 'job_id';
-	process.env.APPVEYOR_BUILD_VERSION = '100';
-	process.env.APPVEYOR_REPO_COMMIT = '5678';
-	process.env.APPVEYOR_BUILD_NUMBER = '91011';
-	process.env.APPVEYOR_REPO_BRANCH = 'master';
-	process.env.APPVEYOR_REPO_NAME = 'owner/repo';
-	process.env.APPVEYOR_PROJECT_SLUG = 'owner/repo';
-	process.env.APPVEYOR_BUILD_FOLDER = '/';
-	delete process.env.APPVEYOR_PULL_REQUEST_NUMBER;
+const env = {
+	APPVEYOR: 'true',
+	APPVEYOR_JOB_NUMBER: '1234',
+	APPVEYOR_JOB_ID: 'job_id',
+	APPVEYOR_BUILD_VERSION: '100',
+	APPVEYOR_REPO_COMMIT: '5678',
+	APPVEYOR_BUILD_NUMBER: '91011',
+	APPVEYOR_REPO_BRANCH: 'master',
+	APPVEYOR_REPO_NAME: 'owner/repo',
+	APPVEYOR_PROJECT_SLUG: 'owner/repo',
+	APPVEYOR_BUILD_FOLDER: '/',
+};
 
-	t.deepEqual(appveyor.configuration(), {
+test('Push', t => {
+	t.deepEqual(appveyor.configuration({env}), {
 		name: 'Appveyor',
 		service: 'appveyor',
 		commit: '5678',
@@ -31,18 +32,7 @@ test('Push', t => {
 });
 
 test('PR', t => {
-	process.env.APPVEYOR = 'true';
-	process.env.APPVEYOR_JOB_NUMBER = '1234';
-	process.env.APPVEYOR_JOB_ID = 'job_id';
-	process.env.APPVEYOR_BUILD_VERSION = '100';
-	process.env.APPVEYOR_REPO_COMMIT = '5678';
-	process.env.APPVEYOR_BUILD_NUMBER = '91011';
-	process.env.APPVEYOR_REPO_NAME = 'owner/repo';
-	process.env.APPVEYOR_BUILD_FOLDER = '/';
-	process.env.APPVEYOR_PULL_REQUEST_NUMBER = '10';
-	process.env.APPVEYOR_REPO_BRANCH = 'master';
-
-	t.deepEqual(appveyor.configuration(), {
+	t.deepEqual(appveyor.configuration({env: Object.assign({}, env, {APPVEYOR_PULL_REQUEST_NUMBER: '10'})}), {
 		name: 'Appveyor',
 		service: 'appveyor',
 		commit: '5678',

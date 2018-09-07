@@ -1,17 +1,19 @@
 import test from 'ava';
 import gitlab from '../lib/gitlab';
 
-test('Push', t => {
-	process.env.GITLAB_CI = 'true';
-	process.env.CI_COMMIT_SHA = '5678';
-	process.env.CI_PIPELINE_ID = '91011';
-	process.env.CI_JOB_ID = '1213';
-	process.env.CI_PROJECT_URL = 'https://gitlab.com/owner/repo';
-	process.env.CI_COMMIT_REF_NAME = 'master';
-	process.env.CI_PROJECT_PATH = 'owner/repo';
-	process.env.CI_PROJECT_DIR = '/';
+const env = {
+	GITLAB_CI: 'true',
+	CI_COMMIT_SHA: '5678',
+	CI_PIPELINE_ID: '91011',
+	CI_JOB_ID: '1213',
+	CI_PROJECT_URL: 'https://gitlab.com/owner/repo',
+	CI_COMMIT_REF_NAME: 'master',
+	CI_PROJECT_PATH: 'owner/repo',
+	CI_PROJECT_DIR: '/',
+};
 
-	t.deepEqual(gitlab.configuration(), {
+test('Push', t => {
+	t.deepEqual(gitlab.configuration({env}), {
 		name: 'GitLab CI/CD',
 		service: 'gitlab',
 		commit: '5678',

@@ -1,15 +1,16 @@
 import test from 'ava';
-import circle from '../lib/vsts';
+import vsts from '../lib/vsts';
+
+const env = {
+	BUILD_BUILDURI: 'https://fabrikamfiber.visualstudio.com/_git/Scripts',
+	BUILD_SOURCEVERSION: '5678',
+	BUILD_BUILDNUMBER: '1234',
+	BUILD_SOURCEBRANCHNAME: 'master',
+	BUILD_REPOSITORY_LOCALPATH: '/',
+};
 
 test('Push', t => {
-	process.env.BUILD_BUILDURI = 'https://fabrikamfiber.visualstudio.com/_git/Scripts';
-	process.env.BUILD_SOURCEVERSION = '5678';
-	process.env.BUILD_BUILDNUMBER = '1234';
-	process.env.BUILD_SOURCEBRANCHNAME = 'master';
-	process.env.BUILD_REPOSITORY_LOCALPATH = '/';
-	delete process.env.SYSTEM_PULLREQUEST_PULLREQUESTID;
-
-	t.deepEqual(circle.configuration(), {
+	t.deepEqual(vsts.configuration({env}), {
 		name: 'Visual Studio Team Services',
 		service: 'vsts',
 		commit: '5678',
@@ -22,14 +23,7 @@ test('Push', t => {
 });
 
 test('PR', t => {
-	process.env.BUILD_BUILDURI = 'https://fabrikamfiber.visualstudio.com/_git/Scripts';
-	process.env.BUILD_SOURCEVERSION = '5678';
-	process.env.BUILD_BUILDNUMBER = '1234';
-	process.env.BUILD_SOURCEBRANCHNAME = 'master';
-	process.env.BUILD_REPOSITORY_LOCALPATH = '/';
-	process.env.SYSTEM_PULLREQUEST_PULLREQUESTID = '9';
-
-	t.deepEqual(circle.configuration(), {
+	t.deepEqual(vsts.configuration({env: Object.assign({}, env, {SYSTEM_PULLREQUEST_PULLREQUESTID: '9'})}), {
 		name: 'Visual Studio Team Services',
 		service: 'vsts',
 		commit: '5678',

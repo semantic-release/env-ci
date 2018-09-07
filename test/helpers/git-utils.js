@@ -12,18 +12,18 @@ import fileUrl from 'file-url';
  * @return {String} The path of the clone if `withRemote` is `true`, the path of the repository otherwise.
  */
 export async function gitRepo(withRemote, branch = 'master') {
-	const dir = tempy.directory();
+	let cwd = tempy.directory();
 
-	process.chdir(dir);
-	await execa('git', ['init'].concat(withRemote ? ['--bare'] : []));
+	await execa('git', ['init'].concat(withRemote ? ['--bare'] : []), {cwd});
 
+	const repositoryUrl = fileUrl(cwd);
 	if (withRemote) {
-		await initBareRepo(fileUrl(dir), branch);
-		await gitShallowClone(fileUrl(dir));
+		await initBareRepo(repositoryUrl, branch);
+		cwd = await gitShallowClone(repositoryUrl);
 	} else {
-		await gitCheckout(branch);
+		await gitCheckout(branch, true, {cwd});
 	}
-	return fileUrl(dir);
+	return {cwd, repositoryUrl};
 }
 
 /**
@@ -38,29 +38,29 @@ export async function gitRepo(withRemote, branch = 'master') {
  * @param {String} [branch='master'] the branch to initialize.
  */
 export async function initBareRepo(origin, branch = 'master') {
-	const clone = tempy.directory();
-	await execa('git', ['clone', '--no-hardlinks', origin, clone]);
-	process.chdir(clone);
-	await gitCheckout(branch);
-	await gitCommit('Initial commit');
-	await execa('git', ['push', origin, branch]);
+	const cwd = tempy.directory();
+	await execa('git', ['clone', '--no-hardlinks', origin, cwd], {cwd});
+	await gitCheckout(branch, true, {cwd});
+	await gitCommit('Initial commit', {cwd});
+	await execa('git', ['push', origin, branch], {cwd});
 }
 
 /**
  * Create a shallow clone of a git repository and change the current working directory to the cloned repository root.
  * The shallow will contain a limited number of commit and no tags.
  *
- * @param {String} origin The path of the repository to clone.
+ * @param {String} repositoryUrl The path of the repository to clone.
  * @param {String} [branch='master'] The branch to clone.
  * @param {Number} [depth=1] The number of commit to clone.
  * @return {String} The path of the cloned repository.
  */
-export async function gitShallowClone(origin, branch = 'master', depth = 1) {
-	const dir = tempy.directory();
+export async function gitShallowClone(repositoryUrl, branch = 'master', depth = 1) {
+	const cwd = tempy.directory();
 
-	process.chdir(dir);
-	await execa('git', ['clone', '--no-hardlinks', '--no-tags', '-b', branch, '--depth', depth, origin, dir]);
-	return dir;
+	await execa('git', ['clone', '--no-hardlinks', '--no-tags', '-b', branch, '--depth', depth, repositoryUrl, cwd], {
+		cwd,
+	});
+	return cwd;
 }
 
 /**
@@ -69,8 +69,8 @@ export async function gitShallowClone(origin, branch = 'master', depth = 1) {
  * @param {String} branch Branch name.
  * @param {boolean} create `true` to create the branche ans switch, `false` to only switch.
  */
-export async function gitCheckout(branch, create = true) {
-	await execa('git', create ? ['checkout', '-b', branch] : ['checkout', branch]);
+export async function gitCheckout(branch, create = true, options) {
+	await execa('git', create ? ['checkout', '-b', branch] : ['checkout', branch], options);
 }
 
 /**
@@ -80,14 +80,14 @@ export async function gitCheckout(branch, create = true) {
  *
  * @returns {String} The created commit sha.
  */
-export async function gitCommit(message = 'Test commit message') {
-	await execa('git', ['commit', '-m', message, '--allow-empty', '--no-gpg-sign']);
-	return execa.stdout('git', ['rev-parse', 'HEAD']);
+export async function gitCommit(message, options) {
+	await execa('git', ['commit', '-m', message, '--allow-empty', '--no-gpg-sign'], options);
+	return execa.stdout('git', ['rev-parse', 'HEAD'], options);
 }
 
 /**
  * @return {String} The sha of the head commit in the current git repository.
  */
-export function gitHead() {
-	return execa.stdout('git', ['rev-parse', 'HEAD']);
+export function gitHead(options) {
+	return execa.stdout('git', ['rev-parse', 'HEAD'], options);
 }

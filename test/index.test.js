@@ -1,218 +1,181 @@
 import test from 'ava';
 import tempy from 'tempy';
+import proxyquire from 'proxyquire';
 import m from '..';
 import {gitRepo, gitCommit} from './helpers/git-utils';
 
-// Save the current working diretory
-const cwd = process.cwd();
+test('Appveyor', t => {
+	const {isCi, service} = m({env: {APPVEYOR: 'true'}});
 
-test.beforeEach(() => {
-	delete process.env.CI;
-	delete process.env.APPVEYOR;
-	delete process.env.bamboo_agentId;
-	delete process.env.BITBUCKET_BUILD_NUMBER;
-	delete process.env.BITRISE_IO;
-	delete process.env.BUDDY_WORKSPACE_ID;
-	delete process.env.BUILDKITE;
-	delete process.env.CIRCLECI;
-	delete process.env.CIRRUS_CI;
-	delete process.env.CODEBUILD_BUILD_ID;
-	delete process.env.CI_NAME;
-	delete process.env.DRONE;
-	delete process.env.GITLAB_CI;
-	delete process.env.JENKINS_URL;
-	delete process.env.SEMAPHORE;
-	delete process.env.SHIPPABLE;
-	delete process.env.TEAMCITY_VERSION;
-	delete process.env.TRAVIS;
-	delete process.env.BUILD_BUILDURI;
-	delete process.env.WERCKER_MAIN_PIPELINE_STARTED;
+	t.is(isCi, true);
+	t.is(service, 'appveyor');
 });
 
-test.afterEach.always(() => {
-	// Restore the current working directory
-	process.chdir(cwd);
+test('Bamboo', t => {
+	const {isCi, service} = m({env: {bamboo_agentId: 'some bamboo agent id'}}); // eslint-disable-line camelcase
+
+	t.is(isCi, true);
+	t.is(service, 'bamboo');
 });
 
-test.serial('Appveyor', t => {
-	process.env.APPVEYOR = 'true';
+test('Bitbucket', t => {
+	const {isCi, service} = m({env: {BITBUCKET_BUILD_NUMBER: '123456'}});
 
-	const env = m();
-	t.is(env.isCi, true);
-	t.is(env.service, 'appveyor');
+	t.is(isCi, true);
+	t.is(service, 'bitbucket');
 });
 
-test.serial('Bamboo', t => {
-	process.env.bamboo_agentId = 'some bamboo agent id'; // eslint-disable-line camelcase
+test('Bitrise', t => {
+	const {isCi, service} = m({env: {BITRISE_IO: 'true'}});
 
-	const env = m();
-	t.is(env.isCi, true);
-	t.is(env.service, 'bamboo');
+	t.is(isCi, true);
+	t.is(service, 'bitrise');
 });
 
-test.serial('Bitbucket', t => {
-	process.env.BITBUCKET_BUILD_NUMBER = '123456';
+test('Buddy', t => {
+	const {isCi, service} = m({env: {BUDDY_WORKSPACE_ID: '1234'}});
 
-	const env = m();
-	t.is(env.isCi, true);
-	t.is(env.service, 'bitbucket');
+	t.is(isCi, true);
+	t.is(service, 'buddy');
 });
 
-test.serial('Bitrise', t => {
-	process.env.BITRISE_IO = 'true';
+test('Buildkite', t => {
+	const {isCi, service} = m({env: {BUILDKITE: 'true'}});
 
-	const env = m();
-	t.is(env.isCi, true);
-	t.is(env.service, 'bitrise');
+	t.is(isCi, true);
+	t.is(service, 'buildkite');
 });
 
-test.serial('Buddy', t => {
-	process.env.BUDDY_WORKSPACE_ID = '1234';
+test('Circle CI', t => {
+	const {isCi, service} = m({env: {CIRCLECI: 'true'}});
 
-	const env = m();
-	t.is(env.isCi, true);
-	t.is(env.service, 'buddy');
+	t.is(isCi, true);
+	t.is(service, 'circleci');
 });
 
-test.serial('Buildkite', t => {
-	process.env.BUILDKITE = 'true';
+test('Cirrus CI', t => {
+	const {isCi, service} = m({env: {CIRRUS_CI: 'true'}});
 
-	const env = m();
-	t.is(env.isCi, true);
-	t.is(env.service, 'buildkite');
+	t.is(isCi, true);
+	t.is(service, 'cirrus');
 });
 
-test.serial('Circle CI', t => {
-	process.env.CIRCLECI = 'true';
+test('AWS CodeBuild', t => {
+	const {isCi, service} = m({env: {CODEBUILD_BUILD_ID: 'env-ci:40cc72d2-acd5-46f4-a86b-6a3dcd2a39a0'}});
 
-	const env = m();
-	t.is(env.isCi, true);
-	t.is(env.service, 'circleci');
+	t.is(isCi, true);
+	t.is(service, 'codebuild');
 });
 
-test.serial('Cirrus CI', t => {
-	process.env.CIRRUS_CI = 'true';
+test('Codeship', t => {
+	const {isCi, service} = m({env: {CI_NAME: 'codeship'}});
 
-	const env = m();
-	t.is(env.isCi, true);
-	t.is(env.service, 'cirrus');
+	t.is(isCi, true);
+	t.is(service, 'codeship');
 });
 
-test.serial('AWS CodeBuild', t => {
-	process.env.CODEBUILD_BUILD_ID = 'env-ci:40cc72d2-acd5-46f4-a86b-6a3dcd2a39a0';
+test('Drone', t => {
+	const {isCi, service} = m({env: {DRONE: 'true'}});
 
-	const env = m();
-	t.is(env.isCi, true);
-	t.is(env.service, 'codebuild');
+	t.is(isCi, true);
+	t.is(service, 'drone');
 });
 
-test.serial('Codeship', t => {
-	process.env.CI_NAME = 'codeship';
+test('Gitlab', t => {
+	const {isCi, service} = m({env: {GITLAB_CI: 'true'}});
 
-	const env = m();
-	t.is(env.isCi, true);
-	t.is(env.service, 'codeship');
+	t.is(isCi, true);
+	t.is(service, 'gitlab');
 });
 
-test.serial('Drone', t => {
-	process.env.DRONE = 'true';
+test('Jenkins', async t => {
+	const {cwd} = await gitRepo();
+	await gitCommit('Test commit message', {cwd});
 
-	const env = m();
-	t.is(env.isCi, true);
-	t.is(env.service, 'drone');
+	const {isCi, service} = m({env: {JENKINS_URL: 'http://jenkins.jenkins.example/'}, cwd});
+
+	t.is(isCi, true);
+	t.is(service, 'jenkins');
 });
 
-test.serial('Gitlab', t => {
-	process.env.GITLAB_CI = 'true';
+test('Semaphore', async t => {
+	const {cwd} = await gitRepo();
+	await gitCommit('Test commit message', {cwd});
 
-	const env = m();
-	t.is(env.isCi, true);
-	t.is(env.service, 'gitlab');
+	const {isCi, service} = m({env: {SEMAPHORE: 'true'}});
+
+	t.is(isCi, true);
+	t.is(service, 'semaphore');
 });
 
-test.serial('Jenkins', async t => {
-	process.env.JENKINS_URL = 'http://jenkins.jenkins.example/';
-	await gitRepo();
-	await gitCommit();
+test('Shippable', t => {
+	const {isCi, service} = m({env: {SHIPPABLE: 'true'}});
 
-	const env = m();
-	t.is(env.isCi, true);
-	t.is(env.service, 'jenkins');
+	t.is(isCi, true);
+	t.is(service, 'shippable');
 });
 
-test.serial('Semaphore', async t => {
-	process.env.SEMAPHORE = 'true';
-	await gitRepo();
-	await gitCommit();
+test('TeamCity', t => {
+	const {isCi, service} = m({env: {TEAMCITY_VERSION: '2017.1.2 (build 46812)'}});
 
-	const env = m();
-	t.is(env.isCi, true);
-	t.is(env.service, 'semaphore');
+	t.is(isCi, true);
+	t.is(service, 'teamcity');
 });
 
-test.serial('Shippable', t => {
-	process.env.SHIPPABLE = 'true';
+test('Travis', t => {
+	const {isCi, service} = m({env: {TRAVIS: 'true'}});
 
-	const env = m();
-	t.is(env.isCi, true);
-	t.is(env.service, 'shippable');
+	t.is(isCi, true);
+	t.is(service, 'travis');
 });
 
-test.serial('TeamCity', t => {
-	process.env.TEAMCITY_VERSION = '2017.1.2 (build 46812)';
+test('Visual Studio Team Services', t => {
+	const {isCi, service} = m({env: {BUILD_BUILDURI: 'https://fabrikamfiber.visualstudio.com/_git/Scripts'}});
 
-	const env = m();
-	t.is(env.isCi, true);
-	t.is(env.service, 'teamcity');
+	t.is(isCi, true);
+	t.is(service, 'vsts');
 });
 
-test.serial('Travis', t => {
-	process.env.TRAVIS = 'true';
+test('Wercker', t => {
+	const {isCi, service} = m({env: {WERCKER_MAIN_PIPELINE_STARTED: '123456'}});
 
-	const env = m();
-	t.is(env.isCi, true);
-	t.is(env.service, 'travis');
+	t.is(isCi, true);
+	t.is(service, 'wercker');
 });
 
-test.serial('Visual Studio Team Services', t => {
-	process.env.BUILD_BUILDURI = 'https://fabrikamfiber.visualstudio.com/_git/Scripts';
+test('Unknown CI and Git repository', async t => {
+	const {cwd} = await gitRepo();
+	await gitCommit('Test commit message', {cwd});
 
-	const env = m();
-	t.is(env.isCi, true);
-	t.is(env.service, 'vsts');
+	const {isCi, service} = m({env: {CI: 'true'}, cwd});
+
+	t.is(isCi, true);
+	t.falsy(service);
 });
 
-test.serial('Wercker', t => {
-	process.env.WERCKER_MAIN_PIPELINE_STARTED = '123456';
+test('Unknown CI and not a Git repository', t => {
+	const cwd = tempy.directory();
 
-	const env = m();
-	t.is(env.isCi, true);
-	t.is(env.service, 'wercker');
+	const {isCi, service} = m({env: {CI: 'true'}, cwd});
+
+	t.is(isCi, true);
+	t.falsy(service);
 });
 
-test.serial('Unknown CI and Git repository', async t => {
-	process.env.CI = 'true';
-	await gitRepo();
-	await gitCommit();
+test('Not CI', t => {
+	const cwd = tempy.directory();
 
-	const env = m();
-	t.is(env.isCi, true);
-	t.falsy(env.service);
+	const {isCi, service} = m({env: {}, cwd});
+
+	t.is(isCi, false);
+	t.falsy(service);
 });
 
-test.serial('Unknown CI and not a Git repository', t => {
-	process.env.CI = 'true';
-	process.chdir(tempy.directory());
-	const env = m();
+test('Default options', t => {
+	const m = proxyquire('..', {process: {env: {}, cwd: () => tempy.directory()}});
 
-	t.is(env.isCi, true);
-	t.falsy(env.service);
-});
+	const {isCi, service} = m();
 
-test.serial('Not CI', t => {
-	process.chdir(tempy.directory());
-	const env = m();
-
-	t.is(env.isCi, false);
-	t.falsy(env.service);
+	t.is(isCi, false);
+	t.falsy(service);
 });
