@@ -45,6 +45,7 @@
     "git",
     "gitlab",
     "jenkins",
+    "sail",
     "semaphore",
     "shippable",
     "teamcity",

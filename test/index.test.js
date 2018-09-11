@@ -98,6 +98,13 @@ test('Jenkins', async t => {
 	t.is(service, 'jenkins');
 });
 
+test('Sail CI', t => {
+	const {isCi, service} = m({env: {SAILCI: 'true'}});
+
+	t.is(isCi, true);
+	t.is(service, 'sail');
+});
+
 test('Semaphore', async t => {
 	const {cwd} = await gitRepo();
 	await gitCommit('Test commit message', {cwd});
