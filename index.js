@@ -17,6 +17,7 @@ const services = {
 	drone: require('./lib/drone'),
 	gitlab: require('./lib/gitlab'),
 	jenkins: require('./lib/jenkins'),
+	sail: require('./lib/sail'),
 	semaphore: require('./lib/semaphore'),
 	shippable: require('./lib/shippable'),
 	teamcity: require('./lib/teamcity'),

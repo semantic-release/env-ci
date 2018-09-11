@@ -1,0 +1,36 @@
+import test from 'ava';
+import sail from '../lib/sail';
+
+const env = {
+	SAIL_COMMIT_SHA: 'full-commit-sha',
+	SAIL_COMMIT_BRANCH: 'master',
+	SAIL_REPO_OWNER: 'owner',
+	SAIL_REPO_NAME: 'repo',
+	SAIL_CLONE_DIR: '/workspace/repo',
+};
+
+test('Push', t => {
+	t.deepEqual(sail.configuration({env}), {
+		name: 'Sail CI',
+		service: 'sail',
+		commit: 'full-commit-sha',
+		branch: 'master',
+		slug: 'owner/repo',
+		pr: undefined,
+		isPr: false,
+		root: '/workspace/repo',
+	});
+});
+
+test('PR', t => {
+	t.deepEqual(sail.configuration({env: Object.assign({}, env, {SAIL_PULL_REQUEST_NUMBER: '10'})}), {
+		name: 'Sail CI',
+		service: 'sail',
+		commit: 'full-commit-sha',
+		branch: 'master',
+		slug: 'owner/repo',
+		root: '/workspace/repo',
+		pr: '10',
+		isPr: true,
+	});
+});
