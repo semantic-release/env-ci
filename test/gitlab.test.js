@@ -4,6 +4,7 @@ import gitlab from '../lib/gitlab';
 const env = {
 	GITLAB_CI: 'true',
 	CI_COMMIT_SHA: '5678',
+	CI_COMMIT_TAG: 'tag_name',
 	CI_PIPELINE_ID: '91011',
 	CI_JOB_ID: '1213',
 	CI_PROJECT_URL: 'https://gitlab.com/owner/repo',
@@ -17,6 +18,7 @@ test('Push', t => {
 		name: 'GitLab CI/CD',
 		service: 'gitlab',
 		commit: '5678',
+		tag: 'tag_name',
 		build: '91011',
 		buildUrl: 'https://gitlab.com/owner/repo/pipelines/91011',
 		branch: 'master',

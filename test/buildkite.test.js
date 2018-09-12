@@ -4,6 +4,7 @@ import buildkite from '../lib/buildkite';
 const env = {
 	BUILDKITE: 'true',
 	BUILDKITE_COMMIT: '5678',
+	BUILDKITE_TAG: 'tag_name',
 	BUILDKITE_BUILD_NUMBER: '91011',
 	BUILDKITE_BUILD_URL: 'https://server.com/buildresult',
 	BUILDKITE_BRANCH: 'master',
@@ -18,6 +19,7 @@ test('Push', t => {
 		name: 'Buildkite',
 		service: 'buildkite',
 		commit: '5678',
+		tag: 'tag_name',
 		build: '91011',
 		buildUrl: 'https://server.com/buildresult',
 		branch: 'master',
@@ -33,6 +35,7 @@ test('PR', t => {
 		name: 'Buildkite',
 		service: 'buildkite',
 		commit: '5678',
+		tag: 'tag_name',
 		build: '91011',
 		buildUrl: 'https://server.com/buildresult',
 		branch: 'master',
