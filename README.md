@@ -67,7 +67,7 @@ if (isCI) {
 | [Buildkite](https://buildkite.com/docs/builds/environment-variables)                                                                   | `buildkite` | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |        :x:         |        :x:         | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | [CircleCI](https://circleci.com/docs/2.0/env-vars/#built-in-environment-variables)                                                     | `circleci`  | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |        :x:         | :white_check_mark: | :white_check_mark: | :white_check_mark: |        :x:         |
 | [Cirrus CI](https://cirrus-ci.org/guide/writing-tasks/#environment-variables)                                                          |  `cirrus`   | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| [AWS CodeBuild](https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-env-vars.html)                                    | `codebuild` | :white_check_mark: | :white_check_mark: | :white_check_mark: |        :x:         | :white_check_mark: | :white_check_mark: |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         | :white_check_mark: |
+| [AWS CodeBuild](https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-env-vars.html)                                    | `codebuild` | :white_check_mark: |     :warning:      | :white_check_mark: |        :x:         | :white_check_mark: | :white_check_mark: |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         | :white_check_mark: |
 | [Codeship](https://documentation.codeship.com/basic/builds-and-configuration/set-environment-variables/#default-environment-variables) | `codeship`  | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |        :x:         |        :x:         |        :x:         |        :x:         | :white_check_mark: |        :x:         |
 | [Drone](https://readme.drone.io/reference/environ/)                                                                                    |   `drone`   | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |        :x:         | :white_check_mark: |        :x:         | :white_check_mark: | :white_check_mark: | :white_check_mark: |        :x:         |
 | [Gitlab CI/CD](https://docs.gitlab.com/ce/ci/variables/README.html)                                                                    |  `gitlab`   | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |        :x:         |        :x:         | :white_check_mark: | :white_check_mark: |
@@ -109,7 +109,7 @@ Type: `Object`
 
 [Environment variables values](#supported-variables) exposed by the CI service.
 
-## Caveats
+## Caveats :warning:
 
 ### Git `branch` determination
 
