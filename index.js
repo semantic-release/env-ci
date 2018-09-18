@@ -13,6 +13,7 @@ const services = {
 	circleci: require('./lib/circleci'),
 	cirrus: require('./lib/cirrus'),
 	codebuild: require('./lib/codebuild'),
+	codefresh: require('./lib/codefresh'),
 	codeship: require('./lib/codeship'),
 	drone: require('./lib/drone'),
 	gitlab: require('./lib/gitlab'),

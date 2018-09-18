@@ -39,6 +39,7 @@
     "circle",
     "cirrus",
     "codebuild",
+    "codefresh",
     "codeship",
     "drone",
     "environment",
