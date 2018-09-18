@@ -29,17 +29,22 @@ test('Push', t => {
 });
 
 test('PR', t => {
-	t.deepEqual(buddy.configuration({env: Object.assign({}, env, {BUDDY_EXECUTION_PULL_REQUEST_ID: '10'})}), {
-		name: 'Buddy',
-		service: 'buddy',
-		commit: '5678',
-		tag: 'tag_name',
-		build: '5',
-		buildUrl:
-			'https://app.buddy.works/pierredenisvanduynslager/playground/pipelines/pipeline/1111/execution/5b92a93863115e06fe4f7129',
-		branch: 'master',
-		pr: '10',
-		isPr: true,
-		slug: 'owner/repo',
-	});
+	t.deepEqual(
+		buddy.configuration({
+			env: Object.assign({}, env, {BUDDY_EXECUTION_PULL_REQUEST_ID: 'pull/10', BUDDY_EXECUTION_BRANCH: undefined}),
+		}),
+		{
+			name: 'Buddy',
+			service: 'buddy',
+			commit: '5678',
+			tag: 'tag_name',
+			build: '5',
+			buildUrl:
+				'https://app.buddy.works/pierredenisvanduynslager/playground/pipelines/pipeline/1111/execution/5b92a93863115e06fe4f7129',
+			branch: undefined,
+			pr: '10',
+			isPr: true,
+			slug: 'owner/repo',
+		}
+	);
 });

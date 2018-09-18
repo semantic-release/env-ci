@@ -25,22 +25,29 @@ test('Push', t => {
 		job: '1234',
 		pr: undefined,
 		isPr: false,
+		prBranch: undefined,
 		slug: 'owner/repo',
 	});
 });
 
 test('PR', t => {
-	t.deepEqual(travis.configuration({env: Object.assign({}, env, {TRAVIS_PULL_REQUEST: '10'})}), {
-		name: 'Travis CI',
-		service: 'travis',
-		commit: '5678',
-		tag: 'tag_name',
-		build: '91011',
-		branch: 'master',
-		root: '/',
-		job: '1234',
-		pr: '10',
-		isPr: true,
-		slug: 'owner/repo',
-	});
+	t.deepEqual(
+		travis.configuration({
+			env: Object.assign({}, env, {TRAVIS_PULL_REQUEST: '10', TRAVIS_PULL_REQUEST_BRANCH: 'pr-branch'}),
+		}),
+		{
+			name: 'Travis CI',
+			service: 'travis',
+			commit: '5678',
+			tag: 'tag_name',
+			build: '91011',
+			branch: 'master',
+			root: '/',
+			job: '1234',
+			pr: '10',
+			isPr: true,
+			prBranch: 'pr-branch',
+			slug: 'owner/repo',
+		}
+	);
 });

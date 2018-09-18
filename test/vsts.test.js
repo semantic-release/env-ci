@@ -18,19 +18,30 @@ test('Push', t => {
 		branch: 'master',
 		pr: undefined,
 		isPr: false,
+		prBranch: undefined,
 		root: '/',
 	});
 });
 
 test('PR', t => {
-	t.deepEqual(vsts.configuration({env: Object.assign({}, env, {SYSTEM_PULLREQUEST_PULLREQUESTID: '9'})}), {
-		name: 'Visual Studio Team Services',
-		service: 'vsts',
-		commit: '5678',
-		build: '1234',
-		branch: 'master',
-		pr: '9',
-		isPr: true,
-		root: '/',
-	});
+	t.deepEqual(
+		vsts.configuration({
+			env: Object.assign({}, env, {
+				SYSTEM_PULLREQUEST_PULLREQUESTID: '9',
+				SYSTEM_PULLREQUEST_TARGETBRANCH: 'master',
+				SYSTEM_PULLREQUEST_SOURCEBRANCH: 'pr-branch',
+			}),
+		}),
+		{
+			name: 'Visual Studio Team Services',
+			service: 'vsts',
+			commit: '5678',
+			build: '1234',
+			branch: 'master',
+			pr: '9',
+			isPr: true,
+			prBranch: 'pr-branch',
+			root: '/',
+		}
+	);
 });

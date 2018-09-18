@@ -67,6 +67,13 @@ test('AWS CodeBuild', t => {
 	t.is(service, 'codebuild');
 });
 
+test('Codefresh', t => {
+	const {isCi, service} = m({env: {CF_BUILD_ID: '91011'}});
+
+	t.is(isCi, true);
+	t.is(service, 'codefresh');
+});
+
 test('Codeship', t => {
 	const {isCi, service} = m({env: {CI_NAME: 'codeship'}});
 
