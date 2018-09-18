@@ -52,6 +52,7 @@ export async function initBareRepo(origin, branch = 'master') {
  * @param {String} repositoryUrl The path of the repository to clone.
  * @param {String} [branch='master'] The branch to clone.
  * @param {Number} [depth=1] The number of commit to clone.
+ *
  * @return {String} The path of the cloned repository.
  */
 export async function gitShallowClone(repositoryUrl, branch = 'master', depth = 1) {
@@ -68,6 +69,7 @@ export async function gitShallowClone(repositoryUrl, branch = 'master', depth = 
  *
  * @param {String} branch Branch name.
  * @param {boolean} create `true` to create the branche ans switch, `false` to only switch.
+ * @param {Object} [options] Options to pass to `execa`.
  */
 export async function gitCheckout(branch, create = true, options) {
 	await execa('git', create ? ['checkout', '-b', branch] : ['checkout', branch], options);
@@ -77,6 +79,7 @@ export async function gitCheckout(branch, create = true, options) {
  * Create commit on the current git repository.
  *
  * @param {String} message commit message.
+ * @param {Object} [options] Options to pass to `execa`.
  *
  * @returns {String} The created commit sha.
  */
@@ -86,6 +89,8 @@ export async function gitCommit(message, options) {
 }
 
 /**
+ * @param {Object} [options] Options to pass to `execa`.
+ *
  * @return {String} The sha of the head commit in the current git repository.
  */
 export function gitHead(options) {

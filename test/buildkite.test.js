@@ -26,22 +26,33 @@ test('Push', t => {
 		root: '/',
 		pr: undefined,
 		isPr: false,
+		prBranch: undefined,
 		slug: 'owner/repo',
 	});
 });
 
 test('PR', t => {
-	t.deepEqual(buildkite.configuration({env: Object.assign({}, env, {BUILDKITE_PULL_REQUEST: '10'})}), {
-		name: 'Buildkite',
-		service: 'buildkite',
-		commit: '5678',
-		tag: 'tag_name',
-		build: '91011',
-		buildUrl: 'https://server.com/buildresult',
-		branch: 'master',
-		root: '/',
-		pr: '10',
-		isPr: true,
-		slug: 'owner/repo',
-	});
+	t.deepEqual(
+		buildkite.configuration({
+			env: Object.assign({}, env, {
+				BUILDKITE_PULL_REQUEST: '10',
+				BUILDKITE_PULL_REQUEST_BASE_BRANCH: 'master',
+				BUILDKITE_BRANCH: 'pr-branch',
+			}),
+		}),
+		{
+			name: 'Buildkite',
+			service: 'buildkite',
+			commit: '5678',
+			tag: 'tag_name',
+			build: '91011',
+			buildUrl: 'https://server.com/buildresult',
+			branch: 'master',
+			root: '/',
+			pr: '10',
+			isPr: true,
+			prBranch: 'pr-branch',
+			slug: 'owner/repo',
+		}
+	);
 });

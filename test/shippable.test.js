@@ -7,6 +7,7 @@ const env = {
 	COMMIT: '5678',
 	GIT_TAG_NAME: 'tag_name',
 	BUILD_NUMBER: '91011',
+	BRANCH: 'master',
 	BUILD_URL: 'https://server.com/buildresult',
 	PULL_REQUEST: 'false',
 	IS_PULL_REQUEST: 'false',
@@ -15,7 +16,7 @@ const env = {
 };
 
 test('Push', t => {
-	t.deepEqual(shippable.configuration({env: Object.assign({}, env, {BRANCH: 'master'})}), {
+	t.deepEqual(shippable.configuration({env}), {
 		name: 'Shippable',
 		service: 'shippable',
 		commit: '5678',
@@ -27,6 +28,7 @@ test('Push', t => {
 		job: '1234',
 		pr: undefined,
 		isPr: false,
+		prBranch: undefined,
 		slug: 'owner/repo',
 	});
 });
@@ -34,7 +36,12 @@ test('Push', t => {
 test('PR', t => {
 	t.deepEqual(
 		shippable.configuration({
-			env: Object.assign({}, env, {BASE_BRANCH: 'master', IS_PULL_REQUEST: 'true', PULL_REQUEST: '10'}),
+			env: Object.assign({}, env, {
+				BASE_BRANCH: 'master',
+				HEAD_BRANCH: 'pr-branch',
+				IS_PULL_REQUEST: 'true',
+				PULL_REQUEST: '10',
+			}),
 		}),
 		{
 			name: 'Shippable',
@@ -48,6 +55,7 @@ test('PR', t => {
 			job: '1234',
 			pr: '10',
 			isPr: true,
+			prBranch: 'pr-branch',
 			slug: 'owner/repo',
 		}
 	);

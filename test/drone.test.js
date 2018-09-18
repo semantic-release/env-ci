@@ -23,13 +23,21 @@ test('Push', t => {
 		job: '1234',
 		pr: undefined,
 		isPr: false,
+		prBranch: undefined,
 		slug: 'owner/repo',
 	});
 });
 
 test('PR', t => {
 	t.deepEqual(
-		drone.configuration({env: Object.assign({}, env, {DRONE_PULL_REQUEST: '10', DRONE_BUILD_EVENT: 'pull_request'})}),
+		drone.configuration({
+			env: Object.assign({}, env, {
+				DRONE_PULL_REQUEST: '10',
+				DRONE_BUILD_EVENT: 'pull_request',
+				DRONE_TARGET_BRANCH: 'master',
+				DRONE_SOURCE_BRANCH: 'pr-branch',
+			}),
+		}),
 		{
 			name: 'Drone',
 			service: 'drone',
@@ -40,6 +48,7 @@ test('PR', t => {
 			job: '1234',
 			pr: '10',
 			isPr: true,
+			prBranch: 'pr-branch',
 			slug: 'owner/repo',
 		}
 	);

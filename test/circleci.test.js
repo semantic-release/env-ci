@@ -25,13 +25,14 @@ test('Push', t => {
 		branch: 'master',
 		pr: undefined,
 		isPr: false,
+		prBranch: undefined,
 		slug: 'owner/repo',
 	});
 });
 
 test('PR 1.0', t => {
 	t.deepEqual(
-		circle.configuration({env: Object.assign({}, env, {CIRCLE_BRANCH: 'pr_branch', CI_PULL_REQUEST: 'uri/pr/10'})}),
+		circle.configuration({env: Object.assign({}, env, {CIRCLE_BRANCH: 'pr-branch', CI_PULL_REQUEST: 'uri/pr/10'})}),
 		{
 			name: 'CircleCI',
 			service: 'circleci',
@@ -40,9 +41,10 @@ test('PR 1.0', t => {
 			build: '1234',
 			buildUrl: 'https://server.com/buildresult',
 			job: '1234.1',
-			branch: 'pr_branch',
+			branch: undefined,
 			pr: '10',
 			isPr: true,
+			prBranch: 'pr-branch',
 			slug: 'owner/repo',
 		}
 	);
@@ -50,7 +52,7 @@ test('PR 1.0', t => {
 
 test('PR 2.0', t => {
 	t.deepEqual(
-		circle.configuration({env: Object.assign({}, env, {CIRCLE_BRANCH: 'pr_branch', CIRCLE_PULL_REQUEST: 'uri/pr/10'})}),
+		circle.configuration({env: Object.assign({}, env, {CIRCLE_BRANCH: 'pr-branch', CIRCLE_PULL_REQUEST: 'uri/pr/10'})}),
 		{
 			name: 'CircleCI',
 			service: 'circleci',
@@ -59,9 +61,10 @@ test('PR 2.0', t => {
 			build: '1234',
 			buildUrl: 'https://server.com/buildresult',
 			job: '1234.1',
-			branch: 'pr_branch',
+			branch: undefined,
 			pr: '10',
 			isPr: true,
+			prBranch: 'pr-branch',
 			slug: 'owner/repo',
 		}
 	);
@@ -69,7 +72,7 @@ test('PR 2.0', t => {
 
 test('PR 2.0 without pull uri', t => {
 	t.deepEqual(
-		circle.configuration({env: Object.assign({}, env, {CIRCLE_BRANCH: 'pr_branch', CIRCLE_PR_NUMBER: '10'})}),
+		circle.configuration({env: Object.assign({}, env, {CIRCLE_BRANCH: 'pr-branch', CIRCLE_PR_NUMBER: '10'})}),
 		{
 			name: 'CircleCI',
 			service: 'circleci',
@@ -78,9 +81,10 @@ test('PR 2.0 without pull uri', t => {
 			build: '1234',
 			buildUrl: 'https://server.com/buildresult',
 			job: '1234.1',
-			branch: 'pr_branch',
+			branch: undefined,
 			pr: '10',
 			isPr: true,
+			prBranch: 'pr-branch',
 			slug: 'owner/repo',
 		}
 	);

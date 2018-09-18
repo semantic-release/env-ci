@@ -31,19 +31,24 @@ test('Push', t => {
 });
 
 test('PR', t => {
-	t.deepEqual(cirrus.configuration({env: Object.assign({}, env, {CIRRUS_PR: '239'})}), {
-		name: 'Cirrus CI',
-		service: 'cirrus',
-		commit: '5678',
-		tag: 'tag_name',
-		build: '1234',
-		buildUrl: 'https://cirrus-ci.com/build/1234',
-		job: '91011',
-		jobUrl: 'https://cirrus-ci.com/task/91011',
-		branch: 'master',
-		pr: '239',
-		isPr: true,
-		slug: 'owner/repo',
-		root: '/',
-	});
+	t.deepEqual(
+		cirrus.configuration({
+			env: Object.assign({}, env, {CIRRUS_PR: '239', CIRRUS_BASE_BRANCH: 'master', CIRRUS_BRANCH: 'pr-branch'}),
+		}),
+		{
+			name: 'Cirrus CI',
+			service: 'cirrus',
+			commit: '5678',
+			tag: 'tag_name',
+			build: '1234',
+			buildUrl: 'https://cirrus-ci.com/build/1234',
+			job: '91011',
+			jobUrl: 'https://cirrus-ci.com/task/91011',
+			branch: 'master',
+			pr: '239',
+			isPr: true,
+			slug: 'owner/repo',
+			root: '/',
+		}
+	);
 });

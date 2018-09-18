@@ -19,36 +19,65 @@ test('Push', t => {
 		branch: 'master',
 		root: '/',
 		pr: undefined,
+		prBranch: undefined,
 		isPr: false,
 	});
 });
 
 test('PR', t => {
-	t.deepEqual(jenkins.configuration({env: Object.assign({}, env, {BRANCH_NAME: 'pr_branch', CHANGE_ID: '10'})}), {
+	t.deepEqual(jenkins.configuration({env: Object.assign({}, env, {BRANCH_NAME: 'pr-branch', CHANGE_ID: '10'})}), {
 		name: 'Jenkins',
 		service: 'jenkins',
 		commit: '5678',
 		build: '91011',
 		buildUrl: 'http://jenkins.jenkins.example/buildResult',
-		branch: 'pr_branch',
+		branch: undefined,
 		root: '/',
 		pr: '10',
+		prBranch: 'pr-branch',
 		isPr: true,
 	});
 });
 
-test('PR (PR builder)', t => {
+test('PR (PR ghprb-plugin)', t => {
 	t.deepEqual(
-		jenkins.configuration({env: Object.assign({}, env, {ghprbSourceBranch: 'pr_branch', ghprbPullId: '10'})}),
+		jenkins.configuration({
+			env: Object.assign({}, env, {ghprbSourceBranch: 'pr-branch', ghprbTargetBranch: 'master', ghprbPullId: '10'}),
+		}),
 		{
 			name: 'Jenkins',
 			service: 'jenkins',
 			commit: '5678',
 			build: '91011',
 			buildUrl: 'http://jenkins.jenkins.example/buildResult',
-			branch: 'pr_branch',
+			branch: 'master',
 			root: '/',
 			pr: '10',
+			prBranch: 'pr-branch',
+			isPr: true,
+		}
+	);
+});
+
+test('PR (gitlab-plugin)', t => {
+	t.deepEqual(
+		jenkins.configuration({
+			env: Object.assign({}, env, {
+				ghprbSourceBranch: 'pr-branch',
+				gitlabTargetBranch: 'master',
+				gitlabMergeRequestId: '10',
+			}),
+		}),
+		{
+			name: 'Jenkins',
+			service: 'jenkins',
+			commit: '5678',
+			build: '91011',
+			buildUrl: 'http://jenkins.jenkins.example/buildResult',
+			branch: 'master',
+			root: '/',
+			pr: '10',
+			prBranch: 'pr-branch',
 			isPr: true,
 		}
 	);

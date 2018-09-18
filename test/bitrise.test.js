@@ -23,21 +23,32 @@ test('Push', t => {
 		branch: 'master',
 		pr: undefined,
 		isPr: false,
+		prBranch: undefined,
 		slug: 'owner/repo',
 	});
 });
 
 test('PR', t => {
-	t.deepEqual(bitrise.configuration({env: Object.assign({}, env, {BITRISE_PULL_REQUEST: '10'})}), {
-		name: 'Bitrise',
-		service: 'bitrise',
-		commit: '5678',
-		tag: 'tag_name',
-		build: '91011',
-		buildUrl: 'https://server.com/buildresult',
-		branch: 'master',
-		pr: '10',
-		isPr: true,
-		slug: 'owner/repo',
-	});
+	t.deepEqual(
+		bitrise.configuration({
+			env: Object.assign({}, env, {
+				BITRISE_PULL_REQUEST: '10',
+				BITRISEIO_GIT_BRANCH_DEST: 'master',
+				BITRISE_GIT_BRANCH: 'pr-branch',
+			}),
+		}),
+		{
+			name: 'Bitrise',
+			service: 'bitrise',
+			commit: '5678',
+			tag: 'tag_name',
+			build: '91011',
+			buildUrl: 'https://server.com/buildresult',
+			branch: 'master',
+			pr: '10',
+			isPr: true,
+			prBranch: 'pr-branch',
+			slug: 'owner/repo',
+		}
+	);
 });
