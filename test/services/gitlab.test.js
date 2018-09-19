@@ -1,5 +1,5 @@
 import test from 'ava';
-import gitlab from '../lib/gitlab';
+import gitlab from '../../services/gitlab';
 
 const env = {
 	GITLAB_CI: 'true',

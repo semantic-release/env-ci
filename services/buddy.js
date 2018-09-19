@@ -1,11 +1,13 @@
 // https://buddy.works/knowledge/deployments/how-use-environment-variables#default-environment-variables
 
+const {prNumber} = require('../lib/utils');
+
 module.exports = {
 	detect({env}) {
 		return Boolean(env.BUDDY_WORKSPACE_ID);
 	},
 	configuration({env}) {
-		const pr = (/\d+(?!.*\d+)/.exec(env.BUDDY_EXECUTION_PULL_REQUEST_ID) || [])[0];
+		const pr = prNumber(env.BUDDY_EXECUTION_PULL_REQUEST_ID);
 		const isPr = Boolean(pr);
 
 		return {

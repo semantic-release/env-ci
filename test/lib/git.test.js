@@ -1,18 +1,20 @@
 import test from 'ava';
-import git from '../lib/git';
-import {gitRepo, gitCommit, gitHead, gitCheckout} from './helpers/git-utils';
+import {head, branch} from '../../lib/git';
+import {gitRepo, gitCommit, gitHead, gitCheckout} from '../helpers/git-utils';
 
 test('Git local repository', async t => {
 	const {cwd} = await gitRepo();
 	const commit = await gitCommit('Test commit message', {cwd});
 
-	t.deepEqual(git.configuration({cwd}), {commit, branch: 'master'});
+	t.is(head({cwd}), commit);
+	t.is(branch({cwd}), 'master');
 });
 
 test('Git cloned repository', async t => {
 	const {cwd} = await gitRepo(true);
 
-	t.deepEqual(git.configuration({cwd}), {commit: await gitHead({cwd}), branch: 'master'});
+	t.is(head({cwd}), await gitHead({cwd}));
+	t.is(branch({cwd}), 'master');
 });
 
 test('Git local repository with detached head', async t => {
@@ -20,12 +22,14 @@ test('Git local repository with detached head', async t => {
 	const commit = await gitCommit('Test commit message', {cwd});
 	await gitCheckout('HEAD~0', false, {cwd});
 
-	t.deepEqual(git.configuration({cwd}), {commit, branch: undefined});
+	t.is(head({cwd}), commit);
+	t.is(branch({cwd}), undefined);
 });
 
 test('Git cloned repository with detached head', async t => {
 	const {cwd} = await gitRepo(true);
 	await gitCheckout('HEAD~0', false, {cwd});
 
-	t.deepEqual(git.configuration({cwd}), {commit: await gitHead({cwd}), branch: 'master'});
+	t.is(head({cwd}), await gitHead({cwd}));
+	t.is(branch({cwd}), 'master');
 });

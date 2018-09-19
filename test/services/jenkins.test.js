@@ -1,5 +1,5 @@
 import test from 'ava';
-import jenkins from '../lib/jenkins';
+import jenkins from '../../services/jenkins';
 
 const env = {
 	JENKINS_URL: 'http://jenkins.jenkins.example/',

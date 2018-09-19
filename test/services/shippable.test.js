@@ -1,5 +1,5 @@
 import test from 'ava';
-import shippable from '../lib/shippable';
+import shippable from '../../services/shippable';
 
 const env = {
 	SHIPPABLE: 'true',

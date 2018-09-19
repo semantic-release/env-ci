@@ -1,5 +1,5 @@
 import test from 'ava';
-import buddy from '../lib/buddy';
+import buddy from '../../services/buddy';
 
 const env = {
 	BUDDY_WORKSPACE_ID: '111',
