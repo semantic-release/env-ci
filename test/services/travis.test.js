@@ -1,5 +1,5 @@
 import test from 'ava';
-import travis from '../lib/travis';
+import travis from '../../services/travis';
 
 const env = {
 	TRAVIS: 'true',

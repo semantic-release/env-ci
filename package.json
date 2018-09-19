@@ -24,8 +24,9 @@
     "node": ">=6"
   },
   "files": [
+    "index.js",
     "lib",
-    "index.js"
+    "services"
   ],
   "homepage": "https://github.com/pvdlg/env-ci#readme",
   "keywords": [

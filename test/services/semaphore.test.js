@@ -1,6 +1,6 @@
 import test from 'ava';
-import semaphore from '../lib/semaphore';
-import {gitRepo, gitCommit} from './helpers/git-utils';
+import semaphore from '../../services/semaphore';
+import {gitRepo, gitCommit} from '../helpers/git-utils';
 
 const env = {
 	SEMAPHORE: 'true',

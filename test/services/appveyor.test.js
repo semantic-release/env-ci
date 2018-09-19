@@ -1,5 +1,5 @@
 import test from 'ava';
-import appveyor from '../lib/appveyor';
+import appveyor from '../../services/appveyor';
 
 const env = {
 	APPVEYOR: 'true',

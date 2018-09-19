@@ -1,5 +1,5 @@
 import test from 'ava';
-import cirrus from '../lib/cirrus';
+import cirrus from '../../services/cirrus';
 
 const env = {
 	CIRRUS_CI: 'true',

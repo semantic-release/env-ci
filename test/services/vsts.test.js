@@ -1,5 +1,5 @@
 import test from 'ava';
-import vsts from '../lib/vsts';
+import vsts from '../../services/vsts';
 
 const env = {
 	BUILD_BUILDURI: 'https://fabrikamfiber.visualstudio.com/_git/Scripts',

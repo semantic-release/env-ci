@@ -1,7 +1,7 @@
 import fs from 'fs';
 import test from 'ava';
 import tempy from 'tempy';
-import teamcity from '../lib/teamcity';
+import teamcity from '../../services/teamcity';
 
 const env = {
 	TEAMCITY_VERSION: '2017.1.2 (build 46812)',

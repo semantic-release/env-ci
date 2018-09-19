@@ -1,5 +1,5 @@
 import test from 'ava';
-import bamboo from '../lib/bamboo';
+import bamboo from '../../services/bamboo';
 
 /* eslint-disable camelcase */
 

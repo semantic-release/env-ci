@@ -1,4 +1,4 @@
-const {head} = require('./git');
+const {head} = require('../lib/git');
 
 // https://wiki.jenkins.io/display/JENKINS/Building+a+software+project
 

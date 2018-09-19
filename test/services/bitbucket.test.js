@@ -1,5 +1,5 @@
 import test from 'ava';
-import bitbucket from '../lib/bitbucket';
+import bitbucket from '../../services/bitbucket';
 
 const env = {
 	BITBUCKET_COMMIT: 'b5ce5ce',

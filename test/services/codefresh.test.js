@@ -1,5 +1,5 @@
 import test from 'ava';
-import codefresh from '../lib/codefresh';
+import codefresh from '../../services/codefresh';
 
 const env = {
 	CF_BUILD_ID: '91011',

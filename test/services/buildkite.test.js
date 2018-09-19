@@ -1,5 +1,5 @@
 import test from 'ava';
-import buildkite from '../lib/buildkite';
+import buildkite from '../../services/buildkite';
 
 const env = {
 	BUILDKITE: 'true',

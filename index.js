@@ -1,30 +1,30 @@
 'use strict';
 
 const process = require('process');
-const git = require('./lib/git');
+const git = require('./services/git');
 
 const services = {
-	appveyor: require('./lib/appveyor'),
-	bamboo: require('./lib/bamboo'),
-	bitbucket: require('./lib/bitbucket'),
-	bitrise: require('./lib/bitrise'),
-	buddy: require('./lib/buddy'),
-	buildkite: require('./lib/buildkite'),
-	circleci: require('./lib/circleci'),
-	cirrus: require('./lib/cirrus'),
-	codebuild: require('./lib/codebuild'),
-	codefresh: require('./lib/codefresh'),
-	codeship: require('./lib/codeship'),
-	drone: require('./lib/drone'),
-	gitlab: require('./lib/gitlab'),
-	jenkins: require('./lib/jenkins'),
-	sail: require('./lib/sail'),
-	semaphore: require('./lib/semaphore'),
-	shippable: require('./lib/shippable'),
-	teamcity: require('./lib/teamcity'),
-	travis: require('./lib/travis'),
-	vsts: require('./lib/vsts'),
-	wercker: require('./lib/wercker'),
+	appveyor: require('./services/appveyor'),
+	bamboo: require('./services/bamboo'),
+	bitbucket: require('./services/bitbucket'),
+	bitrise: require('./services/bitrise'),
+	buddy: require('./services/buddy'),
+	buildkite: require('./services/buildkite'),
+	circleci: require('./services/circleci'),
+	cirrus: require('./services/cirrus'),
+	codebuild: require('./services/codebuild'),
+	codefresh: require('./services/codefresh'),
+	codeship: require('./services/codeship'),
+	drone: require('./services/drone'),
+	gitlab: require('./services/gitlab'),
+	jenkins: require('./services/jenkins'),
+	sail: require('./services/sail'),
+	semaphore: require('./services/semaphore'),
+	shippable: require('./services/shippable'),
+	teamcity: require('./services/teamcity'),
+	travis: require('./services/travis'),
+	vsts: require('./services/vsts'),
+	wercker: require('./services/wercker'),
 };
 
 module.exports = ({env = process.env, cwd = process.cwd()} = {}) => {

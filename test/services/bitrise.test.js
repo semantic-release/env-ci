@@ -1,5 +1,5 @@
 import test from 'ava';
-import bitrise from '../lib/bitrise';
+import bitrise from '../../services/bitrise';
 
 const env = {
 	BITRISE_IO: 'true',

@@ -1,5 +1,5 @@
 import test from 'ava';
-import codeship from '../lib/codeship';
+import codeship from '../../services/codeship';
 
 const env = {
 	CI_NAME: 'codeship',

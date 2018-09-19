@@ -1,5 +1,5 @@
 import test from 'ava';
-import drone from '../lib/drone';
+import drone from '../../services/drone';
 
 const env = {
 	DRONE: 'true',

@@ -1,6 +1,6 @@
 import test from 'ava';
-import codebuild from '../lib/codebuild';
-import {gitRepo, gitHead} from './helpers/git-utils';
+import codebuild from '../../services/codebuild';
+import {gitRepo, gitHead} from '../helpers/git-utils';
 
 const env = {
 	CODEBUILD_BUILD_ID: 'env-ci:40cc72d2-acd5-46f4-a86b-6a3dcd2a39a0',

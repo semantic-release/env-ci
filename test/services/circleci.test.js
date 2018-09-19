@@ -1,5 +1,5 @@
 import test from 'ava';
-import circle from '../lib/circleci';
+import circle from '../../services/circleci';
 
 const env = {
 	CIRCLECI: 'true',
