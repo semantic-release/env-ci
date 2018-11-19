@@ -2,17 +2,18 @@
 
 const javaProperties = require('java-properties');
 
-function getProperties(env) {
-	const file = env.TEAMCITY_BUILD_PROPERTIES_FILE;
-	if (!file) {
-		return {};
-	}
-	const properties = javaProperties.of(file);
-	return {
-		root: properties.get('teamcity.build.workingDir'),
-		branch: properties.get('teamcity.build.branch'),
-	};
-}
+const PROPERTIES_MAPPING = {root: 'teamcity.build.workingDir', branch: 'teamcity.build.branch'};
+
+const getProperties = env => {
+	const properties = env.TEAMCITY_BUILD_PROPERTIES_FILE
+		? javaProperties.of(env.TEAMCITY_BUILD_PROPERTIES_FILE)
+		: undefined;
+
+	return Object.keys(PROPERTIES_MAPPING).reduce((result, key) => {
+		const property = properties ? properties.get(PROPERTIES_MAPPING[key]) : undefined;
+		return Object.assign(result, {[key]: typeof property === 'undefined' ? env[PROPERTIES_MAPPING[key]] : property});
+	}, {});
+};
 
 module.exports = {
 	detect({env}) {
