@@ -10,12 +10,12 @@ const env = {
 	TEAMCITY_BUILDCONF_NAME: 'owner/repo',
 };
 
-test('Push - with properties file', t => {
-	const propertiesFile = tempy.file({extension: 'properties'});
-	const properties = ['teamcity.build.branch=master', 'teamcity.build.workingDir=/'];
-	fs.writeFileSync(propertiesFile, properties.join('\n') + '\n');
+test('Push - with build properties file', t => {
+	const buildFile = tempy.file({extension: 'properties'});
+	const buildProperties = ['teamcity.build.branch=master', 'teamcity.build.workingDir=/'];
+	fs.writeFileSync(buildFile, buildProperties.join('\n') + '\n');
 
-	t.deepEqual(teamcity.configuration({env: Object.assign({}, env, {TEAMCITY_BUILD_PROPERTIES_FILE: propertiesFile})}), {
+	t.deepEqual(teamcity.configuration({env: Object.assign({}, env, {TEAMCITY_BUILD_PROPERTIES_FILE: buildFile})}), {
 		name: 'TeamCity',
 		service: 'teamcity',
 		commit: '5678',
@@ -26,44 +26,56 @@ test('Push - with properties file', t => {
 	});
 });
 
-test('Push - without properties file', t => {
-	t.deepEqual(
-		teamcity.configuration({
-			env: Object.assign({}, env, {'teamcity.build.workingDir': '/', 'teamcity.build.branch': 'master'}),
-		}),
-		{
-			name: 'TeamCity',
-			service: 'teamcity',
-			commit: '5678',
-			build: '91011',
-			branch: 'master',
-			root: '/',
-			slug: 'owner/repo',
-		}
-	);
+test('Push - without build properties file', t => {
+	t.deepEqual(teamcity.configuration({env}), {
+		name: 'TeamCity',
+		service: 'teamcity',
+		commit: '5678',
+		build: '91011',
+		branch: undefined,
+		root: undefined,
+		slug: 'owner/repo',
+	});
 });
 
-test('Push - prioritize properties file values', t => {
-	const propertiesFile = tempy.file({extension: 'properties'});
-	const properties = ['teamcity.build.branch=master'];
-	fs.writeFileSync(propertiesFile, properties.join('\n') + '\n');
+test('Push - with build and config properties files', t => {
+	const buildFile = tempy.file({extension: 'properties'});
+	const configFile = tempy.file({extension: 'properties'});
+	const buildProperties = ['teamcity.build.branch=master', `teamcity.configuration.properties.file=${configFile}`];
+	const configProperties = ['teamcity.build.workingDir=/'];
+	fs.writeFileSync(buildFile, buildProperties.join('\n') + '\n');
+	fs.writeFileSync(configFile, configProperties.join('\n') + '\n');
 
-	t.deepEqual(
-		teamcity.configuration({
-			env: Object.assign({}, env, {
-				TEAMCITY_BUILD_PROPERTIES_FILE: propertiesFile,
-				'teamcity.build.workingDir': '/other',
-				'teamcity.build.branch': 'other',
-			}),
-		}),
-		{
-			name: 'TeamCity',
-			service: 'teamcity',
-			commit: '5678',
-			build: '91011',
-			branch: 'master',
-			root: '/other',
-			slug: 'owner/repo',
-		}
-	);
+	t.deepEqual(teamcity.configuration({env: Object.assign({}, env, {TEAMCITY_BUILD_PROPERTIES_FILE: buildFile})}), {
+		name: 'TeamCity',
+		service: 'teamcity',
+		commit: '5678',
+		build: '91011',
+		branch: 'master',
+		root: '/',
+		slug: 'owner/repo',
+	});
+});
+
+test('Push - prioritize build properties file values', t => {
+	const buildFile = tempy.file({extension: 'properties'});
+	const configFile = tempy.file({extension: 'properties'});
+	const buildProperties = [
+		'teamcity.build.workingDir=/',
+		'teamcity.build.branch=master',
+		`teamcity.configuration.properties.file=${configFile}`,
+	];
+	const configProperties = ['teamcity.build.branch=other'];
+	fs.writeFileSync(buildFile, buildProperties.join('\n') + '\n');
+	fs.writeFileSync(configFile, configProperties.join('\n') + '\n');
+
+	t.deepEqual(teamcity.configuration({env: Object.assign({}, env, {TEAMCITY_BUILD_PROPERTIES_FILE: buildFile})}), {
+		name: 'TeamCity',
+		service: 'teamcity',
+		commit: '5678',
+		build: '91011',
+		branch: 'master',
+		root: '/',
+		slug: 'owner/repo',
+	});
 });
