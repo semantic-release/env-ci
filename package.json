@@ -11,7 +11,7 @@
     "java-properties": "^0.2.9"
   },
   "devDependencies": {
-    "ava": "^0.25.0",
+    "ava": "^1.0.1",
     "codecov": "^3.0.0",
     "file-url": "^2.0.2",
     "nyc": "^13.1.0",
