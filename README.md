@@ -135,13 +135,6 @@ Therefore in the case of Pull Request builds, `env-ci` will not be able to deter
 
 See [feature request](https://forum.buddy.works/t/determine-pull-request-branch-with-environment-variable/911).
 
-### CircleCI
-
-For builds triggered when a Pull Request is opened/updated, CircleCI doesn't provide an environment variable indicating the target branch.
-Therefore in the case of Pull Request builds, `env-ci` will not be able to determine the `branch` property. However `prBranch` will be set.
-
-See [feature request](https://discuss.circleci.com/t/create-a-circle-target-branch-envar/10022).
-
 ## Jenkins
 
 Triggering build when a Pull Request is opened/updated is supported only via the [ghprb-plugin](https://github.com/jenkinsci/ghprb-plugin) and [gitlab-plugin](https://github.com/jenkinsci/gitlab-plugin). Therefore `env-ci` will set `isPr`, `pr` and `prBranch` and define `branch` with the Pull Request target branch only if one those plugin is used.
