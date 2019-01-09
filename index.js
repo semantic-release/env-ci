@@ -16,6 +16,7 @@ const services = {
 	codefresh: require('./services/codefresh'),
 	codeship: require('./services/codeship'),
 	drone: require('./services/drone'),
+	github: require('./services/github'),
 	gitlab: require('./services/gitlab'),
 	jenkins: require('./services/jenkins'),
 	sail: require('./services/sail'),
