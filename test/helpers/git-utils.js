@@ -23,6 +23,7 @@ export async function gitRepo(withRemote, branch = 'master') {
 	} else {
 		await gitCheckout(branch, true, {cwd});
 	}
+
 	return {cwd, repositoryUrl};
 }
 

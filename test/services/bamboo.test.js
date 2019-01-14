@@ -24,3 +24,5 @@ test('Push', t => {
 		root: '/some/working/dir',
 	});
 });
+
+/* eslint-enable camelcase */
