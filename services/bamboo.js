@@ -1,7 +1,5 @@
 // https://confluence.atlassian.com/bamboo/bamboo-variables-289277087.html
 
-/* eslint-disable camelcase */
-
 module.exports = {
 	detect({env}) {
 		return Boolean(env.bamboo_agentId);

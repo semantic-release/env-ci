@@ -1,6 +1,6 @@
 'use strict';
 
-const process = require('process');
+const process = require('process'); // eslint-disable-line node/prefer-global/process
 const git = require('./services/git');
 
 const services = {
@@ -34,5 +34,6 @@ module.exports = ({env = process.env, cwd = process.cwd()} = {}) => {
 			return Object.assign({isCi: true}, services[name].configuration({env, cwd}));
 		}
 	}
+
 	return Object.assign({isCi: Boolean(env.CI)}, git.configuration({env, cwd}));
 };
