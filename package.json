@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "execa": "^1.0.0",
+    "git-url-parse": "^11.1.2",
     "java-properties": "^0.2.9"
   },
   "devDependencies": {
