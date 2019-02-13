@@ -19,6 +19,7 @@ const services = {
 	github: require('./services/github'),
 	gitlab: require('./services/gitlab'),
 	jenkins: require('./services/jenkins'),
+	puppetpipelines: require('./services/puppetpipelines'),
 	sail: require('./services/sail'),
 	semaphore: require('./services/semaphore'),
 	shippable: require('./services/shippable'),
