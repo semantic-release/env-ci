@@ -112,6 +112,13 @@ test('Jenkins', async t => {
 	t.is(service, 'jenkins');
 });
 
+test('Puppet', t => {
+	const {isCi, service} = m({env: {DISTELLI_APPNAME: 'app'}});
+
+	t.is(isCi, true);
+	t.is(service, 'puppet');
+});
+
 test('Sail CI', t => {
 	const {isCi, service} = m({env: {SAILCI: 'true'}});
 
