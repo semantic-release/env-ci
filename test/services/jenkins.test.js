@@ -21,7 +21,29 @@ test('Push', t => {
 		pr: undefined,
 		prBranch: undefined,
 		isPr: false,
+		slug: undefined,
 	});
+});
+
+test('Push (Git Plugin)', t => {
+	t.deepEqual(
+		jenkins.configuration({
+			env: Object.assign({}, env, {GIT_BRANCH: 'master', GIT_URL: 'https://some.git.com/owner/repo.git'}),
+		}),
+		{
+			name: 'Jenkins',
+			service: 'jenkins',
+			commit: '5678',
+			build: '91011',
+			buildUrl: 'http://jenkins.jenkins.example/buildResult',
+			branch: 'master',
+			root: '/',
+			pr: undefined,
+			prBranch: undefined,
+			isPr: false,
+			slug: 'owner/repo',
+		}
+	);
 });
 
 test('PR', t => {
@@ -36,7 +58,33 @@ test('PR', t => {
 		pr: '10',
 		prBranch: 'pr-branch',
 		isPr: true,
+		slug: undefined,
 	});
+});
+
+test('PR (Git Plugin + Fork)', t => {
+	t.deepEqual(
+		jenkins.configuration({
+			env: Object.assign({}, env, {
+				BRANCH_NAME: 'pr-branch',
+				CHANGE_ID: '10',
+				GIT_URL_1: 'https://some.git.com/owner/repo.git',
+			}),
+		}),
+		{
+			name: 'Jenkins',
+			service: 'jenkins',
+			commit: '5678',
+			build: '91011',
+			buildUrl: 'http://jenkins.jenkins.example/buildResult',
+			branch: undefined,
+			root: '/',
+			pr: '10',
+			prBranch: 'pr-branch',
+			isPr: true,
+			slug: 'owner/repo',
+		}
+	);
 });
 
 test('PR (PR ghprb-plugin)', t => {
@@ -55,6 +103,7 @@ test('PR (PR ghprb-plugin)', t => {
 			pr: '10',
 			prBranch: 'pr-branch',
 			isPr: true,
+			slug: undefined,
 		}
 	);
 });
@@ -79,6 +128,7 @@ test('PR (gitlab-plugin)', t => {
 			pr: '10',
 			prBranch: 'pr-branch',
 			isPr: true,
+			slug: undefined,
 		}
 	);
 });
