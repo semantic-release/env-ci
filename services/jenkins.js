@@ -24,7 +24,6 @@ module.exports = {
 			prBranch: isPr ? env.ghprbSourceBranch || env.gitlabSourceBranch || localBranch : undefined,
 			// Jenkins with the Git Plugin https://wiki.jenkins.io/pages/viewpage.action?pageId=69273545
 			// Special note to the bottom around environment variables
-			// Remove `.git`, split, grab owner/repo, bring back together.
 			slug:
 				(env.GIT_URL_1 || env.GIT_URL || '') // try and use the fork url if it exists, otherwise the default, otherwise empty
 					.slice(0, -4) // strip `.git` if it exists
