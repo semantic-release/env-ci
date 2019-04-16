@@ -17,7 +17,7 @@
     "nyc": "^13.1.0",
     "proxyquire": "^2.1.0",
     "semantic-release": "^15.0.0",
-    "tempy": "^0.2.1",
+    "tempy": "^0.3.0",
     "xo": "^0.24.0"
   },
   "engines": {
