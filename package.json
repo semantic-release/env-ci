@@ -22,7 +22,7 @@
     "ava": "^2.0.0",
     "codecov": "^3.0.0",
     "file-url": "^2.0.2",
-    "nyc": "^13.1.0",
+    "nyc": "^14.0.0",
     "proxyquire": "^2.1.0",
     "semantic-release": "^15.0.0",
     "tempy": "^0.2.1",
