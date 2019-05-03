@@ -26,7 +26,7 @@ const getProperties = ({env, cwd}) => {
 				[key]:
 					(buildProperties ? buildProperties.get(PROPERTIES_MAPPING[key]) : undefined) ||
 					(configProperties ? configProperties.get(PROPERTIES_MAPPING[key]) : undefined) ||
-					(key === 'branch' ? branch({env, cwd}) : undefined),
+					(key === 'branch' ? branch({env, cwd}) : undefined) ||
 					(key === 'branch' ? env.TEAMCITY_BUILD_BRANCH : undefined)
 			}),
 		{}
