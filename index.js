@@ -12,6 +12,7 @@ const services = {
 	buildkite: require('./services/buildkite'),
 	circleci: require('./services/circleci'),
 	cirrus: require('./services/cirrus'),
+	cloudbuild: require('./services/cloudbuild'),
 	codebuild: require('./services/codebuild'),
 	codefresh: require('./services/codefresh'),
 	codeship: require('./services/codeship'),

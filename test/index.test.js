@@ -74,6 +74,12 @@ test('Codefresh', t => {
 	t.is(service, 'codefresh');
 });
 
+test('Google Cloud Build', t => {
+	const {isCi, service} = m({env: {PROJECT_ID: 'test-project'}});
+	t.is(isCi, true);
+	t.is(service, 'cloudbuild');
+});
+
 test('Codeship', t => {
 	const {isCi, service} = m({env: {CI_NAME: 'codeship'}});
 
