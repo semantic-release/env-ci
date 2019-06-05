@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "execa": "^1.0.0",
-    "java-properties": "^0.2.9"
+    "java-properties": "^1.0.0"
   },
   "devDependencies": {
     "ava": "^2.0.0",
