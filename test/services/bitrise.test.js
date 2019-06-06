@@ -31,11 +31,7 @@ test('Push', t => {
 test('PR', t => {
 	t.deepEqual(
 		bitrise.configuration({
-			env: Object.assign({}, env, {
-				BITRISE_PULL_REQUEST: '10',
-				BITRISEIO_GIT_BRANCH_DEST: 'master',
-				BITRISE_GIT_BRANCH: 'pr-branch',
-			}),
+			env: {...env, BITRISE_PULL_REQUEST: '10', BITRISEIO_GIT_BRANCH_DEST: 'master', BITRISE_GIT_BRANCH: 'pr-branch'},
 		}),
 		{
 			name: 'Bitrise',

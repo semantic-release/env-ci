@@ -36,12 +36,7 @@ test('Push', t => {
 test('PR', t => {
 	t.deepEqual(
 		shippable.configuration({
-			env: Object.assign({}, env, {
-				BASE_BRANCH: 'master',
-				HEAD_BRANCH: 'pr-branch',
-				IS_PULL_REQUEST: 'true',
-				PULL_REQUEST: '10',
-			}),
+			env: {...env, BASE_BRANCH: 'master', HEAD_BRANCH: 'pr-branch', IS_PULL_REQUEST: 'true', PULL_REQUEST: '10'},
 		}),
 		{
 			name: 'Shippable',

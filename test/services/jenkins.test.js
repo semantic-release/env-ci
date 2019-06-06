@@ -10,7 +10,7 @@ const env = {
 };
 
 test('Push', t => {
-	t.deepEqual(jenkins.configuration({env: Object.assign({}, env, {GIT_BRANCH: 'master'})}), {
+	t.deepEqual(jenkins.configuration({env: {...env, GIT_BRANCH: 'master'}}), {
 		name: 'Jenkins',
 		service: 'jenkins',
 		commit: '5678',
@@ -25,7 +25,7 @@ test('Push', t => {
 });
 
 test('PR', t => {
-	t.deepEqual(jenkins.configuration({env: Object.assign({}, env, {BRANCH_NAME: 'pr-branch', CHANGE_ID: '10'})}), {
+	t.deepEqual(jenkins.configuration({env: {...env, BRANCH_NAME: 'pr-branch', CHANGE_ID: '10'}}), {
 		name: 'Jenkins',
 		service: 'jenkins',
 		commit: '5678',
@@ -42,7 +42,7 @@ test('PR', t => {
 test('PR (PR ghprb-plugin)', t => {
 	t.deepEqual(
 		jenkins.configuration({
-			env: Object.assign({}, env, {ghprbSourceBranch: 'pr-branch', ghprbTargetBranch: 'master', ghprbPullId: '10'}),
+			env: {...env, ghprbSourceBranch: 'pr-branch', ghprbTargetBranch: 'master', ghprbPullId: '10'},
 		}),
 		{
 			name: 'Jenkins',
@@ -62,11 +62,7 @@ test('PR (PR ghprb-plugin)', t => {
 test('PR (gitlab-plugin)', t => {
 	t.deepEqual(
 		jenkins.configuration({
-			env: Object.assign({}, env, {
-				ghprbSourceBranch: 'pr-branch',
-				gitlabTargetBranch: 'master',
-				gitlabMergeRequestId: '10',
-			}),
+			env: {...env, ghprbSourceBranch: 'pr-branch', gitlabTargetBranch: 'master', gitlabMergeRequestId: '10'},
 		}),
 		{
 			name: 'Jenkins',

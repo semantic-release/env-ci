@@ -37,7 +37,7 @@ test('Push', t => {
 test('PR', t => {
 	t.deepEqual(
 		travis.configuration({
-			env: Object.assign({}, env, {TRAVIS_PULL_REQUEST: '10', TRAVIS_PULL_REQUEST_BRANCH: 'pr-branch'}),
+			env: {...env, TRAVIS_PULL_REQUEST: '10', TRAVIS_PULL_REQUEST_BRANCH: 'pr-branch'},
 		}),
 		{
 			name: 'Travis CI',

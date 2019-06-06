@@ -33,11 +33,12 @@ test('PR - with event.json file', t => {
 
 	t.deepEqual(
 		github.configuration({
-			env: Object.assign({}, env, {
+			env: {
+				...env,
 				GITHUB_EVENT_NAME: 'pull_request',
 				GITHUB_REF: '/refs/heads/pr-branch',
 				GITHUB_EVENT_PATH: eventFile,
-			}),
+			},
 		}),
 		{
 			name: 'GitHub Actions',
@@ -56,11 +57,12 @@ test('PR - with event.json file', t => {
 test('PR - with missing event.json file', t => {
 	t.deepEqual(
 		github.configuration({
-			env: Object.assign({}, env, {
+			env: {
+				...env,
 				GITHUB_EVENT_NAME: 'pull_request',
 				GITHUB_REF: '/refs/heads/pr-branch',
 				GITHUB_EVENT_PATH: '/tmp/null',
-			}),
+			},
 		}),
 		{
 			name: 'GitHub Actions',
@@ -79,10 +81,7 @@ test('PR - with missing event.json file', t => {
 test('PR - with missing event.json file path', t => {
 	t.deepEqual(
 		github.configuration({
-			env: Object.assign({}, env, {
-				GITHUB_EVENT_NAME: 'pull_request',
-				GITHUB_REF: '/refs/heads/pr-branch',
-			}),
+			env: {...env, GITHUB_EVENT_NAME: 'pull_request', GITHUB_REF: '/refs/heads/pr-branch'},
 		}),
 		{
 			name: 'GitHub Actions',
@@ -105,11 +104,12 @@ test('PR - with missing "pull_request" in event.json file', t => {
 
 	t.deepEqual(
 		github.configuration({
-			env: Object.assign({}, env, {
+			env: {
+				...env,
 				GITHUB_EVENT_NAME: 'pull_request',
 				GITHUB_REF: '/refs/heads/pr-branch',
 				GITHUB_EVENT_PATH: eventFile,
-			}),
+			},
 		}),
 		{
 			name: 'GitHub Actions',
@@ -132,11 +132,12 @@ test('PR - with missing "pull_request.base" in event.json file', t => {
 
 	t.deepEqual(
 		github.configuration({
-			env: Object.assign({}, env, {
+			env: {
+				...env,
 				GITHUB_EVENT_NAME: 'pull_request',
 				GITHUB_REF: '/refs/heads/pr-branch',
 				GITHUB_EVENT_PATH: eventFile,
-			}),
+			},
 		}),
 		{
 			name: 'GitHub Actions',
@@ -159,11 +160,12 @@ test('PR - with erronous branch names', t => {
 
 	t.deepEqual(
 		github.configuration({
-			env: Object.assign({}, env, {
+			env: {
+				...env,
 				GITHUB_EVENT_NAME: 'pull_request',
 				GITHUB_REF: '/refs/tags/pr-branch',
 				GITHUB_EVENT_PATH: eventFile,
-			}),
+			},
 		}),
 		{
 			name: 'GitHub Actions',
