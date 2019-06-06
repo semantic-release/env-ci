@@ -37,10 +37,7 @@ test('Push', t => {
 test('PR', t => {
 	t.deepEqual(
 		appveyor.configuration({
-			env: Object.assign({}, env, {
-				APPVEYOR_PULL_REQUEST_NUMBER: '10',
-				APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH: 'pr-branch',
-			}),
+			env: {...env, APPVEYOR_PULL_REQUEST_NUMBER: '10', APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH: 'pr-branch'},
 		}),
 		{
 			name: 'Appveyor',

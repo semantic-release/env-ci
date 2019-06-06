@@ -27,18 +27,16 @@ module.exports = {
 		const isPr = env.GITHUB_EVENT_NAME === 'pull_request';
 		const branch = parseBranch(env.GITHUB_REF);
 
-		return Object.assign(
-			{
-				name: 'GitHub Actions',
-				service: 'github',
-				commit: env.GITHUB_SHA,
-				isPr,
-				branch,
-				prBranch: isPr ? branch : undefined,
-				slug: env.GITHUB_REPOSITORY,
-				root: env.GITHUB_WORKSPACE,
-			},
-			isPr ? getPrEvent({env, cwd}) : undefined
-		);
+		return {
+			name: 'GitHub Actions',
+			service: 'github',
+			commit: env.GITHUB_SHA,
+			isPr,
+			branch,
+			prBranch: isPr ? branch : undefined,
+			slug: env.GITHUB_REPOSITORY,
+			root: env.GITHUB_WORKSPACE,
+			...(isPr ? getPrEvent({env, cwd}) : undefined),
+		};
 	},
 };
