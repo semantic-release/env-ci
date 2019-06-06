@@ -33,7 +33,7 @@ test('Push', t => {
 test('PR', t => {
 	t.deepEqual(
 		cirrus.configuration({
-			env: Object.assign({}, env, {CIRRUS_PR: '239', CIRRUS_BASE_BRANCH: 'master', CIRRUS_BRANCH: 'pr-branch'}),
+			env: {...env, CIRRUS_PR: '239', CIRRUS_BASE_BRANCH: 'master', CIRRUS_BRANCH: 'pr-branch'},
 		}),
 		{
 			name: 'Cirrus CI',

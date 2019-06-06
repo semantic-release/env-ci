@@ -37,15 +37,13 @@ module.exports = {
 		return Boolean(env.TEAMCITY_VERSION);
 	},
 	configuration({env, cwd}) {
-		return Object.assign(
-			{
-				name: 'TeamCity',
-				service: 'teamcity',
-				commit: env.BUILD_VCS_NUMBER,
-				build: env.BUILD_NUMBER,
-				slug: env.TEAMCITY_BUILDCONF_NAME,
-			},
-			getProperties({env, cwd})
-		);
+		return {
+			name: 'TeamCity',
+			service: 'teamcity',
+			commit: env.BUILD_VCS_NUMBER,
+			build: env.BUILD_NUMBER,
+			slug: env.TEAMCITY_BUILDCONF_NAME,
+			...getProperties({env, cwd}),
+		};
 	},
 };

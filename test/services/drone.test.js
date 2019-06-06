@@ -36,12 +36,13 @@ test('Push', t => {
 test('PR', t => {
 	t.deepEqual(
 		drone.configuration({
-			env: Object.assign({}, env, {
+			env: {
+				...env,
 				DRONE_PULL_REQUEST: '10',
 				DRONE_BUILD_EVENT: 'pull_request',
 				DRONE_TARGET_BRANCH: 'master',
 				DRONE_SOURCE_BRANCH: 'pr-branch',
-			}),
+			},
 		}),
 		{
 			name: 'Drone',

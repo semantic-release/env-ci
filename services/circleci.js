@@ -1,13 +1,11 @@
 // https://circleci.com/docs/2.0/env-vars/#built-in-environment-variables
 
-const {prNumber} = require('../lib/utils');
-
 module.exports = {
 	detect({env}) {
 		return Boolean(env.CIRCLECI);
 	},
 	configuration({env}) {
-		const pr = env.CIRCLE_PR_NUMBER || prNumber(env.CIRCLE_PULL_REQUEST || env.CI_PULL_REQUEST);
+		const pr = env.CIRCLE_PR_NUMBER;
 		const isPr = Boolean(pr);
 
 		return {

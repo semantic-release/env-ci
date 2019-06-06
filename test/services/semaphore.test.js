@@ -32,19 +32,16 @@ test('PR', async t => {
 	const {cwd} = await gitRepo(true);
 	const commit = await gitCommit('Test commit message', {cwd});
 
-	t.deepEqual(
-		semaphore.configuration({env: Object.assign({}, env, {PULL_REQUEST_NUMBER: '10', BRANCH_NAME: 'pr-branch'}), cwd}),
-		{
-			name: 'Semaphore',
-			service: 'semaphore',
-			commit,
-			build: '91011',
-			branch: undefined,
-			root: '/',
-			pr: '10',
-			isPr: true,
-			prBranch: 'pr-branch',
-			slug: 'owner/repo',
-		}
-	);
+	t.deepEqual(semaphore.configuration({env: {...env, PULL_REQUEST_NUMBER: '10', BRANCH_NAME: 'pr-branch'}, cwd}), {
+		name: 'Semaphore',
+		service: 'semaphore',
+		commit,
+		build: '91011',
+		branch: undefined,
+		root: '/',
+		pr: '10',
+		isPr: true,
+		prBranch: 'pr-branch',
+		slug: 'owner/repo',
+	});
 });

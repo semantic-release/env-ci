@@ -30,11 +30,7 @@ test('Push', t => {
 test('PR', t => {
 	t.deepEqual(
 		codefresh.configuration({
-			env: Object.assign({}, env, {
-				CF_PULL_REQUEST_NUMBER: '10',
-				CF_PULL_REQUEST_TARGET: 'master',
-				CF_BRANCH: 'pr-branch',
-			}),
+			env: {...env, CF_PULL_REQUEST_NUMBER: '10', CF_PULL_REQUEST_TARGET: 'master', CF_BRANCH: 'pr-branch'},
 		}),
 		{
 			name: 'Codefresh',

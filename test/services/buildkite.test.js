@@ -34,11 +34,12 @@ test('Push', t => {
 test('PR', t => {
 	t.deepEqual(
 		buildkite.configuration({
-			env: Object.assign({}, env, {
+			env: {
+				...env,
 				BUILDKITE_PULL_REQUEST: '10',
 				BUILDKITE_PULL_REQUEST_BASE_BRANCH: 'master',
 				BUILDKITE_BRANCH: 'pr-branch',
-			}),
+			},
 		}),
 		{
 			name: 'Buildkite',
