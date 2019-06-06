@@ -31,9 +31,9 @@ const services = {
 module.exports = ({env = process.env, cwd = process.cwd()} = {}) => {
 	for (const name of Object.keys(services)) {
 		if (services[name].detect({env, cwd})) {
-			return Object.assign({isCi: true}, services[name].configuration({env, cwd}));
+			return {isCi: true, ...services[name].configuration({env, cwd})};
 		}
 	}
 
-	return Object.assign({isCi: Boolean(env.CI)}, git.configuration({env, cwd}));
+	return {isCi: Boolean(env.CI), ...git.configuration({env, cwd})};
 };
