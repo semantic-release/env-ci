@@ -16,7 +16,7 @@ test('Push - with build properties file', t => {
 	const buildProperties = ['teamcity.build.branch=master', 'teamcity.build.workingDir=/'];
 	fs.writeFileSync(buildFile, buildProperties.join('\n') + '\n');
 
-	t.deepEqual(teamcity.configuration({env: Object.assign({}, env, {TEAMCITY_BUILD_PROPERTIES_FILE: buildFile})}), {
+	t.deepEqual(teamcity.configuration({env: {...env, TEAMCITY_BUILD_PROPERTIES_FILE: buildFile}}), {
 		name: 'TeamCity',
 		service: 'teamcity',
 		commit: '5678',
@@ -35,7 +35,7 @@ test('Push - with build and config properties files', t => {
 	fs.writeFileSync(buildFile, buildProperties.join('\n') + '\n');
 	fs.writeFileSync(configFile, configProperties.join('\n') + '\n');
 
-	t.deepEqual(teamcity.configuration({env: Object.assign({}, env, {TEAMCITY_BUILD_PROPERTIES_FILE: buildFile})}), {
+	t.deepEqual(teamcity.configuration({env: {...env, TEAMCITY_BUILD_PROPERTIES_FILE: buildFile}}), {
 		name: 'TeamCity',
 		service: 'teamcity',
 		commit: '5678',
@@ -58,7 +58,7 @@ test('Push - prioritize build properties file values', t => {
 	fs.writeFileSync(buildFile, buildProperties.join('\n') + '\n');
 	fs.writeFileSync(configFile, configProperties.join('\n') + '\n');
 
-	t.deepEqual(teamcity.configuration({env: Object.assign({}, env, {TEAMCITY_BUILD_PROPERTIES_FILE: buildFile})}), {
+	t.deepEqual(teamcity.configuration({env: {...env, TEAMCITY_BUILD_PROPERTIES_FILE: buildFile}}), {
 		name: 'TeamCity',
 		service: 'teamcity',
 		commit: '5678',
@@ -90,7 +90,7 @@ test('Push - with build and missing config properties files', async t => {
 	const buildProperties = ['teamcity.build.branch=master', 'teamcity.configuration.properties.file=/tmp/null'];
 	fs.writeFileSync(buildFile, buildProperties.join('\n') + '\n');
 
-	t.deepEqual(teamcity.configuration({env: Object.assign({}, env, {TEAMCITY_BUILD_PROPERTIES_FILE: buildFile}), cwd}), {
+	t.deepEqual(teamcity.configuration({env: {...env, TEAMCITY_BUILD_PROPERTIES_FILE: buildFile}, cwd}), {
 		name: 'TeamCity',
 		service: 'teamcity',
 		commit: '5678',
@@ -104,16 +104,13 @@ test('Push - with build and missing config properties files', async t => {
 test('Push - with missing build properties files', async t => {
 	const {cwd} = await gitRepo(true);
 
-	t.deepEqual(
-		teamcity.configuration({env: Object.assign({}, env, {TEAMCITY_BUILD_PROPERTIES_FILE: '/tmp/null'}), cwd}),
-		{
-			name: 'TeamCity',
-			service: 'teamcity',
-			commit: '5678',
-			build: '91011',
-			branch: 'master',
-			root: undefined,
-			slug: 'owner/repo',
-		}
-	);
+	t.deepEqual(teamcity.configuration({env: {...env, TEAMCITY_BUILD_PROPERTIES_FILE: '/tmp/null'}, cwd}), {
+		name: 'TeamCity',
+		service: 'teamcity',
+		commit: '5678',
+		build: '91011',
+		branch: 'master',
+		root: undefined,
+		slug: 'owner/repo',
+	});
 });

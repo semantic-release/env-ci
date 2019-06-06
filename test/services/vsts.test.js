@@ -26,11 +26,12 @@ test('Push', t => {
 test('PR', t => {
 	t.deepEqual(
 		vsts.configuration({
-			env: Object.assign({}, env, {
+			env: {
+				...env,
 				SYSTEM_PULLREQUEST_PULLREQUESTID: '9',
 				SYSTEM_PULLREQUEST_TARGETBRANCH: 'master',
 				SYSTEM_PULLREQUEST_SOURCEBRANCH: 'pr-branch',
-			}),
+			},
 		}),
 		{
 			name: 'Visual Studio Team Services',

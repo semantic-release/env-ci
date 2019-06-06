@@ -31,7 +31,7 @@ test('Push', t => {
 test('PR', t => {
 	t.deepEqual(
 		buddy.configuration({
-			env: Object.assign({}, env, {BUDDY_EXECUTION_PULL_REQUEST_ID: 'pull/10', BUDDY_EXECUTION_BRANCH: undefined}),
+			env: {...env, BUDDY_EXECUTION_PULL_REQUEST_ID: 'pull/10', BUDDY_EXECUTION_BRANCH: undefined},
 		}),
 		{
 			name: 'Buddy',
