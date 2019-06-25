@@ -86,7 +86,7 @@ export async function gitCheckout(branch, create, options) {
  */
 export async function gitCommit(message, options) {
 	await execa('git', ['commit', '-m', message, '--allow-empty', '--no-gpg-sign'], options);
-	return execa.stdout('git', ['rev-parse', 'HEAD'], options);
+	return (await execa('git', ['rev-parse', 'HEAD'], options)).stdout;
 }
 
 /**
@@ -94,6 +94,6 @@ export async function gitCommit(message, options) {
  *
  * @return {String} The sha of the head commit in the current git repository.
  */
-export function gitHead(options) {
-	return execa.stdout('git', ['rev-parse', 'HEAD'], options);
+export async function gitHead(options) {
+	return (await execa('git', ['rev-parse', 'HEAD'], options)).stdout;
 }
