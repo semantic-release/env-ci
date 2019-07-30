@@ -10,6 +10,9 @@ module.exports = {
 		const pr = env.PULL_REQUEST_NUMBER;
 		const isPr = Boolean(pr);
 
+		console.log(env)
+		console.log(env.SEMAPHORE_GIT_BRANCH)
+
 		return {
 			name: 'Semaphore',
 			service: 'semaphore',
