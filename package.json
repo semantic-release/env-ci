@@ -47,6 +47,7 @@
     "ci",
     "circle",
     "cirrus",
+    "cloudbuild",
     "codebuild",
     "codefresh",
     "codeship",

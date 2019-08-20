@@ -102,6 +102,13 @@ test('GitLab', t => {
 	t.is(service, 'gitlab');
 });
 
+test('Google Cloud Build', t => {
+	const {isCi, service} = m({env: {$BUILD_ID: 'arbitary-build-id'}});
+
+	t.is(isCi, true);
+	t.is(service, 'cloudbuild');
+});
+
 test('Jenkins', async t => {
 	const {cwd} = await gitRepo();
 	await gitCommit('Test commit message', {cwd});
