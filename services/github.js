@@ -1,6 +1,6 @@
 // https://developer.github.com/actions/creating-github-actions/accessing-the-runtime-environment/#environment-variables
 
-const parseBranch = branch => (/refs\/heads\/(.*)/i.exec(branch) || [])[1];
+const parseBranch = branch => (/^(?:\/refs\/heads\/)?([^/]+)$/i.exec(branch) || [])[1];
 
 const getPrEvent = ({env}) => {
 	try {
