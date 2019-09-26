@@ -12,7 +12,7 @@ const getPrEvent = ({env}) => {
 				pr: event.pull_request.number,
 			};
 		}
-	} catch (error) {
+	} catch (_) {
 		// Noop
 	}
 
