@@ -221,3 +221,16 @@ test('PR - with erronous branch names', t => {
 		}
 	);
 });
+
+test('Push - with no leading slash', t => {
+	t.deepEqual(github.configuration({env: {...env, GITHUB_REF: 'refs/heads/saga'}}), {
+		name: 'GitHub Actions',
+		service: 'github',
+		commit: '1234',
+		branch: 'saga',
+		isPr: false,
+		prBranch: undefined,
+		root: '/workspace',
+		slug: 'owner/repo',
+	});
+});
