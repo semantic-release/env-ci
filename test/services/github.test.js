@@ -26,6 +26,19 @@ test('Push', t => {
 	});
 });
 
+test('Push to branch without backslash at the beginning', t => {
+	t.deepEqual(github.configuration({env: {...env, GITHUB_REF: 'refs/heads/master'}}), {
+		name: 'GitHub Actions',
+		service: 'github',
+		commit: '1234',
+		branch: 'master',
+		isPr: false,
+		prBranch: undefined,
+		root: '/workspace',
+		slug: 'owner/repo',
+	});
+});
+
 test('Push - with short branch name', t => {
 	t.deepEqual(github.configuration({env: {...env, GITHUB_REF: 'master'}}), {
 		name: 'GitHub Actions',
