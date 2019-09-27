@@ -1,4 +1,4 @@
-// https://developer.github.com/actions/creating-github-actions/accessing-the-runtime-environment/#environment-variables
+// https://help.github.com/en/articles/virtual-environments-for-github-actions#environment-variables
 
 const parseBranch = branch => (/^\/?(?:refs\/heads\/)?([^/]+)$/i.exec(branch) || [])[1];
 
