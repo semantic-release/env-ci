@@ -55,6 +55,7 @@
     "git",
     "gitlab",
     "jenkins",
+    "puppet",
     "sail",
     "semaphore",
     "shippable",
