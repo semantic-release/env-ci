@@ -53,6 +53,7 @@
     "drone",
     "environment",
     "git",
+    "github",
     "gitlab",
     "jenkins",
     "puppet",
