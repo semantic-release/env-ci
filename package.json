@@ -58,6 +58,7 @@
     "jenkins",
     "puppet",
     "sail",
+    "scrutinizer",
     "semaphore",
     "shippable",
     "teamcity",

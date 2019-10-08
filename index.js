@@ -21,6 +21,7 @@ const services = {
 	jenkins: require('./services/jenkins'),
 	puppet: require('./services/puppet'),
 	sail: require('./services/sail'),
+	scrutinizer: require('./services/scrutinizer'),
 	semaphore: require('./services/semaphore'),
 	shippable: require('./services/shippable'),
 	teamcity: require('./services/teamcity'),

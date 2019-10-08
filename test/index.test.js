@@ -126,6 +126,13 @@ test('Sail CI', t => {
 	t.is(service, 'sail');
 });
 
+test('Scrutinizer', t => {
+	const {isCi, service} = m({env: {SCRUTINIZER: 'true'}});
+
+	t.is(isCi, true);
+	t.is(service, 'scrutinizer');
+});
+
 test('Semaphore', async t => {
 	const {cwd} = await gitRepo();
 	await gitCommit('Test commit message', {cwd});
