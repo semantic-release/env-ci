@@ -69,10 +69,10 @@ export async function gitShallowClone(repositoryUrl, branch = 'master', depth = 
  * Checkout a branch on the current git repository.
  *
  * @param {String} branch Branch name.
- * @param {boolean} create `true` to create the branche ans switch, `false` to only switch.
+ * @param {boolean} create to create the branche ans switch, `false` to only switch.
  * @param {Object} [options] Options to pass to `execa`.
  */
-export async function gitCheckout(branch, create = true, options) {
+export async function gitCheckout(branch, create, options) {
 	await execa('git', create ? ['checkout', '-b', branch] : ['checkout', branch], options);
 }
 
