@@ -3,11 +3,11 @@ import cloudbuild from '../../services/cloudbuild';
 import {gitRepo} from '../helpers/git-utils';
 
 const env = {
-	$BUILD_ID: 'arbitary-build-id',
-	$BRANCH_NAME: 'arbitary-branch',
-	$COMMIT_SHA: 'arbitary-commit-sha',
-	$TAG_NAME: 'arbitary-tag-name',
-	$REPO_NAME: 'https://github.com/arbitary-repo-slug',
+	BUILD_ID: 'arbitary-build-id',
+	BRANCH_NAME: 'arbitary-branch',
+	COMMIT_SHA: 'arbitary-commit-sha',
+	TAG_NAME: 'arbitary-tag-name',
+	REPO_NAME: 'https://github.com/arbitary-repo-slug',
 };
 
 test('Push', async t => {

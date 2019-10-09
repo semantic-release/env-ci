@@ -103,7 +103,7 @@ test('GitLab', t => {
 });
 
 test('Google Cloud Build', t => {
-	const {isCi, service} = m({env: {$BUILD_ID: 'arbitary-build-id'}});
+	const {isCi, service} = m({env: {BUILD_ID: 'arbitary-build-id'}});
 
 	t.is(isCi, true);
 	t.is(service, 'cloudbuild');
