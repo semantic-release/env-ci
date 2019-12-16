@@ -193,31 +193,3 @@ test('PR - with missing "pull_request.base" in event.json file', t => {
 		}
 	);
 });
-
-test('PR - with erronous branch names', t => {
-	const eventFile = tempy.file({extension: 'json'});
-	const event = {pull_request: {number: '10', base: {ref: 'refs/tags/master'}}};
-	fs.writeFileSync(eventFile, JSON.stringify(event));
-
-	t.deepEqual(
-		github.configuration({
-			env: {
-				...env,
-				GITHUB_EVENT_NAME: 'pull_request',
-				GITHUB_REF: 'refs/tags/pr-branch',
-				GITHUB_EVENT_PATH: eventFile,
-			},
-		}),
-		{
-			name: 'GitHub Actions',
-			service: 'github',
-			commit: '1234',
-			branch: undefined,
-			isPr: true,
-			prBranch: undefined,
-			pr: '10',
-			root: '/workspace',
-			slug: 'owner/repo',
-		}
-	);
-});
