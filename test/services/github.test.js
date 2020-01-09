@@ -193,3 +193,16 @@ test('PR - with missing "pull_request.base" in event.json file', t => {
 		}
 	);
 });
+
+test('Push - with incorrect branch name', t => {
+	t.deepEqual(github.configuration({env: {...env, GITHUB_REF: ''}}), {
+		name: 'GitHub Actions',
+		service: 'github',
+		commit: '1234',
+		branch: undefined,
+		isPr: false,
+		prBranch: undefined,
+		root: '/workspace',
+		slug: 'owner/repo',
+	});
+});
