@@ -1,6 +1,6 @@
-import test from 'ava';
-import semaphore from '../../services/semaphore';
-import {gitRepo, gitCommit} from '../helpers/git-utils';
+const test = require('ava');
+const semaphore = require('../../services/semaphore');
+const {gitRepo, gitCommit} = require('../helpers/git-utils');
 
 const env1 = {
 	SEMAPHORE: 'true',

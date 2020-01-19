@@ -1,5 +1,5 @@
-import test from 'ava';
-import codefresh from '../../services/codefresh';
+const test = require('ava');
+const codefresh = require('../../services/codefresh');
 
 const env = {
 	CF_BUILD_ID: '91011',

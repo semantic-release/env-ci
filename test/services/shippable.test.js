@@ -1,5 +1,5 @@
-import test from 'ava';
-import shippable from '../../services/shippable';
+const test = require('ava');
+const shippable = require('../../services/shippable');
 
 const env = {
 	SHIPPABLE: 'true',

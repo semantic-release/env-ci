@@ -1,5 +1,5 @@
-import test from 'ava';
-import puppetpipelines from '../../services/puppet';
+const test = require('ava');
+const puppet = require('../../services/puppet');
 
 const env = {
 	DISTELLI_BUILDNUM: '1234',
@@ -10,7 +10,7 @@ const env = {
 };
 
 test('Push', t => {
-	t.deepEqual(puppetpipelines.configuration({env}), {
+	t.deepEqual(puppet.configuration({env}), {
 		name: 'Puppet',
 		service: 'puppet',
 		build: '1234',

@@ -1,5 +1,5 @@
-import test from 'ava';
-import codeship from '../../services/codeship';
+const test = require('ava');
+const codeship = require('../../services/codeship');
 
 const env = {
 	CI_NAME: 'codeship',

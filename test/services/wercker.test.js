@@ -1,5 +1,5 @@
-import test from 'ava';
-import wercker from '../../services/wercker';
+const test = require('ava');
+const wercker = require('../../services/wercker');
 
 const env = {
 	WERCKER_MAIN_PIPELINE_STARTED: '123456',

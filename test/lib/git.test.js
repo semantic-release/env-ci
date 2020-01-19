@@ -1,6 +1,6 @@
-import test from 'ava';
-import {head, branch} from '../../lib/git';
-import {gitRepo, gitCommit, gitHead, gitCheckout} from '../helpers/git-utils';
+const test = require('ava');
+const {head, branch} = require('../../lib/git');
+const {gitRepo, gitCommit, gitHead, gitCheckout} = require('../helpers/git-utils');
 
 test('Git local repository', async t => {
 	const {cwd} = await gitRepo();

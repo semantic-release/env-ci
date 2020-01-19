@@ -1,5 +1,5 @@
-import test from 'ava';
-import bamboo from '../../services/bamboo';
+const test = require('ava');
+const bamboo = require('../../services/bamboo');
 
 /* eslint-disable camelcase */
 

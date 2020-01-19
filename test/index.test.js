@@ -1,8 +1,8 @@
-import test from 'ava';
-import tempy from 'tempy';
-import proxyquire from 'proxyquire';
-import {gitRepo, gitCommit} from './helpers/git-utils';
-import m from '..';
+const test = require('ava');
+const tempy = require('tempy');
+const proxyquire = require('proxyquire');
+const {gitRepo, gitCommit} = require('./helpers/git-utils');
+const m = require('..');
 
 test('Appveyor', t => {
 	const {isCi, service} = m({env: {APPVEYOR: 'true'}});

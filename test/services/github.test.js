@@ -1,7 +1,7 @@
-import fs from 'fs';
-import test from 'ava';
-import tempy from 'tempy';
-import github from '../../services/github';
+const fs = require('fs');
+const test = require('ava');
+const tempy = require('tempy');
+const github = require('../../services/github');
 
 /* eslint camelcase: ["error", {properties: "never"}] */
 
