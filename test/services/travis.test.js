@@ -1,5 +1,5 @@
-import test from 'ava';
-import travis from '../../services/travis';
+const test = require('ava');
+const travis = require('../../services/travis');
 
 const env = {
 	TRAVIS: 'true',

@@ -1,5 +1,5 @@
-import test from 'ava';
-import scrutinizer from '../../services/scrutinizer';
+const test = require('ava');
+const scrutinizer = require('../../services/scrutinizer');
 
 const env = {
 	SCRUTINIZER: 'true',

@@ -1,5 +1,5 @@
-import test from 'ava';
-import sail from '../../services/sail';
+const test = require('ava');
+const sail = require('../../services/sail');
 
 const env = {
 	SAIL_COMMIT_SHA: 'full-commit-sha',

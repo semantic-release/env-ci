@@ -1,5 +1,5 @@
-import test from 'ava';
-import buddy from '../../services/buddy';
+const test = require('ava');
+const buddy = require('../../services/buddy');
 
 const env = {
 	BUDDY_WORKSPACE_ID: '111',

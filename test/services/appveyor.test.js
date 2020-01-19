@@ -1,5 +1,5 @@
-import test from 'ava';
-import appveyor from '../../services/appveyor';
+const test = require('ava');
+const appveyor = require('../../services/appveyor');
 
 const env = {
 	APPVEYOR: 'true',

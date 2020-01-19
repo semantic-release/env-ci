@@ -1,5 +1,5 @@
-import test from 'ava';
-import buildkite from '../../services/buildkite';
+const test = require('ava');
+const buildkite = require('../../services/buildkite');
 
 const env = {
 	BUILDKITE: 'true',

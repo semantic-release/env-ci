@@ -1,5 +1,5 @@
-import test from 'ava';
-import bitbucket from '../../services/bitbucket';
+const test = require('ava');
+const bitbucket = require('../../services/bitbucket');
 
 const env = {
 	BITBUCKET_COMMIT: 'b5ce5ce',

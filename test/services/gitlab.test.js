@@ -1,5 +1,5 @@
-import test from 'ava';
-import gitlab from '../../services/gitlab';
+const test = require('ava');
+const gitlab = require('../../services/gitlab');
 
 const env = {
 	GITLAB_CI: 'true',

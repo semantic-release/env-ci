@@ -1,5 +1,5 @@
-import test from 'ava';
-import drone from '../../services/drone';
+const test = require('ava');
+const drone = require('../../services/drone');
 
 const env = {
 	DRONE: 'true',

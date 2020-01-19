@@ -1,8 +1,8 @@
-import fs from 'fs';
-import test from 'ava';
-import tempy from 'tempy';
-import teamcity from '../../services/teamcity';
-import {gitRepo} from '../helpers/git-utils';
+const fs = require('fs');
+const test = require('ava');
+const tempy = require('tempy');
+const teamcity = require('../../services/teamcity');
+const {gitRepo} = require('../helpers/git-utils');
 
 const env = {
 	TEAMCITY_VERSION: '2017.1.2 (build 46812)',

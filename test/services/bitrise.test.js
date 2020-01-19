@@ -1,5 +1,5 @@
-import test from 'ava';
-import bitrise from '../../services/bitrise';
+const test = require('ava');
+const bitrise = require('../../services/bitrise');
 
 const env = {
 	BITRISE_IO: 'true',

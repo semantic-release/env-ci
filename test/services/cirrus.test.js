@@ -1,5 +1,5 @@
-import test from 'ava';
-import cirrus from '../../services/cirrus';
+const test = require('ava');
+const cirrus = require('../../services/cirrus');
 
 const env = {
 	CIRRUS_CI: 'true',
