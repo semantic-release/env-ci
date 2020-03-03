@@ -18,7 +18,7 @@ module.exports = {
 			job: `${env.CIRCLE_BUILD_NUM}.${env.CIRCLE_NODE_INDEX}`,
 			commit: env.CIRCLE_SHA1,
 			tag: env.CIRCLE_TAG,
-			branch: isPr ? undefined : env.CIRCLE_BRANCH,
+			branch: isPr ? env.CIRCLE_TARGET_BRANCH : env.CIRCLE_BRANCH,
 			pr,
 			isPr,
 			prBranch: isPr ? env.CIRCLE_BRANCH : undefined,
