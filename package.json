@@ -23,7 +23,7 @@
     "proxyquire": "^2.1.0",
     "semantic-release": "^17.0.0",
     "tempy": "^0.5.0",
-    "xo": "^0.27.0"
+    "xo": "^0.28.0"
   },
   "engines": {
     "node": ">=10.13"
@@ -97,6 +97,9 @@
     "test": "xo && nyc ava -v"
   },
   "xo": {
-    "prettier": true
+    "prettier": true,
+    "rules": {
+      "unicorn/string-content": "off"
+    }
   }
 }
