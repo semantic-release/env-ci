@@ -19,6 +19,7 @@ const services = {
   github: require('./services/github'),
   gitlab: require('./services/gitlab'),
   jenkins: require('./services/jenkins'),
+  netlify: require('./services/netlify'),
   puppet: require('./services/puppet'),
   sail: require('./services/sail'),
   scrutinizer: require('./services/scrutinizer'),
