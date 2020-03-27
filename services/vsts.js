@@ -3,23 +3,23 @@
 const {parseBranch} = require('../lib/utils');
 
 module.exports = {
-	detect({env}) {
-		return Boolean(env.BUILD_BUILDURI);
-	},
-	configuration({env}) {
-		const pr = env.SYSTEM_PULLREQUEST_PULLREQUESTID;
-		const isPr = Boolean(pr);
+  detect({env}) {
+    return Boolean(env.BUILD_BUILDURI);
+  },
+  configuration({env}) {
+    const pr = env.SYSTEM_PULLREQUEST_PULLREQUESTID;
+    const isPr = Boolean(pr);
 
-		return {
-			name: 'Visual Studio Team Services',
-			service: 'vsts',
-			commit: env.BUILD_SOURCEVERSION,
-			build: env.BUILD_BUILDNUMBER,
-			branch: parseBranch(isPr ? env.SYSTEM_PULLREQUEST_TARGETBRANCH : env.BUILD_SOURCEBRANCH),
-			pr,
-			isPr,
-			prBranch: parseBranch(isPr ? env.SYSTEM_PULLREQUEST_SOURCEBRANCH : undefined),
-			root: env.BUILD_REPOSITORY_LOCALPATH,
-		};
-	},
+    return {
+      name: 'Visual Studio Team Services',
+      service: 'vsts',
+      commit: env.BUILD_SOURCEVERSION,
+      build: env.BUILD_BUILDNUMBER,
+      branch: parseBranch(isPr ? env.SYSTEM_PULLREQUEST_TARGETBRANCH : env.BUILD_SOURCEBRANCH),
+      pr,
+      isPr,
+      prBranch: parseBranch(isPr ? env.SYSTEM_PULLREQUEST_SOURCEBRANCH : undefined),
+      root: env.BUILD_REPOSITORY_LOCALPATH,
+    };
+  },
 };
