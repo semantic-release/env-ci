@@ -11,7 +11,6 @@ const env = {
   GITHUB_REF: 'refs/heads/master',
   GITHUB_REPOSITORY: 'owner/repo',
   GITHUB_WORKSPACE: '/workspace',
-  GITHUB_RUN_ID: '1246789'
   GITHUB_RUN_ID: '1246789',
 };
 
