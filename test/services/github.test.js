@@ -12,6 +12,7 @@ const env = {
   GITHUB_REPOSITORY: 'owner/repo',
   GITHUB_WORKSPACE: '/workspace',
   GITHUB_RUN_ID: '1246789'
+  GITHUB_RUN_ID: '1246789',
 };
 
 test('Push', t => {
