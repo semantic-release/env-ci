@@ -41,7 +41,7 @@ test('Push - with short branch name', t => {
 
 test('PR - with event.json file', t => {
   const eventFile = tempy.file({extension: 'json'});
-  const event = {pull_request: {number: '10', base: {ref: 'refs/heads/master'}}};
+  const event = {pull_request: {number: '10', head: {ref: 'refs/heads/master'}}};
   fs.writeFileSync(eventFile, JSON.stringify(event));
 
   t.deepEqual(
@@ -69,7 +69,7 @@ test('PR - with event.json file', t => {
 
 test('PR - with event.json file and short branch name', t => {
   const eventFile = tempy.file({extension: 'json'});
-  const event = {pull_request: {number: '10', base: {ref: 'master'}}};
+  const event = {pull_request: {number: '10', head: {ref: 'master'}}};
   fs.writeFileSync(eventFile, JSON.stringify(event));
 
   t.deepEqual(
