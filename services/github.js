@@ -1,13 +1,13 @@
 // https://help.github.com/en/articles/virtual-environments-for-github-actions#environment-variables
-const {parseBranch} = require('../lib/utils');
+const { parseBranch } = require("../lib/utils");
 
-const getPrEvent = ({env}) => {
+const getPrEvent = ({ env }) => {
   try {
     const event = env.GITHUB_EVENT_PATH ? require(env.GITHUB_EVENT_PATH) : undefined;
 
     if (event && event.pull_request) {
       return {
-        branch: event.pull_request.base ? parseBranch(event.pull_request.base.ref) : undefined,
+        branch: event.pull_request.head ? parseBranch(event.pull_request.head.ref) : undefined,
         pr: event.pull_request.number,
       };
     }
@@ -15,27 +15,27 @@ const getPrEvent = ({env}) => {
     // Noop
   }
 
-  return {pr: undefined, branch: undefined};
+  return { pr: undefined, branch: undefined };
 };
 
 module.exports = {
-  detect({env}) {
+  detect({ env }) {
     return Boolean(env.GITHUB_ACTION);
   },
-  configuration({env, cwd}) {
-    const isPr = env.GITHUB_EVENT_NAME === 'pull_request';
+  configuration({ env, cwd }) {
+    const isPr = env.GITHUB_EVENT_NAME === "pull_request";
     const branch = parseBranch(env.GITHUB_REF);
 
     return {
-      name: 'GitHub Actions',
-      service: 'github',
+      name: "GitHub Actions",
+      service: "github",
       commit: env.GITHUB_SHA,
       isPr,
       branch,
       prBranch: isPr ? branch : undefined,
       slug: env.GITHUB_REPOSITORY,
       root: env.GITHUB_WORKSPACE,
-      ...(isPr ? getPrEvent({env, cwd}) : undefined),
+      ...(isPr ? getPrEvent({ env, cwd }) : undefined),
     };
   },
 };
