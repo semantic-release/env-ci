@@ -4,7 +4,7 @@ module.exports = {
   detect({env}) {
     return Boolean(env.AWS_APP_ID);
   },
-  configuration({env, cwd}) {
+  configuration({env}) {
     return {
       name: 'AWS Amplify',
       service: 'amplify',
