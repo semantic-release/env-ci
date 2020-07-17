@@ -26,6 +26,7 @@ const services = {
   shippable: require('./services/shippable.js'),
   teamcity: require('./services/teamcity.js'),
   travis: require('./services/travis.js'),
+  vela: require('./services/vela.js'),
   vercel: require('./services/vercel.js'),
   vsts: require('./services/vsts.js'),
   wercker: require('./services/wercker.js'),
