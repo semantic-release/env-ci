@@ -164,6 +164,13 @@ test('Travis', t => {
   t.is(service, 'travis');
 });
 
+test('Vela', t => {
+  const {isCi, service} = m({env: {VELA: 'true'}});
+
+  t.is(isCi, true);
+  t.is(service, 'vela');
+});
+
 test('Visual Studio Team Services', t => {
   const {isCi, service} = m({env: {BUILD_BUILDURI: 'https://fabrikamfiber.visualstudio.com/_git/Scripts'}});
 
