@@ -3,6 +3,7 @@ const git = require('./services/git.js');
 
 const services = {
   appveyor: require('./services/appveyor.js'),
+  azurePipelines: require('./services/azure-pipelines.js'),
   bamboo: require('./services/bamboo.js'),
   bitbucket: require('./services/bitbucket.js'),
   bitrise: require('./services/bitrise.js'),
@@ -28,7 +29,6 @@ const services = {
   travis: require('./services/travis.js'),
   vela: require('./services/vela.js'),
   vercel: require('./services/vercel.js'),
-  vsts: require('./services/vsts.js'),
   wercker: require('./services/wercker.js'),
 };
 

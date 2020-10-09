@@ -1,4 +1,4 @@
-// https://docs.microsoft.com/en-us/vsts/pipelines/build/variables
+// https://docs.microsoft.com/en-us/azure/devops/pipelines/build/variables
 // The docs indicate that SYSTEM_PULLREQUEST_SOURCEBRANCH and SYSTEM_PULLREQUEST_TARGETBRANCH are in the long format (e.g `refs/heads/master`) however tests show they are both in the short format (e.g. `master`)
 const {parseBranch} = require('../lib/utils.js');
 
@@ -11,8 +11,8 @@ module.exports = {
     const isPr = Boolean(pr);
 
     return {
-      name: 'Visual Studio Team Services',
-      service: 'vsts',
+      name: 'Azure Pipelines',
+      service: 'azurePipelines',
       commit: env.BUILD_SOURCEVERSION,
       build: env.BUILD_BUILDNUMBER,
       branch: parseBranch(isPr ? env.SYSTEM_PULLREQUEST_TARGETBRANCH : env.BUILD_SOURCEBRANCH),

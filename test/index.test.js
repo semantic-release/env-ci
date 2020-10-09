@@ -12,6 +12,13 @@ test('Appveyor', (t) => {
   t.is(service, 'appveyor');
 });
 
+test('Azure Pipelines', (t) => {
+  const {isCi, service} = m({env: {BUILD_BUILDURI: 'https://fabrikamfiber.visualstudio.com/_git/Scripts'}});
+
+  t.is(isCi, true);
+  t.is(service, 'azurePipelines');
+});
+
 test('Bamboo', (t) => {
   const {isCi, service} = m({env: {bamboo_agentId: 'some bamboo agent id'}}); // eslint-disable-line camelcase
 
@@ -170,13 +177,6 @@ test('Vela', (t) => {
 
   t.is(isCi, true);
   t.is(service, 'vela');
-});
-
-test('Visual Studio Team Services', (t) => {
-  const {isCi, service} = m({env: {BUILD_BUILDURI: 'https://fabrikamfiber.visualstudio.com/_git/Scripts'}});
-
-  t.is(isCi, true);
-  t.is(service, 'vsts');
 });
 
 test('Wercker', (t) => {
