@@ -17,7 +17,7 @@ module.exports = {
       pr: env.REVIEW_ID,
       isPr,
       prBranch: isPr ? env.HEAD : undefined,
-      slug: (env.REPOSITORY_URL.match(/[^/:]+\/[^/]+?$/) || [])[0],
+      slug: env.REPOSITORY_URL.match(/[^/:]+\/[^/]+?$/)[0],
       root: env.PWD,
     };
   },
