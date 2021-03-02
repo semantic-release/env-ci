@@ -15,6 +15,7 @@ const env = {
   DEPLOY_URL: 'https://60106253d13f6600587118d1--website-name.netlify.app',
   DEPLOY_PRIME_URL: 'https://website-name.netlify.app',
   REPOSITORY_URL: 'https://github.com/owner/repo',
+  PWD: '/opt/build/repo',
 };
 
 test('Push', t => {
@@ -27,6 +28,9 @@ test('Push', t => {
     buildUrl: 'https://app.netlify.com/sites/website-name/deploys/60106253d13f6600587118d1',
     pr: undefined,
     isPr: false,
+    prBranch: undefined,
+    slug: 'owner/repo',
+    root: '/opt/build/repo',
   });
 });
 
@@ -45,11 +49,14 @@ test('PR', t => {
       name: 'Netlify',
       service: 'netlify',
       commit: '495d988cee629dbf63dca717e0vd1e4f77afd034',
-      branch: 'test-page',
+      branch: undefined,
       build: '60106253d13f6600587118d1',
       buildUrl: 'https://app.netlify.com/sites/website-name/deploys/60106253d13f6600587118d1',
       pr: '12',
       isPr: true,
+      prBranch: 'test-page',
+      slug: 'owner/repo',
+      root: '/opt/build/repo',
     }
   );
 });
