@@ -1,4 +1,4 @@
-// https://docs.netlify.com/configure-builds/environment-variables/#git-metadata
+// https://docs.netlify.com/configure-builds/environment-variables/#netlify-configuration-variables
 
 module.exports = {
   detect({env}) {
@@ -11,11 +11,14 @@ module.exports = {
       name: 'Netlify',
       service: 'netlify',
       commit: env.COMMIT_REF,
-      branch: env.HEAD,
       build: env.DEPLOY_ID,
       buildUrl: `https://app.netlify.com/sites/${env.SITE_NAME}/deploys/${env.DEPLOY_ID}`,
+      branch: isPr ? undefined : env.HEAD,
       pr: env.REVIEW_ID,
       isPr,
+      prBranch: isPr ? env.HEAD : undefined,
+      slug: (env.REPOSITORY_URL.match(/[^/:]+\/[^/]+?$/) || [])[0],
+      root: env.PWD,
     };
   },
 };
