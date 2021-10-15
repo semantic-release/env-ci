@@ -23,7 +23,7 @@ module.exports = {
     return Boolean(env.GITHUB_ACTION);
   },
   configuration({env, cwd}) {
-    const isPr = env.GITHUB_EVENT_NAME === 'pull_request';
+    const isPr = env.GITHUB_EVENT_NAME === 'pull_request' || env.GITHUB_EVENT_NAME === 'pull_request_target';
     const branch = parseBranch(env.GITHUB_REF);
 
     return {
