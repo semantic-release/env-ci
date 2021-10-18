@@ -17,7 +17,11 @@ jobs:
     strategy:
       matrix:
         node-version:
+          # minimal required version
+          - 10.13
+          # minimal required version for latest semantic-release
           - 14.17
+          # latest LTS version
           - 16
 
     runs-on: ubuntu-latest
