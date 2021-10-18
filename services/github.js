@@ -30,6 +30,7 @@ module.exports = {
       name: 'GitHub Actions',
       service: 'github',
       commit: env.GITHUB_SHA,
+      build: env.GITHUB_RUN_ID,
       isPr,
       branch,
       prBranch: isPr ? branch : undefined,
