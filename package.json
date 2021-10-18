@@ -94,7 +94,8 @@
     "codecov": "codecov -f coverage/coverage-final.json",
     "lint": "xo",
     "semantic-release": "semantic-release",
-    "test": "xo && nyc ava -v"
+    "test": "npm run lint && npm run test:ci",
+    "test:ci": "nyc ava -v"
   },
   "xo": {
     "prettier": true,
