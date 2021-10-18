@@ -1,4 +1,4 @@
-// https://help.github.com/en/articles/virtual-environments-for-github-actions#environment-variables
+// https://docs.github.com/en/actions/learn-github-actions/environment-variables#default-environment-variables
 const {parseBranch} = require('../lib/utils');
 
 const getPrEvent = ({env}) => {
@@ -20,7 +20,7 @@ const getPrEvent = ({env}) => {
 
 module.exports = {
   detect({env}) {
-    return Boolean(env.GITHUB_ACTION);
+    return Boolean(env.GITHUB_ACTIONS);
   },
   configuration({env, cwd}) {
     const isPr = env.GITHUB_EVENT_NAME === 'pull_request' || env.GITHUB_EVENT_NAME === 'pull_request_target';

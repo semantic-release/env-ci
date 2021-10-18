@@ -6,7 +6,7 @@ const github = require('../../services/github');
 /* eslint camelcase: ["error", {properties: "never"}] */
 
 const env = {
-  GITHUB_ACTION: 'action-name',
+  GITHUB_ACTIONS: 'true',
   GITHUB_SHA: '1234',
   GITHUB_REF: 'refs/heads/master',
   GITHUB_REPOSITORY: 'owner/repo',
