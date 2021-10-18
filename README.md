@@ -80,6 +80,7 @@ if (isCI) {
 | [GitHub Actions](https://docs.github.com/en/actions/reference/environment-variables)                                                   |   `github`    | :white_check_mark: |     :white_check_mark:      | :white_check_mark: |           :x:           |        :x:         |        :x:         |        :x:         |        :x:         |  :white_check_mark:   |  :white_check_mark:   |  :white_check_mark:   | :white_check_mark: | :white_check_mark: |
 | [GitLab CI/CD](https://docs.gitlab.com/ce/ci/variables/README.html)                                                                    |   `gitlab`    | :white_check_mark: |     :white_check_mark:      | :white_check_mark: |   :white_check_mark:    | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |  :white_check_mark:   |  :white_check_mark:   |  :white_check_mark:   | :white_check_mark: | :white_check_mark: |
 | [Jenkins](https://wiki.jenkins.io/display/JENKINS/Building+a+software+project)                                                         |   `jenkins`   | :white_check_mark: |    [:warning:](#jenkins)    | :white_check_mark: |           :x:           | :white_check_mark: | :white_check_mark: |        :x:         |        :x:         | [:warning:](#jenkins) | [:warning:](#jenkins) | [:warning:](#jenkins) | :white_check_mark: | :white_check_mark: |
+| [Netlify](https://docs.netlify.com/configure-builds/environment-variables/#netlify-configuration-variables)                            |   `netlify`   | :white_check_mark: |    [:warning:](#netlify)    | :white_check_mark: |           :x:           | :white_check_mark: | :white_check_mark: |        :x:         |        :x:         |  :white_check_mark:   |  :white_check_mark:   |  :white_check_mark:   | :white_check_mark: | :white_check_mark: |
 | [Puppet](https://puppet.com/docs/pipelines-for-apps/enterprise/environment-variable.html)                                              |   `puppet`    | :white_check_mark: |     :white_check_mark:      | :white_check_mark: |           :x:           | :white_check_mark: | :white_check_mark: |        :x:         |        :x:         |          :x:          |          :x:          |          :x:          |        :x:         | :white_check_mark: |
 | [Sail CI](https://sail.ci/docs/environment-variables)                                                                                  |    `sail`     | :white_check_mark: |     [:warning:](#sail)      | :white_check_mark: |           :x:           |        :x:         |        :x:         |        :x:         |        :x:         |  :white_check_mark:   |  :white_check_mark:   |          :x:          | :white_check_mark: | :white_check_mark: |
 | [Scrutinizer](https://scrutinizer-ci.com/docs/build/environment-variables)                                                             | `scrutinizer` | :white_check_mark: |     :white_check_mark:      | :white_check_mark: |           :x:           | :white_check_mark: |        :x:         |        :x:         |        :x:         |  :white_check_mark:   |  :white_check_mark:   |  :white_check_mark:   |        :x:         |        :x:         |
@@ -147,16 +148,23 @@ Therefore in the case of Pull Request builds, `env-ci` will not be able to deter
 
 See [feature request](https://discuss.circleci.com/t/create-a-circle-target-branch-envar/10022).
 
-## Jenkins
+### Jenkins
 
 Triggering build when a Pull Request is opened/updated is supported only via the [ghprb-plugin](https://github.com/jenkinsci/ghprb-plugin) and [gitlab-plugin](https://github.com/jenkinsci/gitlab-plugin). Therefore `env-ci` will set `isPr`, `pr` and `prBranch` and define `branch` with the Pull Request target branch only if one those plugin is used.
 
-## Sail
+### Netlify
+
+For builds triggered when a Pull Request is opened/updated, Netlify doesn't provide an environment variable indicating the target branch.
+Therefore in the case of Pull Request builds, `env-ci` will not be able to determine the `branch` property. However `prBranch` will be set.
+
+See [feature request](https://answers.netlify.com/t/access-pr-target-branch-when-deploying-preview-build/32402)
+
+### Sail
 
 For builds triggered when a Pull Request is opened/updated, Sail doesn't provide an environment variable indicating the target branch, and the one for the current branch is set to `pull/<PR number>` independently of the the branch name from which the Pull Request originated.
 Therefore in the case of Pull Request builds, `env-ci` will not be able to determine the `branch` and `prBranch` properties.
 
-## Semaphore
+### Semaphore
 
 For builds triggered when a Pull Request is opened/updated, Semaphore 1.0 doesn't provide an environment variable indicating the target branch.
 Therefore in the case of Pull Request builds, `env-ci` will not be able to determine the `branch` property. However `prBranch` will be set.

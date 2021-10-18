@@ -53,6 +53,7 @@
     "github",
     "gitlab",
     "jenkins",
+    "netlify",
     "puppet",
     "sail",
     "scrutinizer",
