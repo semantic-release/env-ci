@@ -9,7 +9,7 @@
     ]
   },
   "bugs": {
-    "url": "https://github.com/pvdlg/github-parser/issues"
+    "url": "https://github.com/semantic-release/env-ci/issues"
   },
   "dependencies": {
     "execa": "^4.0.0",
@@ -33,7 +33,7 @@
     "lib",
     "services"
   ],
-  "homepage": "https://github.com/pvdlg/env-ci#readme",
+  "homepage": "https://github.com/semantic-release/env-ci#readme",
   "keywords": [
     "appveyor",
     "bamboo",
@@ -88,7 +88,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/pvdlg/env-ci.git"
+    "url": "https://github.com/semantic-release/env-ci.git"
   },
   "scripts": {
     "codecov": "codecov -f coverage/coverage-final.json",
