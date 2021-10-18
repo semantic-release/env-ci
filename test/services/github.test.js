@@ -89,6 +89,7 @@ test('PR - target', t => {
       name: 'GitHub Actions',
       service: 'github',
       commit: '1234',
+      build: '1246789',
       branch: 'master',
       isPr: true,
       prBranch: 'pr-branch',
