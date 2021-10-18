@@ -17,8 +17,8 @@ jobs:
     strategy:
       matrix:
         node-version:
-          # minimal required version
-          - 10.13
+          # minimal required version is 10.13, but ava requires 10.18
+          - 10.18
           # minimal required version for latest semantic-release
           - 14.17
           # latest LTS version
