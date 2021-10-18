@@ -2,9 +2,9 @@
 
 Get environment variables exposed by CI services.
 
-[![Travis](https://img.shields.io/travis/pvdlg/env-ci.svg)](https://travis-ci.org/pvdlg/env-ci)
-[![Codecov](https://img.shields.io/codecov/c/github/pvdlg/env-ci.svg)](https://codecov.io/gh/pvdlg/env-ci)
-[![Greenkeeper badge](https://badges.greenkeeper.io/pvdlg/env-ci.svg)](https://greenkeeper.io/)
+[![Travis](https://img.shields.io/travis/semantic-release/env-ci.svg)](https://travis-ci.org/semantic-release/env-ci)
+[![Codecov](https://img.shields.io/codecov/c/github/semantic-release/env-ci.svg)](https://codecov.io/gh/semantic-release/env-ci)
+[![Greenkeeper badge](https://badges.greenkeeper.io/semantic-release/env-ci.svg)](https://greenkeeper.io/)
 
 Adapted from [codecov-node](https://github.com/codecov/codecov-node/blob/master/lib/detect.js).
 
@@ -17,9 +17,10 @@ $ npm install --save env-ci
 ## Usage
 
 ```js
-const envCi = require('env-ci');
+const envCi = require("env-ci");
 
-const {name, service, isCi, branch, commit, tag, build, buildUrl, job, jobUrl, isPr, pr, prBranch, slug, root} = envCi();
+const { name, service, isCi, branch, commit, tag, build, buildUrl, job, jobUrl, isPr, pr, prBranch, slug, root } =
+  envCi();
 
 if (isCI) {
   console.log(`Building repo ${slug} on ${name} service`);
@@ -30,7 +31,7 @@ if (isCI) {
     console.log(`Building branch ${branch}`);
   }
 
-  if (service === 'travis') {
+  if (service === "travis") {
     // Do something specific to Travis CI
   }
 }
@@ -39,7 +40,7 @@ if (isCI) {
 ## Supported variables
 
 | Variable   | Description                                                                                            |
-|------------|--------------------------------------------------------------------------------------------------------|
+| ---------- | ------------------------------------------------------------------------------------------------------ |
 | `name`     | CI service Commercial name (e.g. `Travis CI`, `CircleCI`, `GitLab CI/CD`)                              |
 | `service`  | Standardized CI service name (e.g. `travis`, `circleci`, `gitlab`)                                     |
 | `isCi`     | `true` is running on a CI, `false` otherwise                                                           |
@@ -63,7 +64,7 @@ if (isCI) {
 ## Supported CI
 
 | CI Service (`name`)                                                                                                                    |   `service`   |       `isCi`       |          `branch`           |      `commit`      |          `tag`          |      `build`       |     `buildUrl`     |       `job`        |      `jobUrl`      |        `isPr`         |         `pr`          |      `prBranch`       |       `slug`       |       `root`       |
-|----------------------------------------------------------------------------------------------------------------------------------------|:-------------:|:------------------:|:---------------------------:|:------------------:|:-----------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:---------------------:|:---------------------:|:---------------------:|:------------------:|:------------------:|
+| -------------------------------------------------------------------------------------------------------------------------------------- | :-----------: | :----------------: | :-------------------------: | :----------------: | :---------------------: | :----------------: | :----------------: | :----------------: | :----------------: | :-------------------: | :-------------------: | :-------------------: | :----------------: | :----------------: |
 | [AppVeyor](https://www.appveyor.com/docs/environment-variables)                                                                        |  `appveyor`   | :white_check_mark: |     :white_check_mark:      | :white_check_mark: |   :white_check_mark:    | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |  :white_check_mark:   |  :white_check_mark:   |  :white_check_mark:   | :white_check_mark: | :white_check_mark: |
 | [Bamboo](https://confluence.atlassian.com/bamboo/bamboo-variables-289277087.html)                                                      |   `bamboo`    | :white_check_mark: |     :white_check_mark:      | :white_check_mark: |           :x:           | :white_check_mark: | :white_check_mark: | :white_check_mark: |        :x:         |          :x:          |          :x:          |          :x:          |        :x:         | :white_check_mark: |
 | [Bitbucket](https://confluence.atlassian.com/bitbucket/environment-variables-794502608.html)                                           |  `bitbucket`  | :white_check_mark: |     :white_check_mark:      | :white_check_mark: |   :white_check_mark:    | :white_check_mark: | :white_check_mark: |        :x:         |        :x:         |          :x:          |          :x:          |          :x:          | :white_check_mark: | :white_check_mark: |
