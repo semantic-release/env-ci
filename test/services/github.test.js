@@ -67,6 +67,34 @@ test('PR - with event.json file', t => {
   );
 });
 
+test('PR - target', t => {
+  const eventFile = tempy.file({extension: 'json'});
+  const event = {pull_request: {number: '10', base: {ref: 'refs/heads/master'}}};
+  fs.writeFileSync(eventFile, JSON.stringify(event));
+
+  t.deepEqual(
+    github.configuration({
+      env: {
+        ...env,
+        GITHUB_EVENT_NAME: 'pull_request_target',
+        GITHUB_REF: 'refs/heads/pr-branch',
+        GITHUB_EVENT_PATH: eventFile,
+      },
+    }),
+    {
+      name: 'GitHub Actions',
+      service: 'github',
+      commit: '1234',
+      branch: 'master',
+      isPr: true,
+      prBranch: 'pr-branch',
+      pr: '10',
+      root: '/workspace',
+      slug: 'owner/repo',
+    }
+  );
+});
+
 test('PR - with event.json file and short branch name', t => {
   const eventFile = tempy.file({extension: 'json'});
   const event = {pull_request: {number: '10', base: {ref: 'master'}}};
