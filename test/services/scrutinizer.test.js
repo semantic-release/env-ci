@@ -1,5 +1,5 @@
 const test = require('ava');
-const scrutinizer = require('../../services/scrutinizer');
+const scrutinizer = require('../../services/scrutinizer.js');
 
 const env = {
   SCRUTINIZER: 'true',
@@ -8,7 +8,7 @@ const env = {
   SCRUTINIZER_BRANCH: 'master',
 };
 
-test('Push', t => {
+test('Push', (t) => {
   t.deepEqual(scrutinizer.configuration({env}), {
     name: 'Scrutinizer',
     service: 'scrutinizer',
@@ -21,7 +21,7 @@ test('Push', t => {
   });
 });
 
-test('PR', t => {
+test('PR', (t) => {
   t.deepEqual(
     scrutinizer.configuration({
       env: {...env, SCRUTINIZER_PR_NUMBER: '10', SCRUTINIZER_PR_SOURCE_BRANCH: 'pr-branch'},

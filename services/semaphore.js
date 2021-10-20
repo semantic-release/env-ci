@@ -1,4 +1,4 @@
-const {head} = require('../lib/git');
+const {head} = require('../lib/git.js');
 
 // 1.0: https://semaphoreci.com/docs/available-environment-variables.html
 // 2.0: https://docs.semaphoreci.com/article/12-environment-variables

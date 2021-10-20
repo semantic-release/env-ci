@@ -1,6 +1,6 @@
 const test = require('ava');
-const semaphore = require('../../services/semaphore');
-const {gitRepo, gitCommit} = require('../helpers/git-utils');
+const semaphore = require('../../services/semaphore.js');
+const {gitRepo, gitCommit} = require('../helpers/git-utils.js');
 
 const env1 = {
   SEMAPHORE: 'true',
@@ -19,7 +19,7 @@ const env2 = {
   SEMAPHORE_GIT_REPO_SLUG: 'owner/repo',
 };
 
-test('Push 1.0', async t => {
+test('Push 1.0', async (t) => {
   const {cwd} = await gitRepo(true);
   const commit = await gitCommit('Test commit message', {cwd});
 
@@ -38,7 +38,7 @@ test('Push 1.0', async t => {
   });
 });
 
-test('PR 1.0', async t => {
+test('PR 1.0', async (t) => {
   const {cwd} = await gitRepo(true);
   const commit = await gitCommit('Test commit message', {cwd});
 
@@ -57,7 +57,7 @@ test('PR 1.0', async t => {
   });
 });
 
-test('Push 2.0', t => {
+test('Push 2.0', (t) => {
   t.deepEqual(semaphore.configuration({env: {...env2, SEMAPHORE_GIT_TAG_NAME: 'v1.0.0'}}), {
     name: 'Semaphore',
     service: 'semaphore',
@@ -73,7 +73,7 @@ test('Push 2.0', t => {
   });
 });
 
-test('PR 2.0', t => {
+test('PR 2.0', (t) => {
   t.deepEqual(
     semaphore.configuration({env: {...env2, SEMAPHORE_GIT_PR_NUMBER: '10', SEMAPHORE_GIT_PR_BRANCH: 'pr-branch'}}),
     {

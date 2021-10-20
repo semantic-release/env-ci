@@ -1,35 +1,33 @@
-'use strict';
-
-const process = require('process'); // eslint-disable-line node/prefer-global/process
-const git = require('./services/git');
+const process = require('process');
+const git = require('./services/git.js');
 
 const services = {
-  appveyor: require('./services/appveyor'),
-  bamboo: require('./services/bamboo'),
-  bitbucket: require('./services/bitbucket'),
-  bitrise: require('./services/bitrise'),
-  buddy: require('./services/buddy'),
-  buildkite: require('./services/buildkite'),
-  circleci: require('./services/circleci'),
-  cirrus: require('./services/cirrus'),
-  codebuild: require('./services/codebuild'),
-  codefresh: require('./services/codefresh'),
-  codeship: require('./services/codeship'),
-  drone: require('./services/drone'),
-  github: require('./services/github'),
-  gitlab: require('./services/gitlab'),
-  jenkins: require('./services/jenkins'),
-  netlify: require('./services/netlify'),
-  puppet: require('./services/puppet'),
-  sail: require('./services/sail'),
-  scrutinizer: require('./services/scrutinizer'),
-  semaphore: require('./services/semaphore'),
-  shippable: require('./services/shippable'),
-  teamcity: require('./services/teamcity'),
-  travis: require('./services/travis'),
-  vercel: require('./services/vercel'),
-  vsts: require('./services/vsts'),
-  wercker: require('./services/wercker'),
+  appveyor: require('./services/appveyor.js'),
+  bamboo: require('./services/bamboo.js'),
+  bitbucket: require('./services/bitbucket.js'),
+  bitrise: require('./services/bitrise.js'),
+  buddy: require('./services/buddy.js'),
+  buildkite: require('./services/buildkite.js'),
+  circleci: require('./services/circleci.js'),
+  cirrus: require('./services/cirrus.js'),
+  codebuild: require('./services/codebuild.js'),
+  codefresh: require('./services/codefresh.js'),
+  codeship: require('./services/codeship.js'),
+  drone: require('./services/drone.js'),
+  github: require('./services/github.js'),
+  gitlab: require('./services/gitlab.js'),
+  jenkins: require('./services/jenkins.js'),
+  netlify: require('./services/netlify.js'),
+  puppet: require('./services/puppet.js'),
+  sail: require('./services/sail.js'),
+  scrutinizer: require('./services/scrutinizer.js'),
+  semaphore: require('./services/semaphore.js'),
+  shippable: require('./services/shippable.js'),
+  teamcity: require('./services/teamcity.js'),
+  travis: require('./services/travis.js'),
+  vercel: require('./services/vercel.js'),
+  vsts: require('./services/vsts.js'),
+  wercker: require('./services/wercker.js'),
 };
 
 module.exports = ({env = process.env, cwd = process.cwd()} = {}) => {

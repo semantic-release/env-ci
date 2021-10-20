@@ -1,5 +1,5 @@
 const test = require('ava');
-const gitlab = require('../../services/gitlab');
+const gitlab = require('../../services/gitlab.js');
 
 const env = {
   GITLAB_CI: 'true',
@@ -13,7 +13,7 @@ const env = {
   CI_PROJECT_DIR: '/',
 };
 
-test('Push', t => {
+test('Push', (t) => {
   t.deepEqual(gitlab.configuration({env}), {
     name: 'GitLab CI/CD',
     service: 'gitlab',
@@ -32,7 +32,7 @@ test('Push', t => {
   });
 });
 
-test('PR', t => {
+test('PR', (t) => {
   t.deepEqual(
     gitlab.configuration({
       env: {

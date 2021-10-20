@@ -1,5 +1,5 @@
 // https://docs.github.com/en/actions/learn-github-actions/environment-variables#default-environment-variables
-const {parseBranch} = require('../lib/utils');
+const {parseBranch} = require('../lib/utils.js');
 
 const getPrEvent = ({env}) => {
   try {
@@ -11,7 +11,7 @@ const getPrEvent = ({env}) => {
         pr: event.pull_request.number,
       };
     }
-  } catch (_) {
+  } catch {
     // Noop
   }
 

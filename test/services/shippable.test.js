@@ -1,5 +1,5 @@
 const test = require('ava');
-const shippable = require('../../services/shippable');
+const shippable = require('../../services/shippable.js');
 
 const env = {
   SHIPPABLE: 'true',
@@ -15,7 +15,7 @@ const env = {
   SHIPPABLE_REPO_SLUG: 'owner/repo',
 };
 
-test('Push', t => {
+test('Push', (t) => {
   t.deepEqual(shippable.configuration({env}), {
     name: 'Shippable',
     service: 'shippable',
@@ -33,7 +33,7 @@ test('Push', t => {
   });
 });
 
-test('PR', t => {
+test('PR', (t) => {
   t.deepEqual(
     shippable.configuration({
       env: {...env, BASE_BRANCH: 'master', HEAD_BRANCH: 'pr-branch', IS_PULL_REQUEST: 'true', PULL_REQUEST: '10'},

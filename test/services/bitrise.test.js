@@ -1,5 +1,5 @@
 const test = require('ava');
-const bitrise = require('../../services/bitrise');
+const bitrise = require('../../services/bitrise.js');
 
 const env = {
   BITRISE_IO: 'true',
@@ -12,7 +12,7 @@ const env = {
   BITRISE_APP_SLUG: 'owner/repo',
 };
 
-test('Push', t => {
+test('Push', (t) => {
   t.deepEqual(bitrise.configuration({env}), {
     name: 'Bitrise',
     service: 'bitrise',
@@ -28,7 +28,7 @@ test('Push', t => {
   });
 });
 
-test('PR', t => {
+test('PR', (t) => {
   t.deepEqual(
     bitrise.configuration({
       env: {...env, BITRISE_PULL_REQUEST: '10', BITRISEIO_GIT_BRANCH_DEST: 'master', BITRISE_GIT_BRANCH: 'pr-branch'},

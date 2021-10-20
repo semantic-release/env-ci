@@ -1,14 +1,16 @@
 // https://confluence.jetbrains.com/display/TCD10/Predefined+Build+Parameters
 
 const javaProperties = require('java-properties');
-const {branch} = require('../lib/git');
+const fromEntries = require('fromentries');
+
+const {branch} = require('../lib/git.js');
 
 const PROPERTIES_MAPPING = {root: 'teamcity.build.workingDir', branch: 'teamcity.build.branch'};
 
-const safeReadProperties = filePath => {
+const safeReadProperties = (filePath) => {
   try {
     return javaProperties.of(filePath);
-  } catch (_) {
+  } catch {
     return undefined;
   }
 };
@@ -20,15 +22,13 @@ const getProperties = ({env, cwd}) => {
   const configFile = buildProperties ? buildProperties.get('teamcity.configuration.properties.file') : undefined;
   const configProperties = configFile ? safeReadProperties(configFile) : configFile;
 
-  return Object.keys(PROPERTIES_MAPPING).reduce(
-    (result, key) =>
-      Object.assign(result, {
-        [key]:
-          (buildProperties ? buildProperties.get(PROPERTIES_MAPPING[key]) : undefined) ||
-          (configProperties ? configProperties.get(PROPERTIES_MAPPING[key]) : undefined) ||
-          (key === 'branch' ? branch({env, cwd}) : undefined),
-      }),
-    {}
+  return fromEntries(
+    Object.keys(PROPERTIES_MAPPING).map((key) => [
+      key,
+      (buildProperties ? buildProperties.get(PROPERTIES_MAPPING[key]) : undefined) ||
+        (configProperties ? configProperties.get(PROPERTIES_MAPPING[key]) : undefined) ||
+        (key === 'branch' ? branch({env, cwd}) : undefined),
+    ])
   );
 };
 

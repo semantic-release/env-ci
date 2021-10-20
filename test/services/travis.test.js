@@ -1,5 +1,5 @@
 const test = require('ava');
-const travis = require('../../services/travis');
+const travis = require('../../services/travis.js');
 
 const env = {
   TRAVIS: 'true',
@@ -15,7 +15,7 @@ const env = {
   TRAVIS_REPO_SLUG: 'owner/repo',
 };
 
-test('Push', t => {
+test('Push', (t) => {
   t.deepEqual(travis.configuration({env}), {
     name: 'Travis CI',
     service: 'travis',
@@ -34,7 +34,7 @@ test('Push', t => {
   });
 });
 
-test('PR', t => {
+test('PR', (t) => {
   t.deepEqual(
     travis.configuration({
       env: {...env, TRAVIS_PULL_REQUEST: '10', TRAVIS_PULL_REQUEST_BRANCH: 'pr-branch'},
