@@ -2,9 +2,8 @@
 
 Get environment variables exposed by CI services.
 
-[![Travis](https://img.shields.io/travis/semantic-release/env-ci.svg)](https://travis-ci.org/semantic-release/env-ci)
-[![Codecov](https://img.shields.io/codecov/c/github/semantic-release/env-ci.svg)](https://codecov.io/gh/semantic-release/env-ci)
-[![Greenkeeper badge](https://badges.greenkeeper.io/semantic-release/env-ci.svg)](https://greenkeeper.io/)
+[![Build Status](https://github.com/semantic-release/env-ci/workflows/Test/badge.svg)](https://github.com/semantic-release/env-ci/actions?query=workflow%3ATest+branch%3Amaster)
+[![npm latest version](https://img.shields.io/npm/v/env-ci/latest.svg)](https://www.npmjs.com/package/env-ci)
 
 Adapted from [codecov-node](https://github.com/codecov/codecov-node/blob/master/lib/detect.js).
 
