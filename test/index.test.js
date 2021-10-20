@@ -89,7 +89,7 @@ test('Drone', t => {
 });
 
 test('GitHub', t => {
-  const {isCi, service} = m({env: {GITHUB_ACTION: 'action-name'}});
+  const {isCi, service} = m({env: {GITHUB_ACTIONS: 'true'}});
 
   t.is(isCi, true);
   t.is(service, 'github');
