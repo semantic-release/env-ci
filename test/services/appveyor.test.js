@@ -1,5 +1,5 @@
 const test = require('ava');
-const appveyor = require('../../services/appveyor');
+const appveyor = require('../../services/appveyor.js');
 
 const env = {
   APPVEYOR: 'true',
@@ -15,7 +15,7 @@ const env = {
   APPVEYOR_BUILD_FOLDER: '/',
 };
 
-test('Push', t => {
+test('Push', (t) => {
   t.deepEqual(appveyor.configuration({env}), {
     name: 'Appveyor',
     service: 'appveyor',
@@ -34,7 +34,7 @@ test('Push', t => {
   });
 });
 
-test('PR', t => {
+test('PR', (t) => {
   t.deepEqual(
     appveyor.configuration({
       env: {...env, APPVEYOR_PULL_REQUEST_NUMBER: '10', APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH: 'pr-branch'},

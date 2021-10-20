@@ -1,5 +1,5 @@
 const test = require('ava');
-const buddy = require('../../services/buddy');
+const buddy = require('../../services/buddy.js');
 
 const env = {
   BUDDY_WORKSPACE_ID: '111',
@@ -12,7 +12,7 @@ const env = {
   BUDDY_REPO_SLUG: 'owner/repo',
 };
 
-test('Push', t => {
+test('Push', (t) => {
   t.deepEqual(buddy.configuration({env}), {
     name: 'Buddy',
     service: 'buddy',
@@ -28,7 +28,7 @@ test('Push', t => {
   });
 });
 
-test('PR', t => {
+test('PR', (t) => {
   t.deepEqual(
     buddy.configuration({
       env: {...env, BUDDY_EXECUTION_PULL_REQUEST_ID: 'pull/10', BUDDY_EXECUTION_BRANCH: undefined},

@@ -1,5 +1,5 @@
 const test = require('ava');
-const drone = require('../../services/drone');
+const drone = require('../../services/drone.js');
 
 const env = {
   DRONE: 'true',
@@ -14,7 +14,7 @@ const env = {
   DRONE_WORKSPACE: '/drone/src/github.com/owner/repo',
 };
 
-test('Push', t => {
+test('Push', (t) => {
   t.deepEqual(drone.configuration({env}), {
     name: 'Drone',
     service: 'drone',
@@ -33,7 +33,7 @@ test('Push', t => {
   });
 });
 
-test('PR', t => {
+test('PR', (t) => {
   t.deepEqual(
     drone.configuration({
       env: {

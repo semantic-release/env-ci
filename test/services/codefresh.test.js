@@ -1,5 +1,5 @@
 const test = require('ava');
-const codefresh = require('../../services/codefresh');
+const codefresh = require('../../services/codefresh.js');
 
 const env = {
   CF_BUILD_ID: '91011',
@@ -11,7 +11,7 @@ const env = {
   CF_VOLUME_PATH: '/',
 };
 
-test('Push', t => {
+test('Push', (t) => {
   t.deepEqual(codefresh.configuration({env}), {
     name: 'Codefresh',
     service: 'codefresh',
@@ -27,7 +27,7 @@ test('Push', t => {
   });
 });
 
-test('PR', t => {
+test('PR', (t) => {
   t.deepEqual(
     codefresh.configuration({
       env: {...env, CF_PULL_REQUEST_NUMBER: '10', CF_PULL_REQUEST_TARGET: 'master', CF_BRANCH: 'pr-branch'},

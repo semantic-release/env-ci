@@ -1,5 +1,5 @@
 const test = require('ava');
-const bitbucket = require('../../services/bitbucket');
+const bitbucket = require('../../services/bitbucket.js');
 
 const env = {
   BITBUCKET_COMMIT: 'b5ce5ce',
@@ -10,7 +10,7 @@ const env = {
   BITBUCKET_CLONE_DIR: '/',
 };
 
-test('Push', t => {
+test('Push', (t) => {
   t.deepEqual(bitbucket.configuration({env}), {
     name: 'Bitbucket Pipelines',
     service: 'bitbucket',

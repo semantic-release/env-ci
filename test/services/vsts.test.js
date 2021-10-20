@@ -1,5 +1,5 @@
 const test = require('ava');
-const vsts = require('../../services/vsts');
+const vsts = require('../../services/vsts.js');
 
 const env = {
   BUILD_BUILDURI: 'https://fabrikamfiber.visualstudio.com/_git/Scripts',
@@ -9,7 +9,7 @@ const env = {
   BUILD_REPOSITORY_LOCALPATH: '/',
 };
 
-test('Push', t => {
+test('Push', (t) => {
   t.deepEqual(vsts.configuration({env}), {
     name: 'Visual Studio Team Services',
     service: 'vsts',
@@ -23,7 +23,7 @@ test('Push', t => {
   });
 });
 
-test('Push - with long branch name', t => {
+test('Push - with long branch name', (t) => {
   t.deepEqual(vsts.configuration({env: {...env, BUILD_SOURCEBRANCH: 'refs/heads/master'}}), {
     name: 'Visual Studio Team Services',
     service: 'vsts',
@@ -37,7 +37,7 @@ test('Push - with long branch name', t => {
   });
 });
 
-test('PR', t => {
+test('PR', (t) => {
   t.deepEqual(
     vsts.configuration({
       env: {

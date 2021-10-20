@@ -1,5 +1,5 @@
 const test = require('ava');
-const vercel = require('../../services/vercel');
+const vercel = require('../../services/vercel.js');
 
 const VERCEL_ENVS = {
   VERCEL: 'true',
@@ -17,7 +17,7 @@ const VERCEL_OBSOLETE_ENVS = {
   NOW_GITHUB_REPO: 'repo',
 };
 
-test('Push on Vercel', t => {
+test('Push on Vercel', (t) => {
   t.deepEqual(vercel.configuration({env: VERCEL_ENVS}), {
     name: 'Vercel',
     service: 'vercel',
@@ -27,7 +27,7 @@ test('Push on Vercel', t => {
   });
 });
 
-test('Push on Now', t => {
+test('Push on Now', (t) => {
   t.deepEqual(vercel.configuration({env: VERCEL_OBSOLETE_ENVS}), {
     name: 'Vercel',
     service: 'vercel',

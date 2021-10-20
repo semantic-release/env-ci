@@ -1,5 +1,5 @@
 const test = require('ava');
-const bamboo = require('../../services/bamboo');
+const bamboo = require('../../services/bamboo.js');
 
 /* eslint-disable camelcase */
 
@@ -12,7 +12,7 @@ const env = {
   bamboo_buildResultsUrl: 'https://server.com/buildresult',
 };
 
-test('Push', t => {
+test('Push', (t) => {
   t.deepEqual(bamboo.configuration({env}), {
     name: 'Bamboo',
     service: 'bamboo',

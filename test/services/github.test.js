@@ -1,7 +1,7 @@
 const fs = require('fs');
 const test = require('ava');
 const tempy = require('tempy');
-const github = require('../../services/github');
+const github = require('../../services/github.js');
 
 /* eslint camelcase: ["error", {properties: "never"}] */
 
@@ -14,7 +14,7 @@ const env = {
   GITHUB_RUN_ID: '1246789',
 };
 
-test('Push', t => {
+test('Push', (t) => {
   t.deepEqual(github.configuration({env}), {
     name: 'GitHub Actions',
     service: 'github',
@@ -28,7 +28,7 @@ test('Push', t => {
   });
 });
 
-test('Push - with short branch name', t => {
+test('Push - with short branch name', (t) => {
   t.deepEqual(github.configuration({env: {...env, GITHUB_REF: 'master'}}), {
     name: 'GitHub Actions',
     service: 'github',
@@ -42,7 +42,7 @@ test('Push - with short branch name', t => {
   });
 });
 
-test('PR - with event.json file', t => {
+test('PR - with event.json file', (t) => {
   const eventFile = tempy.file({extension: 'json'});
   const event = {pull_request: {number: '10', base: {ref: 'refs/heads/master'}}};
   fs.writeFileSync(eventFile, JSON.stringify(event));
@@ -71,7 +71,7 @@ test('PR - with event.json file', t => {
   );
 });
 
-test('PR - target', t => {
+test('PR - target', (t) => {
   const eventFile = tempy.file({extension: 'json'});
   const event = {pull_request: {number: '10', base: {ref: 'refs/heads/master'}}};
   fs.writeFileSync(eventFile, JSON.stringify(event));
@@ -100,7 +100,7 @@ test('PR - target', t => {
   );
 });
 
-test('PR - with event.json file and short branch name', t => {
+test('PR - with event.json file and short branch name', (t) => {
   const eventFile = tempy.file({extension: 'json'});
   const event = {pull_request: {number: '10', base: {ref: 'master'}}};
   fs.writeFileSync(eventFile, JSON.stringify(event));
@@ -129,7 +129,7 @@ test('PR - with event.json file and short branch name', t => {
   );
 });
 
-test('PR - with missing event.json file', t => {
+test('PR - with missing event.json file', (t) => {
   t.deepEqual(
     github.configuration({
       env: {
@@ -154,7 +154,7 @@ test('PR - with missing event.json file', t => {
   );
 });
 
-test('PR - with missing event.json file path', t => {
+test('PR - with missing event.json file path', (t) => {
   t.deepEqual(
     github.configuration({
       env: {...env, GITHUB_EVENT_NAME: 'pull_request', GITHUB_REF: 'refs/heads/pr-branch'},
@@ -174,7 +174,7 @@ test('PR - with missing event.json file path', t => {
   );
 });
 
-test('PR - with missing "pull_request" in event.json file', t => {
+test('PR - with missing "pull_request" in event.json file', (t) => {
   const eventFile = tempy.file({extension: 'json'});
   const event = {};
   fs.writeFileSync(eventFile, JSON.stringify(event));
@@ -203,7 +203,7 @@ test('PR - with missing "pull_request" in event.json file', t => {
   );
 });
 
-test('PR - with missing "pull_request.base" in event.json file', t => {
+test('PR - with missing "pull_request.base" in event.json file', (t) => {
   const eventFile = tempy.file({extension: 'json'});
   const event = {pull_request: {number: '10'}};
   fs.writeFileSync(eventFile, JSON.stringify(event));
@@ -232,7 +232,7 @@ test('PR - with missing "pull_request.base" in event.json file', t => {
   );
 });
 
-test('Push - with incorrect branch name', t => {
+test('Push - with incorrect branch name', (t) => {
   t.deepEqual(github.configuration({env: {...env, GITHUB_REF: ''}}), {
     name: 'GitHub Actions',
     service: 'github',

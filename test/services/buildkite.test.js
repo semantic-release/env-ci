@@ -1,5 +1,5 @@
 const test = require('ava');
-const buildkite = require('../../services/buildkite');
+const buildkite = require('../../services/buildkite.js');
 
 const env = {
   BUILDKITE: 'true',
@@ -14,7 +14,7 @@ const env = {
   BUILDKITE_PROJECT_SLUG: 'repo',
 };
 
-test('Push', t => {
+test('Push', (t) => {
   t.deepEqual(buildkite.configuration({env}), {
     name: 'Buildkite',
     service: 'buildkite',
@@ -31,7 +31,7 @@ test('Push', t => {
   });
 });
 
-test('PR', t => {
+test('PR', (t) => {
   t.deepEqual(
     buildkite.configuration({
       env: {

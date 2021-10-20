@@ -1,5 +1,5 @@
 const test = require('ava');
-const netlify = require('../../services/netlify');
+const netlify = require('../../services/netlify.js');
 
 const env = {
   CI: 'true',
@@ -18,7 +18,7 @@ const env = {
   PWD: '/opt/build/repo',
 };
 
-test('Push', t => {
+test('Push', (t) => {
   t.deepEqual(netlify.configuration({env}), {
     name: 'Netlify',
     service: 'netlify',
@@ -34,7 +34,7 @@ test('Push', t => {
   });
 });
 
-test('PR', t => {
+test('PR', (t) => {
   t.deepEqual(
     netlify.configuration({
       env: {

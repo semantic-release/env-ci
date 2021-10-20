@@ -1,5 +1,5 @@
 const test = require('ava');
-const puppet = require('../../services/puppet');
+const puppet = require('../../services/puppet.js');
 
 const env = {
   DISTELLI_BUILDNUM: '1234',
@@ -9,7 +9,7 @@ const env = {
   DISTELLI_INSTALLHOME: '/opt/distelli',
 };
 
-test('Push', t => {
+test('Push', (t) => {
   t.deepEqual(puppet.configuration({env}), {
     name: 'Puppet',
     service: 'puppet',
