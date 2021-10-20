@@ -67,6 +67,13 @@ test('AWS CodeBuild', t => {
   t.is(service, 'codebuild');
 });
 
+test('AWS Amplify', t => {
+  const {isCi, service} = m({env: {AWS_APP_ID: 'd44r7xst5a1wzk'}});
+
+  t.is(isCi, true);
+  t.is(service, 'amplify');
+});
+
 test('Codefresh', t => {
   const {isCi, service} = m({env: {CF_BUILD_ID: '91011'}});
 

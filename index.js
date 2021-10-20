@@ -4,6 +4,7 @@ const process = require('process'); // eslint-disable-line node/prefer-global/pr
 const git = require('./services/git');
 
 const services = {
+  amplify: require('./services/amplify'),
   appveyor: require('./services/appveyor'),
   bamboo: require('./services/bamboo'),
   bitbucket: require('./services/bitbucket'),
