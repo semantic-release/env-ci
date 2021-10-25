@@ -10,6 +10,7 @@ const services = {
   buildkite: require('./services/buildkite.js'),
   circleci: require('./services/circleci.js'),
   cirrus: require('./services/cirrus.js'),
+  cloudflare: require('./services/cloudflare.js'),
   codebuild: require('./services/codebuild.js'),
   codefresh: require('./services/codefresh.js'),
   codeship: require('./services/codeship.js'),
