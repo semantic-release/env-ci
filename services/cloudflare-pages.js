@@ -7,7 +7,7 @@ module.exports = {
   configuration({env}) {
     return {
       name: 'Cloudflare Pages',
-      service: 'cloudflare',
+      service: 'cloudflarePages',
       commit: env.CF_PAGES_COMMIT_SHA,
       branch: env.CF_PAGES_BRANCH,
       root: env.PWD,

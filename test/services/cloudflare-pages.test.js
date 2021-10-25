@@ -1,5 +1,5 @@
 const test = require('ava');
-const cloudflare = require('../../services/cloudflare.js');
+const cloudflare = require('../../services/cloudflare-pages.js');
 
 const env = {
   CF_PAGES: '1',
@@ -11,7 +11,7 @@ const env = {
 test('Push', (t) => {
   t.deepEqual(cloudflare.configuration({env}), {
     name: 'Cloudflare Pages',
-    service: 'cloudflare',
+    service: 'cloudflarePages',
     commit: '6792f396eadca08926a7c810b7b77fa3815db1f4',
     branch: 'main',
     root: '/opt/buildhome/repo',
