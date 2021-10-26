@@ -81,7 +81,7 @@ test('PR - target', (t) => {
       env: {
         ...env,
         GITHUB_EVENT_NAME: 'pull_request_target',
-        GITHUB_REF: 'refs/heads/pr-branch',
+        GITHUB_REF: 'refs/heads/master',
         GITHUB_EVENT_PATH: eventFile,
       },
     }),
