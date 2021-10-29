@@ -18,13 +18,20 @@ const getPrEvent = ({env}) => {
   return {pr: undefined, branch: undefined};
 };
 
+const getPrNumber = (env) => {
+  const event = env.GITHUB_EVENT_PATH ? require(env.GITHUB_EVENT_PATH) : undefined;
+  return event && event.pull_request ? event.pull_request.number : undefined;
+};
+
 module.exports = {
   detect({env}) {
     return Boolean(env.GITHUB_ACTIONS);
   },
   configuration({env, cwd}) {
     const isPr = env.GITHUB_EVENT_NAME === 'pull_request' || env.GITHUB_EVENT_NAME === 'pull_request_target';
-    const branch = parseBranch(env.GITHUB_REF);
+    const branch = parseBranch(
+      env.GITHUB_EVENT_NAME === 'pull_request_target' ? `refs/pull/${getPrNumber(env)}/merge` : env.GITHUB_REF
+    );
 
     return {
       name: 'GitHub Actions',
