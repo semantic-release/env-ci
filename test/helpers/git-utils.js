@@ -86,7 +86,8 @@ async function gitCheckout(branch, create, options) {
  */
 async function gitCommit(message, options) {
   await execa('git', ['commit', '-m', message, '--allow-empty', '--no-gpg-sign'], options);
-  return (await execa('git', ['rev-parse', 'HEAD'], options)).stdout;
+  const {stdout} = await execa('git', ['rev-parse', 'HEAD'], options);
+  return stdout;
 }
 
 /**
@@ -95,7 +96,8 @@ async function gitCommit(message, options) {
  * @return {String} The sha of the head commit in the current git repository.
  */
 async function gitHead(options) {
-  return (await execa('git', ['rev-parse', 'HEAD'], options)).stdout;
+  const {stdout} = await execa('git', ['rev-parse', 'HEAD'], options);
+  return stdout;
 }
 
 module.exports = {gitRepo, initBareRepo, gitShallowClone, gitCheckout, gitCommit, gitHead};
