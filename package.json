@@ -36,6 +36,7 @@
   "homepage": "https://github.com/semantic-release/env-ci#readme",
   "keywords": [
     "appveyor",
+    "azure-pipelines",
     "bamboo",
     "bitbucket",
     "bitrise",
@@ -63,7 +64,6 @@
     "teamcity",
     "travis",
     "variable",
-    "vsts",
     "wercker"
   ],
   "license": "MIT",
