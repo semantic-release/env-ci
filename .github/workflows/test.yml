@@ -15,8 +15,8 @@ jobs:
     strategy:
       matrix:
         node-version:
-          # minimal required version is 10.13, but ava requires 10.18
-          - 10.18
+          # minimal required version
+          - 12.20
           # minimal required version for latest semantic-release
           - 14.17
           # latest LTS version
@@ -47,7 +47,7 @@ jobs:
         with:
           node-version: 16
           cache: npm
-      - run: npm ci
+      - run: npm clean-install
       - name: Ensure dependencies are compatible with the version of node
-        run: npx ls-engines@0.4
+        run: npx ls-engines
       - run: npm run lint
