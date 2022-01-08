@@ -16,7 +16,7 @@ jobs:
       matrix:
         node-version:
           # minimal required version
-          - 12.20
+          - '12.20'
           # minimal required version for latest semantic-release
           - 14.17
           # latest LTS version
