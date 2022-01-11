@@ -1,4 +1,4 @@
-const {head, branch} = require('../lib/git');
+const {head, branch} = require('../lib/git.js');
 
 // https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-env-vars.html
 

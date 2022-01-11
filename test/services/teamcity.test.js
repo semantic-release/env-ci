@@ -1,8 +1,8 @@
 const fs = require('fs');
 const test = require('ava');
 const tempy = require('tempy');
-const teamcity = require('../../services/teamcity');
-const {gitRepo} = require('../helpers/git-utils');
+const teamcity = require('../../services/teamcity.js');
+const {gitRepo} = require('../helpers/git-utils.js');
 
 const env = {
   TEAMCITY_VERSION: '2017.1.2 (build 46812)',
@@ -11,7 +11,7 @@ const env = {
   TEAMCITY_BUILDCONF_NAME: 'owner/repo',
 };
 
-test('Push - with build properties file', t => {
+test('Push - with build properties file', (t) => {
   const buildFile = tempy.file({extension: 'properties'});
   const buildProperties = ['teamcity.build.branch=master', 'teamcity.build.workingDir=/'];
   fs.writeFileSync(buildFile, buildProperties.join('\n') + '\n');
@@ -27,7 +27,7 @@ test('Push - with build properties file', t => {
   });
 });
 
-test('Push - with build and config properties files', t => {
+test('Push - with build and config properties files', (t) => {
   const buildFile = tempy.file({extension: 'properties'});
   const configFile = tempy.file({extension: 'properties'});
   const buildProperties = ['teamcity.build.branch=master', `teamcity.configuration.properties.file=${configFile}`];
@@ -46,7 +46,7 @@ test('Push - with build and config properties files', t => {
   });
 });
 
-test('Push - prioritize build properties file values', t => {
+test('Push - prioritize build properties file values', (t) => {
   const buildFile = tempy.file({extension: 'properties'});
   const configFile = tempy.file({extension: 'properties'});
   const buildProperties = [
@@ -69,7 +69,7 @@ test('Push - prioritize build properties file values', t => {
   });
 });
 
-test('Push - without build properties file', async t => {
+test('Push - without build properties file', async (t) => {
   const {cwd} = await gitRepo(true);
 
   t.deepEqual(teamcity.configuration({env, cwd}), {
@@ -83,7 +83,7 @@ test('Push - without build properties file', async t => {
   });
 });
 
-test('Push - with build and missing config properties files', async t => {
+test('Push - with build and missing config properties files', async (t) => {
   const {cwd} = await gitRepo(true);
 
   const buildFile = tempy.file({extension: 'properties'});
@@ -101,7 +101,7 @@ test('Push - with build and missing config properties files', async t => {
   });
 });
 
-test('Push - with missing build properties files', async t => {
+test('Push - with missing build properties files', async (t) => {
   const {cwd} = await gitRepo(true);
 
   t.deepEqual(teamcity.configuration({env: {...env, TEAMCITY_BUILD_PROPERTIES_FILE: '/tmp/null'}, cwd}), {

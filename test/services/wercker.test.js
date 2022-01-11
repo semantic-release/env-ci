@@ -1,5 +1,5 @@
 const test = require('ava');
-const wercker = require('../../services/wercker');
+const wercker = require('../../services/wercker.js');
 
 const env = {
   WERCKER_MAIN_PIPELINE_STARTED: '123456',
@@ -11,7 +11,7 @@ const env = {
   WERCKER_GIT_REPOSITORY: 'repo',
 };
 
-test('Push', t => {
+test('Push', (t) => {
   t.deepEqual(wercker.configuration({env}), {
     name: 'Wercker',
     service: 'wercker',

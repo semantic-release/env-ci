@@ -1,5 +1,5 @@
 const test = require('ava');
-const cirrus = require('../../services/cirrus');
+const cirrus = require('../../services/cirrus.js');
 
 const env = {
   CIRRUS_CI: 'true',
@@ -12,7 +12,7 @@ const env = {
   CIRRUS_WORKING_DIR: '/',
 };
 
-test('Push', t => {
+test('Push', (t) => {
   t.deepEqual(cirrus.configuration({env}), {
     name: 'Cirrus CI',
     service: 'cirrus',
@@ -30,7 +30,7 @@ test('Push', t => {
   });
 });
 
-test('PR', t => {
+test('PR', (t) => {
   t.deepEqual(
     cirrus.configuration({
       env: {...env, CIRRUS_PR: '239', CIRRUS_BASE_BRANCH: 'master', CIRRUS_BRANCH: 'pr-branch'},

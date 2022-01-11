@@ -1,5 +1,5 @@
 const test = require('ava');
-const jenkins = require('../../services/jenkins');
+const jenkins = require('../../services/jenkins.js');
 
 const env = {
   JENKINS_URL: 'http://jenkins.jenkins.example/',
@@ -9,7 +9,7 @@ const env = {
   WORKSPACE: '/',
 };
 
-test('Push', t => {
+test('Push', (t) => {
   t.deepEqual(jenkins.configuration({env: {...env, GIT_BRANCH: 'master'}}), {
     name: 'Jenkins',
     service: 'jenkins',
@@ -24,7 +24,7 @@ test('Push', t => {
   });
 });
 
-test('PR', t => {
+test('PR', (t) => {
   t.deepEqual(jenkins.configuration({env: {...env, BRANCH_NAME: 'pr-branch', CHANGE_ID: '10'}}), {
     name: 'Jenkins',
     service: 'jenkins',
@@ -39,7 +39,7 @@ test('PR', t => {
   });
 });
 
-test('PR (PR ghprb-plugin)', t => {
+test('PR (PR ghprb-plugin)', (t) => {
   t.deepEqual(
     jenkins.configuration({
       env: {...env, ghprbSourceBranch: 'pr-branch', ghprbTargetBranch: 'master', ghprbPullId: '10'},
@@ -59,7 +59,7 @@ test('PR (PR ghprb-plugin)', t => {
   );
 });
 
-test('PR (gitlab-plugin)', t => {
+test('PR (gitlab-plugin)', (t) => {
   t.deepEqual(
     jenkins.configuration({
       env: {...env, ghprbSourceBranch: 'pr-branch', gitlabTargetBranch: 'master', gitlabMergeRequestId: '10'},

@@ -1,5 +1,5 @@
 const test = require('ava');
-const codeship = require('../../services/codeship');
+const codeship = require('../../services/codeship.js');
 
 const env = {
   CI_NAME: 'codeship',
@@ -10,7 +10,7 @@ const env = {
   CI_REPO_NAME: 'owner/repo',
 };
 
-test('Push', t => {
+test('Push', (t) => {
   t.deepEqual(codeship.configuration({env}), {
     name: 'Codeship',
     service: 'codeship',

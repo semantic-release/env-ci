@@ -2,9 +2,8 @@
 
 Get environment variables exposed by CI services.
 
-[![Travis](https://img.shields.io/travis/pvdlg/env-ci.svg)](https://travis-ci.org/pvdlg/env-ci)
-[![Codecov](https://img.shields.io/codecov/c/github/pvdlg/env-ci.svg)](https://codecov.io/gh/pvdlg/env-ci)
-[![Greenkeeper badge](https://badges.greenkeeper.io/pvdlg/env-ci.svg)](https://greenkeeper.io/)
+[![Build Status](https://github.com/semantic-release/env-ci/workflows/Test/badge.svg)](https://github.com/semantic-release/env-ci/actions?query=workflow%3ATest+branch%3Amaster)
+[![npm latest version](https://img.shields.io/npm/v/env-ci/latest.svg)](https://www.npmjs.com/package/env-ci)
 
 Adapted from [codecov-node](https://github.com/codecov/codecov-node/blob/master/lib/detect.js).
 
@@ -17,9 +16,10 @@ $ npm install --save env-ci
 ## Usage
 
 ```js
-const envCi = require('env-ci');
+const envCi = require("env-ci");
 
-const {name, service, isCi, branch, commit, tag, build, buildUrl, job, jobUrl, isPr, pr, prBranch, slug, root} = envCi();
+const { name, service, isCi, branch, commit, tag, build, buildUrl, job, jobUrl, isPr, pr, prBranch, slug, root } =
+  envCi();
 
 if (isCI) {
   console.log(`Building repo ${slug} on ${name} service`);
@@ -30,7 +30,7 @@ if (isCI) {
     console.log(`Building branch ${branch}`);
   }
 
-  if (service === 'travis') {
+  if (service === "travis") {
     // Do something specific to Travis CI
   }
 }
@@ -39,7 +39,7 @@ if (isCI) {
 ## Supported variables
 
 | Variable   | Description                                                                                            |
-|------------|--------------------------------------------------------------------------------------------------------|
+| ---------- | ------------------------------------------------------------------------------------------------------ |
 | `name`     | CI service Commercial name (e.g. `Travis CI`, `CircleCI`, `GitLab CI/CD`)                              |
 | `service`  | Standardized CI service name (e.g. `travis`, `circleci`, `gitlab`)                                     |
 | `isCi`     | `true` is running on a CI, `false` otherwise                                                           |
@@ -63,8 +63,9 @@ if (isCI) {
 ## Supported CI
 
 | CI Service (`name`)                                                                                                                    |   `service`   |       `isCi`       |          `branch`           |      `commit`      |          `tag`          |      `build`       |     `buildUrl`     |       `job`        |      `jobUrl`      |        `isPr`         |         `pr`          |      `prBranch`       |       `slug`       |       `root`       |
-|----------------------------------------------------------------------------------------------------------------------------------------|:-------------:|:------------------:|:---------------------------:|:------------------:|:-----------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:---------------------:|:---------------------:|:---------------------:|:------------------:|:------------------:|
+| -------------------------------------------------------------------------------------------------------------------------------------- | :-----------: | :----------------: | :-------------------------: | :----------------: | :---------------------: | :----------------: | :----------------: | :----------------: | :----------------: | :-------------------: | :-------------------: | :-------------------: | :----------------: | :----------------: |
 | [AppVeyor](https://www.appveyor.com/docs/environment-variables)                                                                        |  `appveyor`   | :white_check_mark: |     :white_check_mark:      | :white_check_mark: |   :white_check_mark:    | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |  :white_check_mark:   |  :white_check_mark:   |  :white_check_mark:   | :white_check_mark: | :white_check_mark: |
+| [Azure Pipelines](https://docs.microsoft.com/en-us/azure/devops/pipelines/build/variables)                                               | `azure-devops`| :white_check_mark: |     :white_check_mark:      | :white_check_mark: |           :x:           | :white_check_mark: |        :x:         |        :x:         |        :x:         |  :white_check_mark:   |  :white_check_mark:   |  :white_check_mark:   |        :x:         | :white_check_mark: |
 | [Bamboo](https://confluence.atlassian.com/bamboo/bamboo-variables-289277087.html)                                                      |   `bamboo`    | :white_check_mark: |     :white_check_mark:      | :white_check_mark: |           :x:           | :white_check_mark: | :white_check_mark: | :white_check_mark: |        :x:         |          :x:          |          :x:          |          :x:          |        :x:         | :white_check_mark: |
 | [Bitbucket](https://confluence.atlassian.com/bitbucket/environment-variables-794502608.html)                                           |  `bitbucket`  | :white_check_mark: |     :white_check_mark:      | :white_check_mark: |   :white_check_mark:    | :white_check_mark: | :white_check_mark: |        :x:         |        :x:         |          :x:          |          :x:          |          :x:          | :white_check_mark: | :white_check_mark: |
 | [Bitrise](https://devcenter.bitrise.io/builds/available-environment-variables/#exposed-by-bitriseio)                                   |   `bitrise`   | :white_check_mark: |     :white_check_mark:      | :white_check_mark: |   :white_check_mark:    | :white_check_mark: | :white_check_mark: |        :x:         |        :x:         |  :white_check_mark:   |  :white_check_mark:   |  :white_check_mark:   | :white_check_mark: |        :x:         |
@@ -72,13 +73,15 @@ if (isCI) {
 | [Buildkite](https://buildkite.com/docs/builds/environment-variables)                                                                   |  `buildkite`  | :white_check_mark: |     :white_check_mark:      | :white_check_mark: |   :white_check_mark:    | :white_check_mark: | :white_check_mark: |        :x:         |        :x:         |  :white_check_mark:   |  :white_check_mark:   |  :white_check_mark:   | :white_check_mark: | :white_check_mark: |
 | [CircleCI](https://circleci.com/docs/2.0/env-vars/#built-in-environment-variables)                                                     |  `circleci`   | :white_check_mark: |   [:warning:](#circleci)    | :white_check_mark: |   :white_check_mark:    | :white_check_mark: | :white_check_mark: | :white_check_mark: |        :x:         |  :white_check_mark:   |  :white_check_mark:   |  :white_check_mark:   | :white_check_mark: |        :x:         |
 | [Cirrus CI](https://cirrus-ci.org/guide/writing-tasks/#environment-variables)                                                          |   `cirrus`    | :white_check_mark: |     :white_check_mark:      | :white_check_mark: |   :white_check_mark:    | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |  :white_check_mark:   |  :white_check_mark:   |  :white_check_mark:   | :white_check_mark: | :white_check_mark: |
+| [Cloudflare Pages](https://developers.cloudflare.com/pages/platform/build-configuration#environment-variables)                         |  `cloudflarePages` | :white_check_mark: |     :white_check_mark:      | :white_check_mark: |           :x:           |        :x:         |         :x:        |        :x:         |      :x:                |          :x:          |          :x:          |          :x:          |        :x:         | :white_check_mark: |
 | [AWS CodeBuild](https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-env-vars.html)                                    |  `codebuild`  | :white_check_mark: | [:warning:](#aws-codebuild) | :white_check_mark: |           :x:           | :white_check_mark: | :white_check_mark: |        :x:         |        :x:         |          :x:          |          :x:          |          :x:          |        :x:         | :white_check_mark: |
 | [Codefresh](https://codefresh.io/docs/docs/codefresh-yaml/variables#system-provided-variables)                                         |  `codefresh`  | :white_check_mark: |     :white_check_mark:      | :white_check_mark: |           :x:           | :white_check_mark: | :white_check_mark: |        :x:         |        :x:         |  :white_check_mark:   |  :white_check_mark:   |  :white_check_mark:   | :white_check_mark: | :white_check_mark: |
 | [Codeship](https://documentation.codeship.com/basic/builds-and-configuration/set-environment-variables/#default-environment-variables) |  `codeship`   | :white_check_mark: |     :white_check_mark:      | :white_check_mark: |   :white_check_mark:    | :white_check_mark: | :white_check_mark: |        :x:         |        :x:         |          :x:          |          :x:          |          :x:          | :white_check_mark: |        :x:         |
 | [Drone](https://readme.drone.io/reference/environ/)                                                                                    |    `drone`    | :white_check_mark: |     :white_check_mark:      | :white_check_mark: |   :white_check_mark:    | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |  :white_check_mark:   |  :white_check_mark:   |  :white_check_mark:   | :white_check_mark: | :white_check_mark: |
-| [GitHub Actions](https://help.github.com/en/articles/virtual-environments-for-github-actions#environment-variables)                    |   `github`    | :white_check_mark: |     :white_check_mark:      | :white_check_mark: |           :x:           |        :x:         |        :x:         |        :x:         |        :x:         |  :white_check_mark:   |  :white_check_mark:   |  :white_check_mark:   | :white_check_mark: | :white_check_mark: |
+| [GitHub Actions](https://docs.github.com/en/actions/learn-github-actions/environment-variables#default-environment-variables)          |   `github`    | :white_check_mark: |     :white_check_mark:      | :white_check_mark: |           :x:           | :white_check_mark: |        :x:         |        :x:         |        :x:         |  :white_check_mark:   |  :white_check_mark:   |  :white_check_mark:   | :white_check_mark: | :white_check_mark: |
 | [GitLab CI/CD](https://docs.gitlab.com/ce/ci/variables/README.html)                                                                    |   `gitlab`    | :white_check_mark: |     :white_check_mark:      | :white_check_mark: |   :white_check_mark:    | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |  :white_check_mark:   |  :white_check_mark:   |  :white_check_mark:   | :white_check_mark: | :white_check_mark: |
 | [Jenkins](https://wiki.jenkins.io/display/JENKINS/Building+a+software+project)                                                         |   `jenkins`   | :white_check_mark: |    [:warning:](#jenkins)    | :white_check_mark: |           :x:           | :white_check_mark: | :white_check_mark: |        :x:         |        :x:         | [:warning:](#jenkins) | [:warning:](#jenkins) | [:warning:](#jenkins) | :white_check_mark: | :white_check_mark: |
+| [Netlify](https://docs.netlify.com/configure-builds/environment-variables/#netlify-configuration-variables)                            |   `netlify`   | :white_check_mark: |    [:warning:](#netlify)    | :white_check_mark: |           :x:           | :white_check_mark: | :white_check_mark: |        :x:         |        :x:         |  :white_check_mark:   |  :white_check_mark:   |  :white_check_mark:   | :white_check_mark: | :white_check_mark: |
 | [Puppet](https://puppet.com/docs/pipelines-for-apps/enterprise/environment-variable.html)                                              |   `puppet`    | :white_check_mark: |     :white_check_mark:      | :white_check_mark: |           :x:           | :white_check_mark: | :white_check_mark: |        :x:         |        :x:         |          :x:          |          :x:          |          :x:          |        :x:         | :white_check_mark: |
 | [Sail CI](https://sail.ci/docs/environment-variables)                                                                                  |    `sail`     | :white_check_mark: |     [:warning:](#sail)      | :white_check_mark: |           :x:           |        :x:         |        :x:         |        :x:         |        :x:         |  :white_check_mark:   |  :white_check_mark:   |          :x:          | :white_check_mark: | :white_check_mark: |
 | [Scrutinizer](https://scrutinizer-ci.com/docs/build/environment-variables)                                                             | `scrutinizer` | :white_check_mark: |     :white_check_mark:      | :white_check_mark: |           :x:           | :white_check_mark: |        :x:         |        :x:         |        :x:         |  :white_check_mark:   |  :white_check_mark:   |  :white_check_mark:   |        :x:         |        :x:         |
@@ -86,7 +89,8 @@ if (isCI) {
 | [Shippable](http://docs.shippable.com/ci/env-vars/#stdEnv)                                                                             |  `shippable`  | :white_check_mark: |     :white_check_mark:      | :white_check_mark: |   :white_check_mark:    | :white_check_mark: | :white_check_mark: | :white_check_mark: |        :x:         |  :white_check_mark:   |  :white_check_mark:   |  :white_check_mark:   | :white_check_mark: | :white_check_mark: |
 | [TeamCity](https://confluence.jetbrains.com/display/TCD10/Predefined+Build+Parameters)                                                 |  `teamcity`   | :white_check_mark: |     :white_check_mark:      | :white_check_mark: |           :x:           | :white_check_mark: |        :x:         |        :x:         |        :x:         |          :x:          |          :x:          |          :x:          | :white_check_mark: | :white_check_mark: |
 | [Travis CI](https://docs.travis-ci.com/user/environment-variables#default-environment-variables)                                       |   `travis`    | :white_check_mark: |     :white_check_mark:      | :white_check_mark: |   :white_check_mark:    | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |  :white_check_mark:   |  :white_check_mark:   |  :white_check_mark:   | :white_check_mark: | :white_check_mark: |
-| [Visual Studio Team Services](https://docs.microsoft.com/en-us/vsts/pipelines/build/variables)                                         |    `vsts`     | :white_check_mark: |     :white_check_mark:      | :white_check_mark: |           :x:           | :white_check_mark: |        :x:         |        :x:         |        :x:         |  :white_check_mark:   |  :white_check_mark:   |  :white_check_mark:   |        :x:         | :white_check_mark: |
+| [Vela](https://go-vela.github.io/docs/reference/environment/variables/)                                                                |      `vela`   | :white_check_mark: |     :white_check_mark:      | :white_check_mark: |   :white_check_mark:    | :white_check_mark: | :white_check_mark: |        :x:         |        :x:         |  :white_check_mark:   |  :white_check_mark:   |  :white_check_mark:   | :white_check_mark: | :white_check_mark: |
+| [Vercel](https://vercel.com/docs/environment-variables)                                       |   `vercel`    | :white_check_mark: |     :white_check_mark:      | :white_check_mark: |   :x:    | :x: | :x: | :x: | :x: |  :x:   |  :x:   |  :x:   | :white_check_mark: | :x: |
 | [Wercker](http://devcenter.wercker.com/docs/environment-variables/available-env-vars#hs_cos_wrapper_name)                              |   `wercker`   | :white_check_mark: |     :white_check_mark:      | :white_check_mark: |           :x:           | :white_check_mark: | :white_check_mark: |        :x:         |        :x:         |          :x:          |          :x:          |          :x:          | :white_check_mark: | :white_check_mark: |
 
 :warning: See [Caveats](#caveats)
@@ -145,16 +149,27 @@ Therefore in the case of Pull Request builds, `env-ci` will not be able to deter
 
 See [feature request](https://discuss.circleci.com/t/create-a-circle-target-branch-envar/10022).
 
-## Jenkins
+### Cloudflare Pages
+
+For builds triggered when a Pull Request is opened/updated, Cloudflare Pages will re-use the branch variable for the originating branch and not provide a target. Therefore `env-ci` will not be able to determine the `prBranch` property however `branch` will always be set.
+
+### Jenkins
 
 Triggering build when a Pull Request is opened/updated is supported only via the [ghprb-plugin](https://github.com/jenkinsci/ghprb-plugin) and [gitlab-plugin](https://github.com/jenkinsci/gitlab-plugin). Therefore `env-ci` will set `isPr`, `pr` and `prBranch` and define `branch` with the Pull Request target branch only if one those plugin is used.
 
-## Sail
+### Netlify
+
+For builds triggered when a Pull Request is opened/updated, Netlify doesn't provide an environment variable indicating the target branch.
+Therefore in the case of Pull Request builds, `env-ci` will not be able to determine the `branch` property. However `prBranch` will be set.
+
+See [feature request](https://answers.netlify.com/t/access-pr-target-branch-when-deploying-preview-build/32402)
+
+### Sail
 
 For builds triggered when a Pull Request is opened/updated, Sail doesn't provide an environment variable indicating the target branch, and the one for the current branch is set to `pull/<PR number>` independently of the the branch name from which the Pull Request originated.
 Therefore in the case of Pull Request builds, `env-ci` will not be able to determine the `branch` and `prBranch` properties.
 
-## Semaphore
+### Semaphore
 
 For builds triggered when a Pull Request is opened/updated, Semaphore 1.0 doesn't provide an environment variable indicating the target branch.
 Therefore in the case of Pull Request builds, `env-ci` will not be able to determine the `branch` property. However `prBranch` will be set.

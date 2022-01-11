@@ -1,7 +1,7 @@
 const test = require('ava');
-const {prNumber} = require('../../lib/utils');
+const {prNumber} = require('../../lib/utils.js');
 
-test('prNumber', t => {
+test('prNumber', (t) => {
   t.is(prNumber('https://github.com/owner/repo/pull/10'), '10');
   t.is(prNumber('pull/10'), '10');
   t.is(prNumber('https://gitlab.com/owner/repo/merge_requests/10'), '10');

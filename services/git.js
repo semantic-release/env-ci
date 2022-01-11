@@ -1,4 +1,4 @@
-const {head, branch} = require('../lib/git');
+const {head, branch} = require('../lib/git.js');
 
 module.exports = {
   configuration(options) {
