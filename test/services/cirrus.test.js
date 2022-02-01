@@ -25,6 +25,7 @@ test('Push', (t) => {
     branch: 'master',
     pr: undefined,
     isPr: false,
+    prBranch: undefined,
     slug: 'owner/repo',
     root: '/',
   });
@@ -47,6 +48,7 @@ test('PR', (t) => {
       branch: 'master',
       pr: '239',
       isPr: true,
+      prBranch: 'pr-branch',
       slug: 'owner/repo',
       root: '/',
     }
