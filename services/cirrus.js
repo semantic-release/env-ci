@@ -22,6 +22,7 @@ module.exports = {
       branch: isPr ? env.CIRRUS_BASE_BRANCH : env.CIRRUS_BRANCH,
       pr,
       isPr,
+      prBranch: isPr ? env.CIRRUS_BRANCH : undefined,
       slug: env.CIRRUS_REPO_FULL_NAME,
       root: env.CIRRUS_WORKING_DIR,
     };
