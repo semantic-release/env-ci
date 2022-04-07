@@ -38,6 +38,7 @@ module.exports = {
       service: 'github',
       commit: env.GITHUB_SHA,
       build: env.GITHUB_RUN_ID,
+      buildUrl: `${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}/runs/${env.GITHUB_RUN_ID}`,
       isPr,
       branch,
       prBranch: isPr ? branch : undefined,
