@@ -8,7 +8,7 @@ module.exports = {
       const isPr = env.CI_BUILD_EVENT === 'pull_request';
   
       return {
-        name: 'Woodecker CI',
+        name: 'Woodpecker CI',
         service: 'woodpecker',
         commit: env.CI_COMMIT_SHA,
         tag: env.CI_COMMIT_TAG,
