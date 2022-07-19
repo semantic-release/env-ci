@@ -30,6 +30,7 @@ const services = {
   vela: require('./services/vela.js'),
   vercel: require('./services/vercel.js'),
   wercker: require('./services/wercker.js'),
+  woodpecker: require('./services/woodpecker.js'),
 };
 
 module.exports = ({env = process.env, cwd = process.cwd()} = {}) => {

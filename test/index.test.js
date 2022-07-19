@@ -186,6 +186,13 @@ test('Wercker', (t) => {
   t.is(service, 'wercker');
 });
 
+test('Woodpecker CI', (t) => {
+  const {isCi, service} = m({env: {CI: 'woodpecker'}});
+
+  t.is(isCi, true);
+  t.is(service, 'woodpecker');
+});
+
 test('Unknown CI and Git repository', async (t) => {
   const {cwd} = await gitRepo();
   await gitCommit('Test commit message', {cwd});

@@ -64,7 +64,8 @@
     "teamcity",
     "travis",
     "variable",
-    "wercker"
+    "wercker",
+    "woodpecker"
   ],
   "license": "MIT",
   "main": "index.js",
