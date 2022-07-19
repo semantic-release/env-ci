@@ -8,7 +8,7 @@ const env = {
   CI_COMMIT_SHA: '5678',
   CI_COMMIT_TAG: 'tag_name',
   CI_BUILD_NUMBER: '91011',
-  CI_BRANCH: 'main',
+  CI_COMMIT_BRANCH: 'main',
   CI_REPO_OWNER: 'owner',
   CI_REPO_NAME: 'repo',
   CI_WORKSPACE: '/woodpecker/src/github.com/owner/repo',
