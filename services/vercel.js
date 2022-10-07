@@ -1,6 +1,6 @@
 // https://vercel.com/docs/environment-variables
 
-module.exports = {
+export default {
   detect({ env }) {
     return Boolean(env.VERCEL) || Boolean(env.NOW_GITHUB_DEPLOYMENT);
   },

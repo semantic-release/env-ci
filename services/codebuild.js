@@ -1,8 +1,8 @@
-const { head, branch } = require("../lib/git.js");
+import { head, branch } from "../lib/git.js";
 
 // https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-env-vars.html
 
-module.exports = {
+export default {
   detect({ env }) {
     return Boolean(env.CODEBUILD_BUILD_ID);
   },

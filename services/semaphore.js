@@ -1,9 +1,9 @@
-const { head } = require("../lib/git.js");
+import { head } from "../lib/git.js";
 
 // 1.0: https://semaphoreci.com/docs/available-environment-variables.html
 // 2.0: https://docs.semaphoreci.com/article/12-environment-variables
 
-module.exports = {
+export default {
   detect({ env }) {
     return Boolean(env.SEMAPHORE);
   },
@@ -20,7 +20,8 @@ module.exports = {
       branch: env.SEMAPHORE_GIT_BRANCH || (isPr ? undefined : env.BRANCH_NAME),
       pr,
       isPr,
-      prBranch: env.SEMAPHORE_GIT_PR_BRANCH || (isPr ? env.BRANCH_NAME : undefined),
+      prBranch:
+        env.SEMAPHORE_GIT_PR_BRANCH || (isPr ? env.BRANCH_NAME : undefined),
       slug: env.SEMAPHORE_GIT_REPO_SLUG || env.SEMAPHORE_REPO_SLUG,
       root: env.SEMAPHORE_GIT_DIR || env.SEMAPHORE_PROJECT_DIR,
     };

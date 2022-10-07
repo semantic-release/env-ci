@@ -1,6 +1,6 @@
 // https://confluence.atlassian.com/bitbucket/environment-variables-794502608.html
 
-module.exports = {
+export default {
   detect({ env }) {
     return Boolean(env.BITBUCKET_BUILD_NUMBER);
   },

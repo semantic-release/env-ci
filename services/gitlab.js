@@ -1,6 +1,6 @@
 // https://docs.gitlab.com/ce/ci/variables/README.html
 
-module.exports = {
+export default {
   detect({ env }) {
     return Boolean(env.GITLAB_CI);
   },
@@ -17,7 +17,9 @@ module.exports = {
       buildUrl: `${env.CI_PROJECT_URL}/pipelines/${env.CI_PIPELINE_ID}`,
       job: env.CI_JOB_ID,
       jobUrl: `${env.CI_PROJECT_URL}/-/jobs/${env.CI_JOB_ID}`,
-      branch: isPr ? env.CI_MERGE_REQUEST_TARGET_BRANCH_NAME : env.CI_COMMIT_REF_NAME,
+      branch: isPr
+        ? env.CI_MERGE_REQUEST_TARGET_BRANCH_NAME
+        : env.CI_COMMIT_REF_NAME,
       pr,
       isPr,
       prBranch: env.CI_MERGE_REQUEST_SOURCE_BRANCH_NAME,

@@ -1,7 +1,7 @@
 // https://jetbrains.com/help/space/automation-environment-variables.html#automation
-const { parseBranch } = require("../lib/utils.js");
+import { parseBranch } from "../lib/utils.js";
 
-module.exports = {
+export default {
   detect({ env }) {
     return Boolean(env.JB_SPACE_EXECUTION_NUMBER);
   },
@@ -14,7 +14,10 @@ module.exports = {
       commit: env.JB_SPACE_GIT_REVISION,
       build: env.JB_SPACE_EXECUTION_NUMBER,
       branch: parseBranch(env.JB_SPACE_GIT_BRANCH),
-      slug: projectKey && repositoryName ? `${projectKey.toLowerCase()}/${repositoryName}` : undefined,
+      slug:
+        projectKey && repositoryName
+          ? `${projectKey.toLowerCase()}/${repositoryName}`
+          : undefined,
     };
   },
 };

@@ -1,6 +1,6 @@
 // https://codefresh.io/docs/docs/codefresh-yaml/variables#system-provided-variables
 
-module.exports = {
+export default {
   detect({ env }) {
     return Boolean(env.CF_BUILD_ID);
   },

@@ -1,6 +1,6 @@
 // http://docs.shippable.com/ci/env-vars/#stdEnv
 
-module.exports = {
+export default {
   detect({ env }) {
     return Boolean(env.SHIPPABLE);
   },

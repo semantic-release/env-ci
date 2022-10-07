@@ -1,6 +1,6 @@
 // https://woodpecker-ci.org/docs/usage/environment#built-in-environment-variables
 
-module.exports = {
+export default {
   detect({ env }) {
     return env.CI && env.CI === "woodpecker";
   },

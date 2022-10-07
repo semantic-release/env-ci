@@ -1,6 +1,6 @@
 // https://developers.cloudflare.com/pages/platform/build-configuration#environment-variables
 
-module.exports = {
+export default {
   detect({ env }) {
     return env.CF_PAGES === "1";
   },
