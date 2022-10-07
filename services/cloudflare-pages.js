@@ -1,13 +1,13 @@
 // https://developers.cloudflare.com/pages/platform/build-configuration#environment-variables
 
 module.exports = {
-  detect({env}) {
-    return env.CF_PAGES === '1';
+  detect({ env }) {
+    return env.CF_PAGES === "1";
   },
-  configuration({env}) {
+  configuration({ env }) {
     return {
-      name: 'Cloudflare Pages',
-      service: 'cloudflarePages',
+      name: "Cloudflare Pages",
+      service: "cloudflarePages",
       commit: env.CF_PAGES_COMMIT_SHA,
       branch: env.CF_PAGES_BRANCH,
       root: env.PWD,

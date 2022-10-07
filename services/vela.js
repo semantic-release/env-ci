@@ -1,15 +1,15 @@
 // https://go-vela.github.io/docs/reference/environment/variables/
 
 module.exports = {
-  detect({env}) {
+  detect({ env }) {
     return Boolean(env.VELA);
   },
-  configuration({env}) {
-    const isPr = env.VELA_BUILD_EVENT === 'pull_request';
+  configuration({ env }) {
+    const isPr = env.VELA_BUILD_EVENT === "pull_request";
 
     return {
-      name: 'Vela',
-      service: 'vela',
+      name: "Vela",
+      service: "vela",
       branch: isPr ? env.VELA_PULL_REQUEST_TARGET : env.VELA_BUILD_BRANCH,
       commit: env.VELA_BUILD_COMMIT,
       tag: env.VELA_BUILD_TAG,

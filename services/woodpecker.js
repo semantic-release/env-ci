@@ -1,15 +1,15 @@
 // https://woodpecker-ci.org/docs/usage/environment#built-in-environment-variables
 
 module.exports = {
-  detect({env}) {
-    return env.CI && env.CI === 'woodpecker';
+  detect({ env }) {
+    return env.CI && env.CI === "woodpecker";
   },
-  configuration({env}) {
-    const isPr = env.CI_BUILD_EVENT === 'pull_request';
+  configuration({ env }) {
+    const isPr = env.CI_BUILD_EVENT === "pull_request";
 
     return {
-      name: 'Woodpecker CI',
-      service: 'woodpecker',
+      name: "Woodpecker CI",
+      service: "woodpecker",
       commit: env.CI_COMMIT_SHA,
       tag: env.CI_COMMIT_TAG,
       build: env.CI_BUILD_NUMBER,
