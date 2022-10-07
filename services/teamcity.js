@@ -1,7 +1,6 @@
 // https://confluence.jetbrains.com/display/TCD10/Predefined+Build+Parameters
 
 const javaProperties = require("java-properties");
-const fromEntries = require("fromentries");
 
 const { branch } = require("../lib/git.js");
 
@@ -22,7 +21,7 @@ const getProperties = ({ env, cwd }) => {
   const configFile = buildProperties ? buildProperties.get("teamcity.configuration.properties.file") : undefined;
   const configProperties = configFile ? safeReadProperties(configFile) : configFile;
 
-  return fromEntries(
+  return Object.fromEntries(
     Object.keys(PROPERTIES_MAPPING).map((key) => [
       key,
       (buildProperties ? buildProperties.get(PROPERTIES_MAPPING[key]) : undefined) ||
