@@ -25,7 +25,7 @@
     "tempy": "1.0.1"
   },
   "engines": {
-    "node": ">=12.20"
+    "node": "^16.10 || >=18"
   },
   "files": [
     "index.js",
