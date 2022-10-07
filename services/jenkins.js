@@ -1,20 +1,20 @@
-const {head} = require('../lib/git.js');
+const { head } = require("../lib/git.js");
 
 // https://wiki.jenkins.io/display/JENKINS/Building+a+software+project
 
 module.exports = {
-  detect({env}) {
+  detect({ env }) {
     return Boolean(env.JENKINS_URL);
   },
-  configuration({env, cwd}) {
+  configuration({ env, cwd }) {
     const pr = env.ghprbPullId || env.gitlabMergeRequestId || env.CHANGE_ID;
     const isPr = Boolean(pr);
     const localBranch = env.GIT_LOCAL_BRANCH || env.GIT_BRANCH || env.gitlabBranch || env.BRANCH_NAME;
 
     return {
-      name: 'Jenkins',
-      service: 'jenkins',
-      commit: env.ghprbActualCommit || env.GIT_COMMIT || head({env, cwd}),
+      name: "Jenkins",
+      service: "jenkins",
+      commit: env.ghprbActualCommit || env.GIT_COMMIT || head({ env, cwd }),
       branch: isPr ? env.ghprbTargetBranch || env.gitlabTargetBranch : localBranch,
       build: env.BUILD_NUMBER,
       buildUrl: env.BUILD_URL,
