@@ -16,7 +16,7 @@ jobs:
       matrix:
         node-version:
           # minimal required version
-          - 16.17
+          - 16.10
           - 18
 
     runs-on: ubuntu-latest
