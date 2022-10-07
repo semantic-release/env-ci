@@ -12,8 +12,8 @@
     "url": "https://github.com/semantic-release/env-ci/issues"
   },
   "dependencies": {
-    "execa": "^5.0.0",
-    "java-properties": "^1.0.0"
+    "execa": "^6.1.0",
+    "java-properties": "^1.0.2"
   },
   "devDependencies": {
     "ava": "4.3.3",
