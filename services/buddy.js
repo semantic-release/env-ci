@@ -1,8 +1,8 @@
 // https://buddy.works/knowledge/deployments/how-use-environment-variables#default-environment-variables
 
-const { prNumber } = require("../lib/utils.js");
+import { prNumber } from "../lib/utils.js";
 
-module.exports = {
+export default {
   detect({ env }) {
     return Boolean(env.BUDDY_WORKSPACE_ID);
   },

@@ -1,6 +1,6 @@
 // https://scrutinizer-ci.com/docs/build/environment-variables
 
-module.exports = {
+export default {
   detect({ env }) {
     return Boolean(env.SCRUTINIZER);
   },

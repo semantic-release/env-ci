@@ -1,11 +1,14 @@
 // https://devcenter.bitrise.io/builds/available-environment-variables/#exposed-by-bitriseio
 
-module.exports = {
+export default {
   detect({ env }) {
     return Boolean(env.BITRISE_IO);
   },
   configuration({ env }) {
-    const pr = env.BITRISE_PULL_REQUEST === "false" ? undefined : env.BITRISE_PULL_REQUEST;
+    const pr =
+      env.BITRISE_PULL_REQUEST === "false"
+        ? undefined
+        : env.BITRISE_PULL_REQUEST;
     const isPr = Boolean(pr);
 
     return {

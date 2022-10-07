@@ -1,6 +1,6 @@
 // https://documentation.codeship.com/basic/builds-and-configuration/set-environment-variables/#default-environment-variables
 
-module.exports = {
+export default {
   detect({ env }) {
     return env.CI_NAME && env.CI_NAME === "codeship";
   },

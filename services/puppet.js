@@ -1,6 +1,6 @@
 // https://puppet.com/docs/pipelines-for-apps/enterprise/environment-variable.html
 
-module.exports = {
+export default {
   detect({ env }) {
     return Boolean(env.DISTELLI_APPNAME);
   },

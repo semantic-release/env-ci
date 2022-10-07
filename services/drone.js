@@ -1,6 +1,6 @@
 // https://readme.drone.io/reference/environ
 
-module.exports = {
+export default {
   detect({ env }) {
     return Boolean(env.DRONE);
   },

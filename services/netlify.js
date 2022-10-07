@@ -1,6 +1,6 @@
 // https://docs.netlify.com/configure-builds/environment-variables/#netlify-configuration-variables
 
-module.exports = {
+export default {
   detect({ env }) {
     return env.NETLIFY === "true";
   },
