@@ -1,15 +1,15 @@
 // https://docs.netlify.com/configure-builds/environment-variables/#netlify-configuration-variables
 
 module.exports = {
-  detect({env}) {
-    return env.NETLIFY === 'true';
+  detect({ env }) {
+    return env.NETLIFY === "true";
   },
-  configuration({env}) {
-    const isPr = env.PULL_REQUEST === 'true';
+  configuration({ env }) {
+    const isPr = env.PULL_REQUEST === "true";
 
     return {
-      name: 'Netlify',
-      service: 'netlify',
+      name: "Netlify",
+      service: "netlify",
       commit: env.COMMIT_REF,
       build: env.DEPLOY_ID,
       buildUrl: `https://app.netlify.com/sites/${env.SITE_NAME}/deploys/${env.DEPLOY_ID}`,

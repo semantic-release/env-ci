@@ -1,223 +1,230 @@
-const test = require('ava');
-const tempy = require('tempy');
-const proxyquire = require('proxyquire');
+const test = require("ava");
+const tempy = require("tempy");
+const proxyquire = require("proxyquire");
 
-const m = require('../index.js');
-const {gitRepo, gitCommit} = require('./helpers/git-utils.js');
+const m = require("../index.js");
+const { gitRepo, gitCommit } = require("./helpers/git-utils.js");
 
-test('Appveyor', (t) => {
-  const {isCi, service} = m({env: {APPVEYOR: 'true'}});
-
-  t.is(isCi, true);
-  t.is(service, 'appveyor');
-});
-
-test('Azure Pipelines', (t) => {
-  const {isCi, service} = m({env: {BUILD_BUILDURI: 'https://fabrikamfiber.visualstudio.com/_git/Scripts'}});
+test("Appveyor", (t) => {
+  const { isCi, service } = m({ env: { APPVEYOR: "true" } });
 
   t.is(isCi, true);
-  t.is(service, 'azurePipelines');
+  t.is(service, "appveyor");
 });
 
-test('Bamboo', (t) => {
-  const {isCi, service} = m({env: {bamboo_agentId: 'some bamboo agent id'}}); // eslint-disable-line camelcase
+test("Azure Pipelines", (t) => {
+  const { isCi, service } = m({ env: { BUILD_BUILDURI: "https://fabrikamfiber.visualstudio.com/_git/Scripts" } });
 
   t.is(isCi, true);
-  t.is(service, 'bamboo');
+  t.is(service, "azurePipelines");
 });
 
-test('Bitbucket', (t) => {
-  const {isCi, service} = m({env: {BITBUCKET_BUILD_NUMBER: '123456'}});
+test("Bamboo", (t) => {
+  const { isCi, service } = m({ env: { bamboo_agentId: "some bamboo agent id" } }); // eslint-disable-line camelcase
 
   t.is(isCi, true);
-  t.is(service, 'bitbucket');
+  t.is(service, "bamboo");
 });
 
-test('Bitrise', (t) => {
-  const {isCi, service} = m({env: {BITRISE_IO: 'true'}});
+test("Bitbucket", (t) => {
+  const { isCi, service } = m({ env: { BITBUCKET_BUILD_NUMBER: "123456" } });
 
   t.is(isCi, true);
-  t.is(service, 'bitrise');
+  t.is(service, "bitbucket");
 });
 
-test('Buddy', (t) => {
-  const {isCi, service} = m({env: {BUDDY_WORKSPACE_ID: '1234'}});
+test("Bitrise", (t) => {
+  const { isCi, service } = m({ env: { BITRISE_IO: "true" } });
 
   t.is(isCi, true);
-  t.is(service, 'buddy');
+  t.is(service, "bitrise");
 });
 
-test('Buildkite', (t) => {
-  const {isCi, service} = m({env: {BUILDKITE: 'true'}});
+test("Buddy", (t) => {
+  const { isCi, service } = m({ env: { BUDDY_WORKSPACE_ID: "1234" } });
 
   t.is(isCi, true);
-  t.is(service, 'buildkite');
+  t.is(service, "buddy");
 });
 
-test('Circle CI', (t) => {
-  const {isCi, service} = m({env: {CIRCLECI: 'true'}});
+test("Buildkite", (t) => {
+  const { isCi, service } = m({ env: { BUILDKITE: "true" } });
 
   t.is(isCi, true);
-  t.is(service, 'circleci');
+  t.is(service, "buildkite");
 });
 
-test('Cirrus CI', (t) => {
-  const {isCi, service} = m({env: {CIRRUS_CI: 'true'}});
+test("Circle CI", (t) => {
+  const { isCi, service } = m({ env: { CIRCLECI: "true" } });
 
   t.is(isCi, true);
-  t.is(service, 'cirrus');
+  t.is(service, "circleci");
 });
 
-test('AWS CodeBuild', (t) => {
-  const {isCi, service} = m({env: {CODEBUILD_BUILD_ID: 'env-ci:40cc72d2-acd5-46f4-a86b-6a3dcd2a39a0'}});
+test("Cirrus CI", (t) => {
+  const { isCi, service } = m({ env: { CIRRUS_CI: "true" } });
 
   t.is(isCi, true);
-  t.is(service, 'codebuild');
+  t.is(service, "cirrus");
 });
 
-test('Codefresh', (t) => {
-  const {isCi, service} = m({env: {CF_BUILD_ID: '91011'}});
+test("AWS CodeBuild", (t) => {
+  const { isCi, service } = m({ env: { CODEBUILD_BUILD_ID: "env-ci:40cc72d2-acd5-46f4-a86b-6a3dcd2a39a0" } });
 
   t.is(isCi, true);
-  t.is(service, 'codefresh');
+  t.is(service, "codebuild");
 });
 
-test('Codeship', (t) => {
-  const {isCi, service} = m({env: {CI_NAME: 'codeship'}});
+test("Codefresh", (t) => {
+  const { isCi, service } = m({ env: { CF_BUILD_ID: "91011" } });
 
   t.is(isCi, true);
-  t.is(service, 'codeship');
+  t.is(service, "codefresh");
 });
 
-test('Drone', (t) => {
-  const {isCi, service} = m({env: {DRONE: 'true'}});
+test("Codeship", (t) => {
+  const { isCi, service } = m({ env: { CI_NAME: "codeship" } });
 
   t.is(isCi, true);
-  t.is(service, 'drone');
+  t.is(service, "codeship");
 });
 
-test('GitHub', (t) => {
-  const {isCi, service} = m({env: {GITHUB_ACTIONS: 'true'}});
+test("Drone", (t) => {
+  const { isCi, service } = m({ env: { DRONE: "true" } });
 
   t.is(isCi, true);
-  t.is(service, 'github');
+  t.is(service, "drone");
 });
 
-test('GitLab', (t) => {
-  const {isCi, service} = m({env: {GITLAB_CI: 'true'}});
+test("GitHub", (t) => {
+  const { isCi, service } = m({ env: { GITHUB_ACTIONS: "true" } });
 
   t.is(isCi, true);
-  t.is(service, 'gitlab');
+  t.is(service, "github");
 });
 
-test('Jenkins', async (t) => {
-  const {cwd} = await gitRepo();
-  await gitCommit('Test commit message', {cwd});
-
-  const {isCi, service} = m({env: {JENKINS_URL: 'http://jenkins.jenkins.example/'}, cwd});
+test("GitLab", (t) => {
+  const { isCi, service } = m({ env: { GITLAB_CI: "true" } });
 
   t.is(isCi, true);
-  t.is(service, 'jenkins');
+  t.is(service, "gitlab");
 });
 
-test('Puppet', (t) => {
-  const {isCi, service} = m({env: {DISTELLI_APPNAME: 'app'}});
+test("Jenkins", async (t) => {
+  const { cwd } = await gitRepo();
+  await gitCommit("Test commit message", { cwd });
+
+  const { isCi, service } = m({ env: { JENKINS_URL: "http://jenkins.jenkins.example/" }, cwd });
 
   t.is(isCi, true);
-  t.is(service, 'puppet');
+  t.is(service, "jenkins");
 });
 
-test('Sail CI', (t) => {
-  const {isCi, service} = m({env: {SAILCI: 'true'}});
+test("Puppet", (t) => {
+  const { isCi, service } = m({ env: { DISTELLI_APPNAME: "app" } });
 
   t.is(isCi, true);
-  t.is(service, 'sail');
+  t.is(service, "puppet");
 });
 
-test('Scrutinizer', (t) => {
-  const {isCi, service} = m({env: {SCRUTINIZER: 'true'}});
+test("Sail CI", (t) => {
+  const { isCi, service } = m({ env: { SAILCI: "true" } });
 
   t.is(isCi, true);
-  t.is(service, 'scrutinizer');
+  t.is(service, "sail");
 });
 
-test('Semaphore', async (t) => {
-  const {cwd} = await gitRepo();
-  await gitCommit('Test commit message', {cwd});
-
-  const {isCi, service} = m({env: {SEMAPHORE: 'true'}});
+test("Scrutinizer", (t) => {
+  const { isCi, service } = m({ env: { SCRUTINIZER: "true" } });
 
   t.is(isCi, true);
-  t.is(service, 'semaphore');
+  t.is(service, "scrutinizer");
 });
 
-test('Shippable', (t) => {
-  const {isCi, service} = m({env: {SHIPPABLE: 'true'}});
+test("Semaphore", async (t) => {
+  const { cwd } = await gitRepo();
+  await gitCommit("Test commit message", { cwd });
+
+  const { isCi, service } = m({ env: { SEMAPHORE: "true" } });
 
   t.is(isCi, true);
-  t.is(service, 'shippable');
+  t.is(service, "semaphore");
 });
 
-test('TeamCity', (t) => {
-  const {isCi, service} = m({env: {TEAMCITY_VERSION: '2017.1.2 (build 46812)'}});
+test("Shippable", (t) => {
+  const { isCi, service } = m({ env: { SHIPPABLE: "true" } });
 
   t.is(isCi, true);
-  t.is(service, 'teamcity');
+  t.is(service, "shippable");
 });
 
-test('Travis', (t) => {
-  const {isCi, service} = m({env: {TRAVIS: 'true'}});
+test("TeamCity", (t) => {
+  const { isCi, service } = m({ env: { TEAMCITY_VERSION: "2017.1.2 (build 46812)" } });
 
   t.is(isCi, true);
-  t.is(service, 'travis');
+  t.is(service, "teamcity");
 });
 
-test('Vela', (t) => {
-  const {isCi, service} = m({env: {VELA: 'true'}});
+test("Travis", (t) => {
+  const { isCi, service } = m({ env: { TRAVIS: "true" } });
 
   t.is(isCi, true);
-  t.is(service, 'vela');
+  t.is(service, "travis");
 });
 
-test('Wercker', (t) => {
-  const {isCi, service} = m({env: {WERCKER_MAIN_PIPELINE_STARTED: '123456'}});
+test("Vela", (t) => {
+  const { isCi, service } = m({ env: { VELA: "true" } });
 
   t.is(isCi, true);
-  t.is(service, 'wercker');
+  t.is(service, "vela");
 });
 
-test('Unknown CI and Git repository', async (t) => {
-  const {cwd} = await gitRepo();
-  await gitCommit('Test commit message', {cwd});
-
-  const {isCi, service} = m({env: {CI: 'true'}, cwd});
+test("Wercker", (t) => {
+  const { isCi, service } = m({ env: { WERCKER_MAIN_PIPELINE_STARTED: "123456" } });
 
   t.is(isCi, true);
-  t.falsy(service);
+  t.is(service, "wercker");
 });
 
-test('Unknown CI and not a Git repository', (t) => {
-  const cwd = tempy.directory();
+test("Woodpecker CI", (t) => {
+  const { isCi, service } = m({ env: { CI: "woodpecker" } });
 
-  const {isCi, service} = m({env: {CI: 'true'}, cwd});
+  t.is(isCi, true);
+  t.is(service, "woodpecker");
+});
+
+test("Unknown CI and Git repository", async (t) => {
+  const { cwd } = await gitRepo();
+  await gitCommit("Test commit message", { cwd });
+
+  const { isCi, service } = m({ env: { CI: "true" }, cwd });
 
   t.is(isCi, true);
   t.falsy(service);
 });
 
-test('Not CI', (t) => {
+test("Unknown CI and not a Git repository", (t) => {
   const cwd = tempy.directory();
 
-  const {isCi, service} = m({env: {}, cwd});
+  const { isCi, service } = m({ env: { CI: "true" }, cwd });
+
+  t.is(isCi, true);
+  t.falsy(service);
+});
+
+test("Not CI", (t) => {
+  const cwd = tempy.directory();
+
+  const { isCi, service } = m({ env: {}, cwd });
 
   t.is(isCi, false);
   t.falsy(service);
 });
 
-test('Default options', (t) => {
-  const m = proxyquire('..', {process: {env: {}, cwd: () => tempy.directory()}});
+test("Default options", (t) => {
+  const m = proxyquire("..", { process: { env: {}, cwd: () => tempy.directory() } });
 
-  const {isCi, service} = m();
+  const { isCi, service } = m();
 
   t.is(isCi, false);
   t.falsy(service);

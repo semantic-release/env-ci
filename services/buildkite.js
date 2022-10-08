@@ -1,16 +1,16 @@
 // https://buildkite.com/docs/builds/environment-variables
 
 module.exports = {
-  detect({env}) {
+  detect({ env }) {
     return Boolean(env.BUILDKITE);
   },
-  configuration({env}) {
-    const pr = env.BUILDKITE_PULL_REQUEST === 'false' ? undefined : env.BUILDKITE_PULL_REQUEST;
+  configuration({ env }) {
+    const pr = env.BUILDKITE_PULL_REQUEST === "false" ? undefined : env.BUILDKITE_PULL_REQUEST;
     const isPr = Boolean(pr);
 
     return {
-      name: 'Buildkite',
-      service: 'buildkite',
+      name: "Buildkite",
+      service: "buildkite",
       build: env.BUILDKITE_BUILD_NUMBER,
       buildUrl: env.BUILDKITE_BUILD_URL,
       commit: env.BUILDKITE_COMMIT,

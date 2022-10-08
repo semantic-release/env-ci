@@ -1,18 +1,18 @@
 // https://cirrus-ci.org/guide/writing-tasks/#environment-variables
 
-const CIRRUS_CI_DASHBOARD = 'https://cirrus-ci.com';
+const CIRRUS_CI_DASHBOARD = "https://cirrus-ci.com";
 
 module.exports = {
-  detect({env}) {
+  detect({ env }) {
     return Boolean(env.CIRRUS_CI);
   },
-  configuration({env}) {
+  configuration({ env }) {
     const pr = env.CIRRUS_PR;
     const isPr = Boolean(pr);
 
     return {
-      name: 'Cirrus CI',
-      service: 'cirrus',
+      name: "Cirrus CI",
+      service: "cirrus",
       commit: env.CIRRUS_CHANGE_IN_REPO,
       tag: env.CIRRUS_TAG,
       build: env.CIRRUS_BUILD_ID,

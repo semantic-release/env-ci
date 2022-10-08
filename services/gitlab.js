@@ -1,16 +1,16 @@
 // https://docs.gitlab.com/ce/ci/variables/README.html
 
 module.exports = {
-  detect({env}) {
+  detect({ env }) {
     return Boolean(env.GITLAB_CI);
   },
-  configuration({env}) {
+  configuration({ env }) {
     const pr = env.CI_MERGE_REQUEST_ID;
     const isPr = Boolean(pr);
 
     return {
-      name: 'GitLab CI/CD',
-      service: 'gitlab',
+      name: "GitLab CI/CD",
+      service: "gitlab",
       commit: env.CI_COMMIT_SHA,
       tag: env.CI_COMMIT_TAG,
       build: env.CI_PIPELINE_ID,

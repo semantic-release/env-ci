@@ -1,7 +1,7 @@
 // https://docs.github.com/en/actions/learn-github-actions/environment-variables#default-environment-variables
-const {parseBranch} = require('../lib/utils.js');
+const { parseBranch } = require("../lib/utils.js");
 
-const getPrEvent = ({env}) => {
+const getPrEvent = ({ env }) => {
   try {
     const event = env.GITHUB_EVENT_PATH ? require(env.GITHUB_EVENT_PATH) : undefined;
 
@@ -15,7 +15,7 @@ const getPrEvent = ({env}) => {
     // Noop
   }
 
-  return {pr: undefined, branch: undefined};
+  return { pr: undefined, branch: undefined };
 };
 
 const getPrNumber = (env) => {
@@ -24,18 +24,18 @@ const getPrNumber = (env) => {
 };
 
 module.exports = {
-  detect({env}) {
+  detect({ env }) {
     return Boolean(env.GITHUB_ACTIONS);
   },
-  configuration({env, cwd}) {
-    const isPr = env.GITHUB_EVENT_NAME === 'pull_request' || env.GITHUB_EVENT_NAME === 'pull_request_target';
+  configuration({ env, cwd }) {
+    const isPr = env.GITHUB_EVENT_NAME === "pull_request" || env.GITHUB_EVENT_NAME === "pull_request_target";
     const branch = parseBranch(
-      env.GITHUB_EVENT_NAME === 'pull_request_target' ? `refs/pull/${getPrNumber(env)}/merge` : env.GITHUB_REF
+      env.GITHUB_EVENT_NAME === "pull_request_target" ? `refs/pull/${getPrNumber(env)}/merge` : env.GITHUB_REF
     );
 
     return {
-      name: 'GitHub Actions',
-      service: 'github',
+      name: "GitHub Actions",
+      service: "github",
       commit: env.GITHUB_SHA,
       build: env.GITHUB_RUN_ID,
       buildUrl: `${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}/runs/${env.GITHUB_RUN_ID}`,
@@ -44,7 +44,7 @@ module.exports = {
       prBranch: isPr ? branch : undefined,
       slug: env.GITHUB_REPOSITORY,
       root: env.GITHUB_WORKSPACE,
-      ...(isPr ? getPrEvent({env, cwd}) : undefined),
+      ...(isPr ? getPrEvent({ env, cwd }) : undefined),
     };
   },
 };

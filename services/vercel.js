@@ -1,12 +1,12 @@
 // https://vercel.com/docs/environment-variables
 
 module.exports = {
-  detect({env}) {
+  detect({ env }) {
     return Boolean(env.VERCEL) || Boolean(env.NOW_GITHUB_DEPLOYMENT);
   },
-  configuration({env}) {
-    const name = 'Vercel';
-    const service = 'vercel';
+  configuration({ env }) {
+    const name = "Vercel";
+    const service = "vercel";
 
     if (env.VERCEL) {
       return {
