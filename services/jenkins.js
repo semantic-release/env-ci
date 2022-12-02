@@ -9,7 +9,8 @@ module.exports = {
   configuration({ env, cwd }) {
     const pr = env.ghprbPullId || env.gitlabMergeRequestId || env.CHANGE_ID;
     const isPr = Boolean(pr);
-    const localBranch = env.GIT_LOCAL_BRANCH || env.GIT_BRANCH || env.gitlabBranch || env.BRANCH_NAME;
+    const localBranch =
+      env.GIT_LOCAL_BRANCH || env.CHANGE_BRANCH || env.GIT_BRANCH || env.gitlabBranch || env.BRANCH_NAME;
 
     return {
       name: "Jenkins",
