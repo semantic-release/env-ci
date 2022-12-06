@@ -1,6 +1,6 @@
 // http://devcenter.wercker.com/docs/environment-variables/available-env-vars#hs_cos_wrapper_name
 
-module.exports = {
+export default {
   detect({ env }) {
     return Boolean(env.WERCKER_MAIN_PIPELINE_STARTED);
   },

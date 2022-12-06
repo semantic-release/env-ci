@@ -1,6 +1,6 @@
 // https://go-vela.github.io/docs/reference/environment/variables/
 
-module.exports = {
+export default {
   detect({ env }) {
     return Boolean(env.VELA);
   },

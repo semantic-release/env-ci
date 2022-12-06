@@ -2,7 +2,7 @@
 
 const CIRRUS_CI_DASHBOARD = "https://cirrus-ci.com";
 
-module.exports = {
+export default {
   detect({ env }) {
     return Boolean(env.CIRRUS_CI);
   },

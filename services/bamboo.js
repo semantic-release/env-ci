@@ -1,6 +1,6 @@
 // https://confluence.atlassian.com/bamboo/bamboo-variables-289277087.html
 
-module.exports = {
+export default {
   detect({ env }) {
     return Boolean(env.bamboo_agentId);
   },

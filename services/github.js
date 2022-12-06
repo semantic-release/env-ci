@@ -1,13 +1,19 @@
+import { readFileSync } from "node:fs";
+
 // https://docs.github.com/en/actions/learn-github-actions/environment-variables#default-environment-variables
-const { parseBranch } = require("../lib/utils.js");
+import { parseBranch } from "../lib/utils.js";
 
 const getPrEvent = ({ env }) => {
   try {
-    const event = env.GITHUB_EVENT_PATH ? require(env.GITHUB_EVENT_PATH) : undefined;
+    const event = env.GITHUB_EVENT_PATH
+      ? JSON.parse(readFileSync(env.GITHUB_EVENT_PATH, "utf-8"))
+      : undefined;
 
     if (event && event.pull_request) {
       return {
-        branch: event.pull_request.base ? parseBranch(event.pull_request.base.ref) : undefined,
+        branch: event.pull_request.base
+          ? parseBranch(event.pull_request.base.ref)
+          : undefined,
         pr: event.pull_request.number,
       };
     }
@@ -19,18 +25,25 @@ const getPrEvent = ({ env }) => {
 };
 
 const getPrNumber = (env) => {
-  const event = env.GITHUB_EVENT_PATH ? require(env.GITHUB_EVENT_PATH) : undefined;
+  const event = env.GITHUB_EVENT_PATH
+    ? JSON.parse(readFileSync(env.GITHUB_EVENT_PATH, "utf-8"))
+    : undefined;
+
   return event && event.pull_request ? event.pull_request.number : undefined;
 };
 
-module.exports = {
+export default {
   detect({ env }) {
     return Boolean(env.GITHUB_ACTIONS);
   },
   configuration({ env, cwd }) {
-    const isPr = env.GITHUB_EVENT_NAME === "pull_request" || env.GITHUB_EVENT_NAME === "pull_request_target";
+    const isPr =
+      env.GITHUB_EVENT_NAME === "pull_request" ||
+      env.GITHUB_EVENT_NAME === "pull_request_target";
     const branch = parseBranch(
-      env.GITHUB_EVENT_NAME === "pull_request_target" ? `refs/pull/${getPrNumber(env)}/merge` : env.GITHUB_REF
+      env.GITHUB_EVENT_NAME === "pull_request_target"
+        ? `refs/pull/${getPrNumber(env)}/merge`
+        : env.GITHUB_REF
     );
 
     return {
