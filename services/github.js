@@ -12,7 +12,7 @@ const getPrEvent = ({ env }) => {
     if (event && event.pull_request) {
       return {
         branch: event.pull_request.base
-          ? parseBranch(event.pull_request.base.ref)
+          ? parseBranch(event.pull_request.head.ref)
           : undefined,
         pr: event.pull_request.number,
       };
