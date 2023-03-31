@@ -58,6 +58,10 @@
     "woodpecker"
   ],
   "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
   "repository": "github:semantic-release/env-ci",
   "scripts": {
     "lint": "prettier --check \"*.{js,json,md}\" \".github/**/*.{md,yml}\" \"{lib,services,test}/**/*.js\"",
