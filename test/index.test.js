@@ -146,6 +146,13 @@ test("Sail CI", (t) => {
   t.is(service, "sail");
 });
 
+test("Screwdriver.cd", (t) => {
+  const { isCi, service } = envCi({ env: { SCREWDRIVER: "true" } });
+
+  t.is(isCi, true);
+  t.is(service, "screwdriver");
+});
+
 test("Scrutinizer", (t) => {
   const { isCi, service } = envCi({ env: { SCRUTINIZER: "true" } });
 

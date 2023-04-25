@@ -19,6 +19,7 @@ import jenkins from "./services/jenkins.js";
 import netlify from "./services/netlify.js";
 import puppet from "./services/puppet.js";
 import sail from "./services/sail.js";
+import screwdriver from "./services/screwdriver.js";
 import scrutinizer from "./services/scrutinizer.js";
 import semaphore from "./services/semaphore.js";
 import shippable from "./services/shippable.js";
@@ -50,6 +51,7 @@ const services = {
   netlify,
   puppet,
   sail,
+  screwdriver,
   scrutinizer,
   semaphore,
   shippable,
