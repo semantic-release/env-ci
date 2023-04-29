@@ -75,7 +75,9 @@ if (isCI) {
 
 **Note**: Some variables can be detected only on certain CI services. See [Supported CI](#supported-ci).
 
-**Note**: The `pr` and `prBranch` properties are only available for builds triggered when a Pull Request is opened/updated and not on builds triggered by a push on a branch even if that branch happens to be the branch from which the Pull Request originated.
+**Note**: The `pr` and `prBranch` properties are only available for builds triggered when a Pull Request is
+opened/updated and not on builds triggered by a push on a branch even if that branch happens to be the branch from which
+the Pull Request originated.
 
 ## Supported CI
 
@@ -101,6 +103,7 @@ if (isCI) {
 | [Netlify](https://docs.netlify.com/configure-builds/environment-variables/#netlify-configuration-variables)                            |     `netlify`     | :white_check_mark: |    [:warning:](#netlify)    | :white_check_mark: |           :x:           | :white_check_mark: | :white_check_mark: |        :x:         |        :x:         |  :white_check_mark:   |  :white_check_mark:   |  :white_check_mark:   | :white_check_mark: | :white_check_mark: |
 | [Puppet](https://puppet.com/docs/pipelines-for-apps/enterprise/environment-variable.html)                                              |     `puppet`      | :white_check_mark: |     :white_check_mark:      | :white_check_mark: |           :x:           | :white_check_mark: | :white_check_mark: |        :x:         |        :x:         |          :x:          |          :x:          |          :x:          |        :x:         | :white_check_mark: |
 | [Sail CI](https://sail.ci/docs/environment-variables)                                                                                  |      `sail`       | :white_check_mark: |     [:warning:](#sail)      | :white_check_mark: |           :x:           |        :x:         |        :x:         |        :x:         |        :x:         |  :white_check_mark:   |  :white_check_mark:   |          :x:          | :white_check_mark: | :white_check_mark: |
+| [Screwdriver.cd](https://docs.screwdriver.cd/user-guide/environment-variables)                                                         |   `screwdriver`   | :white_check_mark: |  [:warning:](#screwdriver)  | :white_check_mark: |           :x:           | :white_check_mark: | :white_check_mark: | :white_check_mark: |        :x:         |  :white_check_mark:   |  :white_check_mark:   |  :white_check_mark:   | :white_check_mark: | :white_check_mark: |
 | [Scrutinizer](https://scrutinizer-ci.com/docs/build/environment-variables)                                                             |   `scrutinizer`   | :white_check_mark: |     :white_check_mark:      | :white_check_mark: |           :x:           | :white_check_mark: |        :x:         |        :x:         |        :x:         |  :white_check_mark:   |  :white_check_mark:   |  :white_check_mark:   |        :x:         |        :x:         |
 | [Semaphore](https://docs.semaphoreci.com/article/12-environment-variables)                                                             |    `semaphore`    | :white_check_mark: |   [:warning:](#semaphore)   | :white_check_mark: | [:warning:](#semaphore) | :white_check_mark: |        :x:         |        :x:         |        :x:         |  :white_check_mark:   |  :white_check_mark:   |  :white_check_mark:   | :white_check_mark: | :white_check_mark: |
 | [Shippable](http://docs.shippable.com/ci/env-vars/#stdEnv)                                                                             |    `shippable`    | :white_check_mark: |     :white_check_mark:      | :white_check_mark: |   :white_check_mark:    | :white_check_mark: | :white_check_mark: | :white_check_mark: |        :x:         |  :white_check_mark:   |  :white_check_mark:   |  :white_check_mark:   | :white_check_mark: | :white_check_mark: |
@@ -114,9 +117,11 @@ if (isCI) {
 
 :warning: See [Caveats](#caveats)
 
-**Note**: Unsupported properties will always be `undefined`. For example if a Ci services doesn't support triggering builds when a Pull Request is opened/updated, `isPr` will be `undefined`.
+**Note**: Unsupported properties will always be `undefined`. For example if a Ci services doesn't support triggering
+builds when a Pull Request is opened/updated, `isPr` will be `undefined`.
 
-**Note**: If none of the above CI services is detected, `commit` and `branch` are determined based on the local Git repository, and `isCi` is determined based on the `CI` environment variable.
+**Note**: If none of the above CI services is detected, `commit` and `branch` are determined based on the local Git
+repository, and `isCi` is determined based on the `CI` environment variable.
 
 ## API
 
@@ -138,7 +143,8 @@ The object to read environment variables from.
 Type: `String`<br>
 Default: `process.cwd()`
 
-The current working directory in which to execute `git` commands used to determine the `commit` and `branch` [Result](#result) properties in case no [supported CI](#supported-ci) is detected.
+The current working directory in which to execute `git` commands used to determine the `commit`
+and `branch` [Result](#result) properties in case no [supported CI](#supported-ci) is detected.
 
 ### Result
 
@@ -150,48 +156,75 @@ Type: `Object`
 
 ### AWS CodeBuild
 
-AWS CodeBuild doesn't provide an environment variable to determine the current Git branch being built. In addition, it clones the repository in a [detached head state](https://git-scm.com/docs/git-checkout#_detached_head) so the branch cannot be determined with `git rev-parse --abbrev-ref HEAD`.
-To work around this limitation, `env-ci` look for the remote branches having the same `HEAD` as the local detached `HEAD` to determine the branch from which the detached `HEAD` was created.
-In the rare case where there is multiple remote branches with the same `HEAD` as the local detached `HEAD`, `env-ci` will arbitrarily pick the first one. This can lead to an inaccurate `branch` value in such circumstances.
+AWS CodeBuild doesn't provide an environment variable to determine the current Git branch being built. In addition, it
+clones the repository in a [detached head state](https://git-scm.com/docs/git-checkout#_detached_head) so the branch
+cannot be determined with `git rev-parse --abbrev-ref HEAD`.
+To work around this limitation, `env-ci` look for the remote branches having the same `HEAD` as the local
+detached `HEAD` to determine the branch from which the detached `HEAD` was created.
+In the rare case where there is multiple remote branches with the same `HEAD` as the local detached `HEAD`, `env-ci`
+will arbitrarily pick the first one. This can lead to an inaccurate `branch` value in such circumstances.
 
 ### Buddy
 
-For builds triggered when [a Pull Request is opened/updated](https://buddy.works/knowledge/deployments/pull-requests), Buddy doesn't provide an environment variable indicating the branch from which the Pull Request originated nor the target branch. It also build from a branch named `pull/<PR number>` so the target branch cannot be determined with a `git` command.
-Therefore in the case of Pull Request builds, `env-ci` will not be able to determine the `branch` and `prBranch` properties.
+For builds triggered when [a Pull Request is opened/updated](https://buddy.works/knowledge/deployments/pull-requests),
+Buddy doesn't provide an environment variable indicating the branch from which the Pull Request originated nor the
+target branch. It also build from a branch named `pull/<PR number>` so the target branch cannot be determined with
+a `git` command.
+Therefore, in the case of Pull Request builds, `env-ci` will not be able to determine the `branch` and `prBranch`
+properties.
 
 See [feature request](https://forum.buddy.works/t/determine-pull-request-branch-with-environment-variable/911).
 
 ### CircleCI
 
-For builds triggered when a Pull Request is opened/updated, CircleCI doesn't provide an environment variable indicating the target branch.
-Therefore in the case of Pull Request builds, `env-ci` will not be able to determine the `branch` property. However `prBranch` will be set.
+For builds triggered when a Pull Request is opened/updated, CircleCI doesn't provide an environment variable indicating
+the target branch.
+Therefore, in the case of Pull Request builds, `env-ci` will not be able to determine the `branch` property.
+However `prBranch` will be set.
 
 See [feature request](https://discuss.circleci.com/t/create-a-circle-target-branch-envar/10022).
 
 ### Cloudflare Pages
 
-For builds triggered when a Pull Request is opened/updated, Cloudflare Pages will re-use the branch variable for the originating branch and not provide a target. Therefore `env-ci` will not be able to determine the `prBranch` property however `branch` will always be set.
+For builds triggered when a Pull Request is opened/updated, Cloudflare Pages will re-use the branch variable for the
+originating branch and not provide a target. Therefore `env-ci` will not be able to determine the `prBranch` property
+however `branch` will always be set.
 
 ### Jenkins
 
-Triggering build when a Pull Request is opened/updated is supported only via the [ghprb-plugin](https://github.com/jenkinsci/ghprb-plugin) and [gitlab-plugin](https://github.com/jenkinsci/gitlab-plugin). Therefore `env-ci` will set `isPr`, `pr` and `prBranch` and define `branch` with the Pull Request target branch only if one those plugin is used.
+Triggering build when a Pull Request is opened/updated is supported only via
+the [ghprb-plugin](https://github.com/jenkinsci/ghprb-plugin)
+and [gitlab-plugin](https://github.com/jenkinsci/gitlab-plugin). Therefore `env-ci` will set `isPr`, `pr` and `prBranch`
+and define `branch` with the Pull Request target branch only if one those plugin is used.
 
 ### Netlify
 
-For builds triggered when a Pull Request is opened/updated, Netlify doesn't provide an environment variable indicating the target branch.
-Therefore in the case of Pull Request builds, `env-ci` will not be able to determine the `branch` property. However `prBranch` will be set.
+For builds triggered when a Pull Request is opened/updated, Netlify doesn't provide an environment variable indicating
+the target branch.
+Therefore, in the case of Pull Request builds, `env-ci` will not be able to determine the `branch` property.
+However `prBranch` will be set.
 
 See [feature request](https://answers.netlify.com/t/access-pr-target-branch-when-deploying-preview-build/32402)
 
 ### Sail
 
-For builds triggered when a Pull Request is opened/updated, Sail doesn't provide an environment variable indicating the target branch, and the one for the current branch is set to `pull/<PR number>` independently of the the branch name from which the Pull Request originated.
-Therefore in the case of Pull Request builds, `env-ci` will not be able to determine the `branch` and `prBranch` properties.
+For builds triggered when a Pull Request is opened/updated, Sail doesn't provide an environment variable indicating the
+target branch, and the one for the current branch is set to `pull/<PR number>` independently of the the branch name from
+which the Pull Request originated.
+Therefore, in the case of Pull Request builds, `env-ci` will not be able to determine the `branch` and `prBranch`
+properties.
 
 ### Semaphore
 
-For builds triggered when a Pull Request is opened/updated, Semaphore 1.0 doesn't provide an environment variable indicating the target branch.
-Therefore in the case of Pull Request builds, `env-ci` will not be able to determine the `branch` property. However `prBranch` will be set.
+For builds triggered when a Pull Request is opened/updated, Semaphore 1.0 doesn't provide an environment variable
+indicating the target branch.
+Therefore, in the case of Pull Request builds, `env-ci` will not be able to determine the `branch` property.
+However `prBranch` will be set.
 On Semaphore 2.0 the `branch` and `prBranch` properties will work as expected.
 
 The property `tag` is only available on Semaphore 2.0.
+
+### Screwdriver
+
+For builds triggered when a Pull Request is opened/updated, Screwdriver sets the `env.GIT_BRANCH` as `head:pr` branch
+type (Example:`origin/refs/pull/1/head:pr`) while at commit level (non PR) it does set it with the actual branch (Example: `origin/main`).
