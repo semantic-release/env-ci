@@ -11,7 +11,7 @@
   },
   "devDependencies": {
     "ava": "5.3.0",
-    "c8": "7.14.0",
+    "c8": "8.0.0",
     "file-url": "4.0.0",
     "prettier": "2.8.8",
     "tempy": "3.0.0"
