@@ -216,6 +216,15 @@ test("Woodpecker CI", (t) => {
   t.is(service, "woodpecker");
 });
 
+test("Jetbrains Space", (t) => {
+  const { isCi, service } = envCi({
+    env: { JB_SPACE_EXECUTION_NUMBER: "123" },
+  });
+
+  t.is(isCi, true);
+  t.is(service, "jetbrainsSpace");
+});
+
 test("Unknown CI and Git repository", async (t) => {
   const { cwd } = await gitRepo();
   await gitCommit("Test commit message", { cwd });
