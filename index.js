@@ -29,6 +29,7 @@ import vela from "./services/vela.js";
 import vercel from "./services/vercel.js";
 import wercker from "./services/wercker.js";
 import woodpecker from "./services/woodpecker.js";
+import jetbrainsSpace from "./services/jetbrains-space.js";
 
 const services = {
   appveyor,
@@ -61,6 +62,7 @@ const services = {
   vercel,
   wercker,
   woodpecker,
+  jetbrainsSpace,
 };
 
 export default ({ env = process.env, cwd = process.cwd() } = {}) => {
