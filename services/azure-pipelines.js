@@ -16,12 +16,12 @@ export default {
       commit: env.BUILD_SOURCEVERSION,
       build: env.BUILD_BUILDNUMBER,
       branch: parseBranch(
-        isPr ? env.SYSTEM_PULLREQUEST_TARGETBRANCH : env.BUILD_SOURCEBRANCH
+        isPr ? env.SYSTEM_PULLREQUEST_TARGETBRANCH : env.BUILD_SOURCEBRANCH,
       ),
       pr,
       isPr,
       prBranch: parseBranch(
-        isPr ? env.SYSTEM_PULLREQUEST_SOURCEBRANCH : undefined
+        isPr ? env.SYSTEM_PULLREQUEST_SOURCEBRANCH : undefined,
       ),
       root: env.BUILD_REPOSITORY_LOCALPATH,
     };

@@ -50,6 +50,6 @@ test("PR", (t) => {
       isPr: true,
       prBranch: "pr-branch",
       slug: "owner/repo",
-    }
+    },
   );
 });

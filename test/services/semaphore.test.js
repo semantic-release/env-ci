@@ -59,7 +59,7 @@ test("PR 1.0", async (t) => {
       isPr: true,
       prBranch: "pr-branch",
       slug: "owner/repo",
-    }
+    },
   );
 });
 
@@ -80,7 +80,7 @@ test("Push 2.0", (t) => {
       isPr: false,
       prBranch: undefined,
       slug: "owner/repo",
-    }
+    },
   );
 });
 
@@ -105,6 +105,6 @@ test("PR 2.0", (t) => {
       isPr: true,
       prBranch: "pr-branch",
       slug: "owner/repo",
-    }
+    },
   );
 });

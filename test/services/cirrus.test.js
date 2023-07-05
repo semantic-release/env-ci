@@ -56,6 +56,6 @@ test("PR", (t) => {
       prBranch: "pr-branch",
       slug: "owner/repo",
       root: "/",
-    }
+    },
   );
 });

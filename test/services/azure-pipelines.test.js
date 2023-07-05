@@ -38,7 +38,7 @@ test("Push - with long branch name", (t) => {
       isPr: false,
       prBranch: undefined,
       root: "/",
-    }
+    },
   );
 });
 
@@ -62,6 +62,6 @@ test("PR", (t) => {
       isPr: true,
       prBranch: "pr-branch",
       root: "/",
-    }
+    },
   );
 });

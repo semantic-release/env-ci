@@ -70,7 +70,7 @@ test("PR - with event.json file", (t) => {
       pr: "10",
       root: "/workspace",
       slug: "owner/repo",
-    }
+    },
   );
 });
 
@@ -101,7 +101,7 @@ test("PR - target", (t) => {
       pr: "10",
       root: "/workspace",
       slug: "owner/repo",
-    }
+    },
   );
 });
 
@@ -130,7 +130,7 @@ test("PR - with event.json file and short branch name", (t) => {
       pr: "10",
       root: "/workspace",
       slug: "owner/repo",
-    }
+    },
   );
 });
 
@@ -155,7 +155,7 @@ test("PR - with missing event.json file", (t) => {
       pr: undefined,
       root: "/workspace",
       slug: "owner/repo",
-    }
+    },
   );
 });
 
@@ -179,7 +179,7 @@ test("PR - with missing event.json file path", (t) => {
       pr: undefined,
       root: "/workspace",
       slug: "owner/repo",
-    }
+    },
   );
 });
 
@@ -208,7 +208,7 @@ test('PR - with missing "pull_request" in event.json file', (t) => {
       pr: undefined,
       root: "/workspace",
       slug: "owner/repo",
-    }
+    },
   );
 });
 
@@ -237,7 +237,7 @@ test('PR - with missing "pull_request.base" in event.json file', (t) => {
       pr: "10",
       root: "/workspace",
       slug: "owner/repo",
-    }
+    },
   );
 });
 

@@ -58,7 +58,7 @@ test("PR", (t) => {
       prBranch: "my-branch",
       slug: "Org/Project",
       root: "/home/Org/Project",
-    }
+    },
   );
 });
 
@@ -86,6 +86,6 @@ test("Tag", (t) => {
       prBranch: undefined,
       slug: "Org/Project",
       root: "/home/Org/Project",
-    }
+    },
   );
 });

@@ -39,7 +39,7 @@ test("Push", (t) => {
       isPr: false,
       slug: "d2lam/myPipeline",
       root: "sd/workspace",
-    }
+    },
   );
 });
 
@@ -69,6 +69,6 @@ test("PR", (t) => {
       isPr: true,
       slug: "d2lam/myPipeline",
       root: "sd/workspace",
-    }
+    },
   );
 });

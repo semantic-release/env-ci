@@ -59,6 +59,6 @@ test("PR", (t) => {
       prBranch: "pr-branch",
       slug: "owner/repo",
       root: "/woodpecker/src/github.com/owner/repo",
-    }
+    },
   );
 });

@@ -49,6 +49,6 @@ test("PR", (t) => {
       pr: "10",
       isPr: true,
       slug: "owner/repo",
-    }
+    },
   );
 });
