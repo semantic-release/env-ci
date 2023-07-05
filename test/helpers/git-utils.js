@@ -59,7 +59,7 @@ export async function initBareRepo(origin, branch = "master") {
 export async function gitShallowClone(
   repositoryUrl,
   branch = "master",
-  depth = 1
+  depth = 1,
 ) {
   const cwd = temporaryDirectory();
 
@@ -78,7 +78,7 @@ export async function gitShallowClone(
     ],
     {
       cwd,
-    }
+    },
   );
   return cwd;
 }
@@ -94,7 +94,7 @@ export async function gitCheckout(branch, create, options) {
   await execa(
     "git",
     create ? ["checkout", "-b", branch] : ["checkout", branch],
-    options
+    options,
   );
 }
 
@@ -110,7 +110,7 @@ export async function gitCommit(message, options) {
   await execa(
     "git",
     ["commit", "-m", message, "--allow-empty", "--no-gpg-sign"],
-    options
+    options,
   );
   const { stdout } = await execa("git", ["rev-parse", "HEAD"], options);
   return stdout;

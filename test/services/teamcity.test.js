@@ -32,7 +32,7 @@ test("Push - with build properties file", (t) => {
       branch: "master",
       root: "/",
       slug: "owner/repo",
-    }
+    },
   );
 });
 
@@ -59,7 +59,7 @@ test("Push - with build and config properties files", (t) => {
       branch: "master",
       root: "/",
       slug: "owner/repo",
-    }
+    },
   );
 });
 
@@ -87,7 +87,7 @@ test("Push - prioritize build properties file values", (t) => {
       branch: "master",
       root: "/",
       slug: "owner/repo",
-    }
+    },
   );
 });
 
@@ -128,7 +128,7 @@ test("Push - with build and missing config properties files", async (t) => {
       branch: "master",
       root: undefined,
       slug: "owner/repo",
-    }
+    },
   );
 });
 
@@ -148,6 +148,6 @@ test("Push - with missing build properties files", async (t) => {
       branch: "master",
       root: undefined,
       slug: "owner/repo",
-    }
+    },
   );
 });

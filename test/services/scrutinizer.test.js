@@ -39,6 +39,6 @@ test("PR", (t) => {
       pr: "10",
       isPr: true,
       prBranch: "pr-branch",
-    }
+    },
   );
 });

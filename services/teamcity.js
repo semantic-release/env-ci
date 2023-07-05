@@ -38,7 +38,7 @@ const getProperties = ({ env, cwd }) => {
           ? configProperties.get(PROPERTIES_MAPPING[key])
           : undefined) ||
         (key === "branch" ? branch({ env, cwd }) : undefined),
-    ])
+    ]),
   );
 };
 

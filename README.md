@@ -41,7 +41,7 @@ if (isCI) {
 
   if (isPr) {
     console.log(
-      `Building Pull Request #${pr} originating from branch ${prBranch} and targeting branch ${branch}`
+      `Building Pull Request #${pr} originating from branch ${prBranch} and targeting branch ${branch}`,
     );
   } else {
     console.log(`Building branch ${branch}`);

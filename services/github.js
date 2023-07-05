@@ -43,7 +43,7 @@ export default {
     const branch = parseBranch(
       env.GITHUB_EVENT_NAME === "pull_request_target"
         ? `refs/pull/${getPrNumber(env)}/merge`
-        : env.GITHUB_REF
+        : env.GITHUB_REF,
     );
 
     return {

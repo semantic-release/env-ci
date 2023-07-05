@@ -48,7 +48,7 @@ test("PR 1.0", (t) => {
       isPr: true,
       prBranch: "pr-branch",
       slug: "owner/repo",
-    }
+    },
   );
 });
 
@@ -74,7 +74,7 @@ test("PR 2.0", (t) => {
       isPr: true,
       prBranch: "pr-branch",
       slug: "owner/repo",
-    }
+    },
   );
 });
 
@@ -96,6 +96,6 @@ test("PR 2.0 without pull uri", (t) => {
       isPr: true,
       prBranch: "pr-branch",
       slug: "owner/repo",
-    }
+    },
   );
 });

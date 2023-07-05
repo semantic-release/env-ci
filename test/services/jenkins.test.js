@@ -23,7 +23,7 @@ test("Push", (t) => {
       pr: undefined,
       prBranch: undefined,
       isPr: false,
-    }
+    },
   );
 });
 
@@ -43,7 +43,7 @@ test("PR", (t) => {
       pr: "10",
       prBranch: "pr-branch",
       isPr: true,
-    }
+    },
   );
 });
 
@@ -68,7 +68,7 @@ test("PR (PR ghprb-plugin)", (t) => {
       pr: "10",
       prBranch: "pr-branch",
       isPr: true,
-    }
+    },
   );
 });
 
@@ -93,6 +93,6 @@ test("PR (gitlab-plugin)", (t) => {
       pr: "10",
       prBranch: "pr-branch",
       isPr: true,
-    }
+    },
   );
 });

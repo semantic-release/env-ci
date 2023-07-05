@@ -40,6 +40,6 @@ test("PR", (t) => {
       root: "/workspace/repo",
       pr: "10",
       isPr: true,
-    }
+    },
   );
 });
