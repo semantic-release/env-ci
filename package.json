@@ -6,7 +6,7 @@
   "type": "module",
   "exports": "./index.js",
   "dependencies": {
-    "execa": "^7.0.0",
+    "execa": "^8.0.0",
     "java-properties": "^1.0.2"
   },
   "devDependencies": {
@@ -17,7 +17,7 @@
     "tempy": "3.1.0"
   },
   "engines": {
-    "node": "^16.14 || >=18"
+    "node": "^18.17 || >=20.6.1"
   },
   "files": [
     "index.js",
