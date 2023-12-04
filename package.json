@@ -10,7 +10,7 @@
     "java-properties": "^1.0.2"
   },
   "devDependencies": {
-    "ava": "5.3.1",
+    "ava": "6.0.0",
     "c8": "8.0.1",
     "file-url": "4.0.0",
     "prettier": "3.1.0",
