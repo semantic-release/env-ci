@@ -40,7 +40,7 @@ test("PR", (t) => {
       env: {
         ...env,
         CI_COMMIT_PULL_REQUEST: "10",
-        CI_PIPEL_EVENT: "pull_request",
+        CI_PIPELINE_EVENT: "pull_request",
         CI_COMMIT_TARGET_BRANCH: "main",
         CI_COMMIT_SOURCE_BRANCH: "pr-branch",
       },
