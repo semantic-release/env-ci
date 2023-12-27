@@ -1,5 +1,5 @@
 import test from "ava";
-import { head, branch } from "../../lib/git.js";
+import { getSlugFromGitURL, head, branch } from "../../lib/git.js";
 import {
   gitRepo,
   gitCommit,
@@ -37,4 +37,13 @@ test("Git cloned repository with detached head", async (t) => {
 
   t.is(head({ cwd }), await gitHead({ cwd }));
   t.is(branch({ cwd }), "master");
+});
+
+test("Slug from git URL", (t) => {
+  t.is(getSlugFromGitURL(""), undefined);
+  t.is(getSlugFromGitURL("invalid url"), undefined);
+  t.is(getSlugFromGitURL("https://github.com/owner/repo.git"), "owner/repo");
+  t.is(getSlugFromGitURL("git@github.com:owner/repo.git"), "owner/repo");
+  t.is(getSlugFromGitURL("user@host.com:9418/owner/repo.git"), "owner/repo");
+  t.is(getSlugFromGitURL("user@192.169.0.1:9418/owner/repo.git"), "owner/repo");
 });
