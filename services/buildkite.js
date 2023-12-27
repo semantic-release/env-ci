@@ -1,4 +1,5 @@
 // https://buildkite.com/docs/builds/environment-variables
+import { getSlugFromGitURL } from "../lib/git.js";
 
 export default {
   detect({ env }) {
@@ -21,7 +22,7 @@ export default {
       branch: isPr
         ? env.BUILDKITE_PULL_REQUEST_BASE_BRANCH
         : env.BUILDKITE_BRANCH,
-      slug: `${env.BUILDKITE_ORGANIZATION_SLUG}/${env.BUILDKITE_PROJECT_SLUG}`,
+      slug: getSlugFromGitURL(env.BUILDKITE_REPO),
       pr,
       isPr,
       prBranch: isPr ? env.BUILDKITE_BRANCH : undefined,
