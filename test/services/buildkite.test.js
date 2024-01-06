@@ -10,8 +10,7 @@ const env = {
   BUILDKITE_BRANCH: "master",
   BUILDKITE_PULL_REQUEST: "false",
   BUILDKITE_BUILD_CHECKOUT_PATH: "/",
-  BUILDKITE_ORGANIZATION_SLUG: "owner",
-  BUILDKITE_PROJECT_SLUG: "repo",
+  BUILDKITE_REPO: "git@github.com:owner/repo.git",
 };
 
 test("Push", (t) => {
