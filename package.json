@@ -13,7 +13,7 @@
     "ava": "6.1.1",
     "c8": "9.1.0",
     "file-url": "4.0.0",
-    "prettier": "3.2.4",
+    "prettier": "3.2.5",
     "tempy": "3.1.0"
   },
   "engines": {
