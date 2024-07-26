@@ -57,8 +57,8 @@ if (isCI) {
 
 | Variable   | Description                                                                                            |
 | ---------- | ------------------------------------------------------------------------------------------------------ |
-| `name`     | CI service Commercial name (e.g. `Travis CI`, `CircleCI`, `GitLab CI/CD`)                              |
-| `service`  | Standardized CI service name (e.g. `travis`, `circleci`, `gitlab`)                                     |
+| `name`     | CI service Commercial name (e.g. `Travis CI`, `CircleCI`, `GitLab CI/CD`, `Buddy`)                              |
+| `service`  | Standardized CI service name (e.g. `travis`, `circleci`, `gitlab`, `buddy`)                                     |
 | `isCi`     | `true` is running on a CI, `false` otherwise                                                           |
 | `branch`   | Git branch being built or targeted by a Pull Request                                                   |
 | `commit`   | Commit sha that triggered the CI build                                                                 |
@@ -88,7 +88,7 @@ the Pull Request originated.
 | [Bamboo](https://confluence.atlassian.com/bamboo/bamboo-variables-289277087.html)                                                      |     `bamboo`      | :white_check_mark: |     :white_check_mark:      | :white_check_mark: |           :x:           | :white_check_mark: | :white_check_mark: | :white_check_mark: |        :x:         |          :x:          |          :x:          |          :x:          |        :x:         | :white_check_mark: |
 | [Bitbucket](https://confluence.atlassian.com/bitbucket/environment-variables-794502608.html)                                           |    `bitbucket`    | :white_check_mark: |     :white_check_mark:      | :white_check_mark: |   :white_check_mark:    | :white_check_mark: | :white_check_mark: |        :x:         |        :x:         |          :x:          |          :x:          |          :x:          | :white_check_mark: | :white_check_mark: |
 | [Bitrise](https://devcenter.bitrise.io/builds/available-environment-variables/#exposed-by-bitriseio)                                   |     `bitrise`     | :white_check_mark: |     :white_check_mark:      | :white_check_mark: |   :white_check_mark:    | :white_check_mark: | :white_check_mark: |        :x:         |        :x:         |  :white_check_mark:   |  :white_check_mark:   |  :white_check_mark:   | :white_check_mark: |        :x:         |
-| [Buddy](https://buddy.works/knowledge/deployments/how-use-environment-variables#default-environment-variables)                         |      `buddy`      | :white_check_mark: |     [:warning:](#buddy)     | :white_check_mark: |   :white_check_mark:    | :white_check_mark: | :white_check_mark: |        :x:         |        :x:         |  :white_check_mark:   |  :white_check_mark:   |          :x:          | :white_check_mark: |        :x:         |
+| [Buddy](https://buddy.works/docs/pipelines/environment-variables#default-environment-variables)                         |      `buddy`      | :white_check_mark: |     :white_check_mark:      | :white_check_mark: |   :white_check_mark:    | :white_check_mark: | :white_check_mark: |        :white_check_mark:         |        :white_check_mark:         |  :white_check_mark:   |  :white_check_mark:   |         :white_check_mark:         | :white_check_mark: |        :white_check_mark:         |
 | [Buildkite](https://buildkite.com/docs/builds/environment-variables)                                                                   |    `buildkite`    | :white_check_mark: |     :white_check_mark:      | :white_check_mark: |   :white_check_mark:    | :white_check_mark: | :white_check_mark: |        :x:         |        :x:         |  :white_check_mark:   |  :white_check_mark:   |  :white_check_mark:   | :white_check_mark: | :white_check_mark: |
 | [CircleCI](https://circleci.com/docs/2.0/env-vars/#built-in-environment-variables)                                                     |    `circleci`     | :white_check_mark: |   [:warning:](#circleci)    | :white_check_mark: |   :white_check_mark:    | :white_check_mark: | :white_check_mark: | :white_check_mark: |        :x:         |  :white_check_mark:   |  :white_check_mark:   |  :white_check_mark:   | :white_check_mark: |        :x:         |
 | [Cirrus CI](https://cirrus-ci.org/guide/writing-tasks/#environment-variables)                                                          |     `cirrus`      | :white_check_mark: |     :white_check_mark:      | :white_check_mark: |   :white_check_mark:    | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |  :white_check_mark:   |  :white_check_mark:   |  :white_check_mark:   | :white_check_mark: | :white_check_mark: |
@@ -166,12 +166,16 @@ will arbitrarily pick the first one. This can lead to an inaccurate `branch` val
 
 ### Buddy
 
-For builds triggered when [a Pull Request is opened/updated](https://buddy.works/knowledge/deployments/pull-requests),
+For builds triggered when [a Pull Request is opened/updated](https://buddy.works/docs/pipeline-examples/pull-request-testing),
 Buddy doesn't provide an environment variable indicating the branch from which the Pull Request originated nor the
 target branch. It also build from a branch named `pull/<PR number>` so the target branch cannot be determined with
 a `git` command.
 Therefore, in the case of Pull Request builds, `env-ci` will not be able to determine the `branch` and `prBranch`
 properties.
+
+
+For builds triggered when [a Pull Request is opened/updated](https://buddy.works/docs/pipeline-examples/pull-request-testing),
+Buddy now provides environment variables indicating the branch from which the Pull Request originated (`BUDDY_EXECUTION_PULL_REQUEST_HEAD_BRANCH`) and the target branch (`BUDDY_EXECUTION_PULL_REQUEST_BASE_BRANCH`). Therefore, in the case of Pull Request builds, `env-ci` can determine the `branch` and `prBranch` properties accurately.
 
 See [feature request](https://forum.buddy.works/t/determine-pull-request-branch-with-environment-variable/911).
 
