@@ -167,17 +167,11 @@ will arbitrarily pick the first one. This can lead to an inaccurate `branch` val
 ### Buddy
 
 For builds triggered when [a Pull Request is opened/updated](https://buddy.works/docs/pipeline-examples/pull-request-testing),
-Buddy doesn't provide an environment variable indicating the branch from which the Pull Request originated nor the
-target branch. It also build from a branch named `pull/<PR number>` so the target branch cannot be determined with
-a `git` command.
-Therefore, in the case of Pull Request builds, `env-ci` will not be able to determine the `branch` and `prBranch`
-properties.
+Buddy now provides environment variables indicating the branch from which the Pull Request originated (`BUDDY_EXECUTION_PULL_REQUEST_HEAD_BRANCH`) and the target branch (`BUDDY_EXECUTION_PULL_REQUEST_BASE_BRANCH`).
+
+Therefore, in the case of Pull Request builds, `env-ci` can determine the `branch` and `prBranch` properties accurately.
 
 
-For builds triggered when [a Pull Request is opened/updated](https://buddy.works/docs/pipeline-examples/pull-request-testing),
-Buddy now provides environment variables indicating the branch from which the Pull Request originated (`BUDDY_EXECUTION_PULL_REQUEST_HEAD_BRANCH`) and the target branch (`BUDDY_EXECUTION_PULL_REQUEST_BASE_BRANCH`). Therefore, in the case of Pull Request builds, `env-ci` can determine the `branch` and `prBranch` properties accurately.
-
-See [feature request](https://forum.buddy.works/t/determine-pull-request-branch-with-environment-variable/911).
 
 ### CircleCI
 
