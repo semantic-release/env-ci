@@ -17,7 +17,9 @@ export default {
       tag: env.BUDDY_EXECUTION_TAG,
       build: env.BUDDY_EXECUTION_ID,
       buildUrl: env.BUDDY_EXECUTION_URL,
-      branch: isPr ? undefined : env.BUDDY_EXECUTION_BRANCH,
+      branch: isPr
+        ? env.BUDDY_EXECUTION_PULL_REQUEST_HEAD_BRANCH
+        : env.BUDDY_EXECUTION_BRANCH,
       pr,
       isPr,
       slug: env.BUDDY_REPO_SLUG,
