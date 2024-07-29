@@ -57,8 +57,8 @@ if (isCI) {
 
 | Variable   | Description                                                                                            |
 | ---------- | ------------------------------------------------------------------------------------------------------ |
-| `name`     | CI service Commercial name (e.g. `Travis CI`, `CircleCI`, `GitLab CI/CD`, `Buddy`)                              |
-| `service`  | Standardized CI service name (e.g. `travis`, `circleci`, `gitlab`, `buddy`)                                     |
+| `name`     | CI service Commercial name (e.g. `Travis CI`, `CircleCI`, `GitLab CI/CD`)                              |
+| `service`  | Standardized CI service name (e.g. `travis`, `circleci`, `gitlab`)                                     |
 | `isCi`     | `true` is running on a CI, `false` otherwise                                                           |
 | `branch`   | Git branch being built or targeted by a Pull Request                                                   |
 | `commit`   | Commit sha that triggered the CI build                                                                 |
