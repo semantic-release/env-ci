@@ -164,14 +164,6 @@ detached `HEAD` to determine the branch from which the detached `HEAD` was creat
 In the rare case where there is multiple remote branches with the same `HEAD` as the local detached `HEAD`, `env-ci`
 will arbitrarily pick the first one. This can lead to an inaccurate `branch` value in such circumstances.
 
-### Buddy
-
-For builds triggered when [a Pull Request is opened/updated](https://buddy.works/docs/pipeline-examples/pull-request-testing),
-Buddy now provides environment variables indicating the branch from which the Pull Request originated (`BUDDY_EXECUTION_PULL_REQUEST_HEAD_BRANCH`) and the target branch (`BUDDY_EXECUTION_PULL_REQUEST_BASE_BRANCH`).
-
-Therefore, in the case of Pull Request builds, `env-ci` can determine the `branch` and `prBranch` properties accurately.
-
-
 
 ### CircleCI
 
