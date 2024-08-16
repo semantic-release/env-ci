@@ -1,4 +1,4 @@
-// https://buddy.works/knowledge/deployments/how-use-environment-variables#default-environment-variables
+// https://buddy.works/docs/pipelines/environment-variables#default-environment-variables
 
 import { prNumber } from "../lib/utils.js";
 
@@ -9,6 +9,7 @@ export default {
   configuration({ env }) {
     const pr = prNumber(env.BUDDY_EXECUTION_PULL_REQUEST_ID);
     const isPr = Boolean(pr);
+    const branch = isPr ? env.BUDDY_EXECUTION_PULL_REQUEST_HEAD_BRANCH : env.BUDDY_EXECUTION_BRANCH;
 
     return {
       name: "Buddy",
@@ -17,7 +18,8 @@ export default {
       tag: env.BUDDY_EXECUTION_TAG,
       build: env.BUDDY_EXECUTION_ID,
       buildUrl: env.BUDDY_EXECUTION_URL,
-      branch: isPr ? undefined : env.BUDDY_EXECUTION_BRANCH,
+      branch,
+      prBranch: isPr ? branch : undefined,
       pr,
       isPr,
       slug: env.BUDDY_REPO_SLUG,
