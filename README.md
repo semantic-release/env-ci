@@ -88,7 +88,7 @@ the Pull Request originated.
 | [Bamboo](https://confluence.atlassian.com/bamboo/bamboo-variables-289277087.html)                                                      |     `bamboo`      | :white_check_mark: |     :white_check_mark:      | :white_check_mark: |           :x:           | :white_check_mark: | :white_check_mark: | :white_check_mark: |        :x:         |          :x:          |          :x:          |          :x:          |        :x:         | :white_check_mark: |
 | [Bitbucket](https://confluence.atlassian.com/bitbucket/environment-variables-794502608.html)                                           |    `bitbucket`    | :white_check_mark: |     :white_check_mark:      | :white_check_mark: |   :white_check_mark:    | :white_check_mark: | :white_check_mark: |        :x:         |        :x:         |          :x:          |          :x:          |          :x:          | :white_check_mark: | :white_check_mark: |
 | [Bitrise](https://devcenter.bitrise.io/builds/available-environment-variables/#exposed-by-bitriseio)                                   |     `bitrise`     | :white_check_mark: |     :white_check_mark:      | :white_check_mark: |   :white_check_mark:    | :white_check_mark: | :white_check_mark: |        :x:         |        :x:         |  :white_check_mark:   |  :white_check_mark:   |  :white_check_mark:   | :white_check_mark: |        :x:         |
-| [Buddy](https://buddy.works/knowledge/deployments/how-use-environment-variables#default-environment-variables)                         |      `buddy`      | :white_check_mark: |     [:warning:](#buddy)     | :white_check_mark: |   :white_check_mark:    | :white_check_mark: | :white_check_mark: |        :x:         |        :x:         |  :white_check_mark:   |  :white_check_mark:   |          :x:          | :white_check_mark: |        :x:         |
+| [Buddy](https://buddy.works/knowledge/deployments/how-use-environment-variables#default-environment-variables)                         |      `buddy`      | :white_check_mark: |     :white_check_mark:      | :white_check_mark: |   :white_check_mark:    | :white_check_mark: | :white_check_mark: |        :x:         |        :x:         |  :white_check_mark:   |  :white_check_mark:   |          :x:          | :white_check_mark: |        :x:         |
 | [Buildkite](https://buildkite.com/docs/builds/environment-variables)                                                                   |    `buildkite`    | :white_check_mark: |     :white_check_mark:      | :white_check_mark: |   :white_check_mark:    | :white_check_mark: | :white_check_mark: |        :x:         |        :x:         |  :white_check_mark:   |  :white_check_mark:   |  :white_check_mark:   | :white_check_mark: | :white_check_mark: |
 | [CircleCI](https://circleci.com/docs/2.0/env-vars/#built-in-environment-variables)                                                     |    `circleci`     | :white_check_mark: |   [:warning:](#circleci)    | :white_check_mark: |   :white_check_mark:    | :white_check_mark: | :white_check_mark: | :white_check_mark: |        :x:         |  :white_check_mark:   |  :white_check_mark:   |  :white_check_mark:   | :white_check_mark: |        :x:         |
 | [Cirrus CI](https://cirrus-ci.org/guide/writing-tasks/#environment-variables)                                                          |     `cirrus`      | :white_check_mark: |     :white_check_mark:      | :white_check_mark: |   :white_check_mark:    | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |  :white_check_mark:   |  :white_check_mark:   |  :white_check_mark:   | :white_check_mark: | :white_check_mark: |
@@ -163,17 +163,6 @@ To work around this limitation, `env-ci` look for the remote branches having the
 detached `HEAD` to determine the branch from which the detached `HEAD` was created.
 In the rare case where there is multiple remote branches with the same `HEAD` as the local detached `HEAD`, `env-ci`
 will arbitrarily pick the first one. This can lead to an inaccurate `branch` value in such circumstances.
-
-### Buddy
-
-For builds triggered when [a Pull Request is opened/updated](https://buddy.works/knowledge/deployments/pull-requests),
-Buddy doesn't provide an environment variable indicating the branch from which the Pull Request originated nor the
-target branch. It also build from a branch named `pull/<PR number>` so the target branch cannot be determined with
-a `git` command.
-Therefore, in the case of Pull Request builds, `env-ci` will not be able to determine the `branch` and `prBranch`
-properties.
-
-See [feature request](https://forum.buddy.works/t/determine-pull-request-branch-with-environment-variable/911).
 
 ### CircleCI
 
