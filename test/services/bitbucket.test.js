@@ -6,8 +6,9 @@ const env = {
   BITBUCKET_TAG: "tag_name",
   BITBUCKET_BUILD_NUMBER: "1964",
   BITBUCKET_BRANCH: "master",
-  BITBUCKET_REPO_SLUG: "owner/repo",
+  BITBUCKET_REPO_SLUG: "repo",
   BITBUCKET_CLONE_DIR: "/",
+  BITBUCKET_REPO_FULL_NAME: "owner/repo",
 };
 
 test("Push", (t) => {
