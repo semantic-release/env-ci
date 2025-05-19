@@ -1,16 +1,19 @@
 // https://devcenter.bitrise.io/builds/available-environment-variables/#exposed-by-bitriseio
 
-module.exports = {
-  detect({env}) {
+export default {
+  detect({ env }) {
     return Boolean(env.BITRISE_IO);
   },
-  configuration({env}) {
-    const pr = env.BITRISE_PULL_REQUEST === 'false' ? undefined : env.BITRISE_PULL_REQUEST;
+  configuration({ env }) {
+    const pr =
+      env.BITRISE_PULL_REQUEST === "false"
+        ? undefined
+        : env.BITRISE_PULL_REQUEST;
     const isPr = Boolean(pr);
 
     return {
-      name: 'Bitrise',
-      service: 'bitrise',
+      name: "Bitrise",
+      service: "bitrise",
       commit: env.BITRISE_GIT_COMMIT,
       tag: env.BITRISE_GIT_TAG,
       build: env.BITRISE_BUILD_NUMBER,

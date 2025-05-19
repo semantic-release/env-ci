@@ -1,16 +1,16 @@
 // http://docs.shippable.com/ci/env-vars/#stdEnv
 
-module.exports = {
-  detect({env}) {
+export default {
+  detect({ env }) {
     return Boolean(env.SHIPPABLE);
   },
-  configuration({env}) {
-    const pr = env.IS_PULL_REQUEST === 'true' ? env.PULL_REQUEST : undefined;
+  configuration({ env }) {
+    const pr = env.IS_PULL_REQUEST === "true" ? env.PULL_REQUEST : undefined;
     const isPr = Boolean(pr);
 
     return {
-      name: 'Shippable',
-      service: 'shippable',
+      name: "Shippable",
+      service: "shippable",
       commit: env.COMMIT,
       tag: env.GIT_TAG_NAME,
       build: env.BUILD_NUMBER,

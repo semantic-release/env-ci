@@ -1,18 +1,20 @@
 // https://circleci.com/docs/2.0/env-vars/#built-in-environment-variables
 
-const {prNumber} = require('../lib/utils');
+import { prNumber } from "../lib/utils.js";
 
-module.exports = {
-  detect({env}) {
+export default {
+  detect({ env }) {
     return Boolean(env.CIRCLECI);
   },
-  configuration({env}) {
-    const pr = env.CIRCLE_PR_NUMBER || prNumber(env.CIRCLE_PULL_REQUEST || env.CI_PULL_REQUEST);
+  configuration({ env }) {
+    const pr =
+      env.CIRCLE_PR_NUMBER ||
+      prNumber(env.CIRCLE_PULL_REQUEST || env.CI_PULL_REQUEST);
     const isPr = Boolean(pr);
 
     return {
-      name: 'CircleCI',
-      service: 'circleci',
+      name: "CircleCI",
+      service: "circleci",
       build: env.CIRCLE_BUILD_NUM,
       buildUrl: env.CIRCLE_BUILD_URL,
       job: `${env.CIRCLE_BUILD_NUM}.${env.CIRCLE_NODE_INDEX}`,

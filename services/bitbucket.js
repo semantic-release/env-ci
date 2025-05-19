@@ -1,13 +1,13 @@
 // https://confluence.atlassian.com/bitbucket/environment-variables-794502608.html
 
-module.exports = {
-  detect({env}) {
+export default {
+  detect({ env }) {
     return Boolean(env.BITBUCKET_BUILD_NUMBER);
   },
-  configuration({env}) {
+  configuration({ env }) {
     return {
-      name: 'Bitbucket Pipelines',
-      service: 'bitbucket',
+      name: "Bitbucket Pipelines",
+      service: "bitbucket",
       commit: env.BITBUCKET_COMMIT,
       tag: env.BITBUCKET_TAG,
       build: env.BITBUCKET_BUILD_NUMBER,

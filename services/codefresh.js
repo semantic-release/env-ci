@@ -1,16 +1,16 @@
 // https://codefresh.io/docs/docs/codefresh-yaml/variables#system-provided-variables
 
-module.exports = {
-  detect({env}) {
+export default {
+  detect({ env }) {
     return Boolean(env.CF_BUILD_ID);
   },
-  configuration({env}) {
+  configuration({ env }) {
     const pr = env.CF_PULL_REQUEST_NUMBER;
     const isPr = Boolean(pr);
 
     return {
-      name: 'Codefresh',
-      service: 'codefresh',
+      name: "Codefresh",
+      service: "codefresh",
       commit: env.CF_REVISION,
       build: env.CF_BUILD_ID,
       buildUrl: env.CF_BUILD_URL,

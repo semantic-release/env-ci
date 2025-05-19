@@ -1,16 +1,17 @@
 // https://docs.travis-ci.com/user/environment-variables#default-environment-variables
 
-module.exports = {
-  detect({env}) {
+export default {
+  detect({ env }) {
     return Boolean(env.TRAVIS);
   },
-  configuration({env}) {
-    const pr = env.TRAVIS_PULL_REQUEST === 'false' ? undefined : env.TRAVIS_PULL_REQUEST;
+  configuration({ env }) {
+    const pr =
+      env.TRAVIS_PULL_REQUEST === "false" ? undefined : env.TRAVIS_PULL_REQUEST;
     const isPr = Boolean(pr);
 
     return {
-      name: 'Travis CI',
-      service: 'travis',
+      name: "Travis CI",
+      service: "travis",
       commit: env.TRAVIS_COMMIT,
       tag: env.TRAVIS_TAG,
       build: env.TRAVIS_BUILD_NUMBER,

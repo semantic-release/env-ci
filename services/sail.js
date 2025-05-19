@@ -1,16 +1,16 @@
 // https://sail.ci/docs/environment-variables
 
-module.exports = {
-  detect({env}) {
+export default {
+  detect({ env }) {
     return Boolean(env.SAILCI);
   },
-  configuration({env}) {
+  configuration({ env }) {
     const pr = env.SAIL_PULL_REQUEST_NUMBER;
     const isPr = Boolean(pr);
 
     return {
-      name: 'Sail CI',
-      service: 'sail',
+      name: "Sail CI",
+      service: "sail",
       commit: env.SAIL_COMMIT_SHA,
       branch: isPr ? undefined : env.SAIL_COMMIT_BRANCH,
       pr,

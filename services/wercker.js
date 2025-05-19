@@ -1,13 +1,13 @@
 // http://devcenter.wercker.com/docs/environment-variables/available-env-vars#hs_cos_wrapper_name
 
-module.exports = {
-  detect({env}) {
+export default {
+  detect({ env }) {
     return Boolean(env.WERCKER_MAIN_PIPELINE_STARTED);
   },
-  configuration({env}) {
+  configuration({ env }) {
     return {
-      name: 'Wercker',
-      service: 'wercker',
+      name: "Wercker",
+      service: "wercker",
       commit: env.WERCKER_GIT_COMMIT,
       build: env.WERCKER_MAIN_PIPELINE_STARTED,
       buildUrl: env.WERCKER_RUN_URL,

@@ -1,16 +1,16 @@
 // https://www.appveyor.com/docs/environment-variables
 
-module.exports = {
-  detect({env}) {
+export default {
+  detect({ env }) {
     return Boolean(env.APPVEYOR);
   },
-  configuration({env}) {
+  configuration({ env }) {
     const pr = env.APPVEYOR_PULL_REQUEST_NUMBER;
     const isPr = Boolean(pr);
 
     return {
-      name: 'Appveyor',
-      service: 'appveyor',
+      name: "Appveyor",
+      service: "appveyor",
       commit: env.APPVEYOR_REPO_COMMIT,
       tag: env.APPVEYOR_REPO_TAG_NAME,
       build: env.APPVEYOR_BUILD_NUMBER,

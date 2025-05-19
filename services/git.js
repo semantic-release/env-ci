@@ -1,7 +1,7 @@
-const {head, branch} = require('../lib/git');
+import { head, branch } from "../lib/git.js";
 
-module.exports = {
+export default {
   configuration(options) {
-    return {commit: head(options), branch: branch(options)};
+    return { commit: head(options), branch: branch(options) };
   },
 };

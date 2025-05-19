@@ -1,15 +1,15 @@
 // https://readme.drone.io/reference/environ
 
-module.exports = {
-  detect({env}) {
+export default {
+  detect({ env }) {
     return Boolean(env.DRONE);
   },
-  configuration({env}) {
-    const isPr = env.DRONE_BUILD_EVENT === 'pull_request';
+  configuration({ env }) {
+    const isPr = env.DRONE_BUILD_EVENT === "pull_request";
 
     return {
-      name: 'Drone',
-      service: 'drone',
+      name: "Drone",
+      service: "drone",
       commit: env.DRONE_COMMIT_SHA,
       tag: env.DRONE_TAG,
       build: env.DRONE_BUILD_NUMBER,

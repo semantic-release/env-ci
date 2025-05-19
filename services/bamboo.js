@@ -1,13 +1,13 @@
 // https://confluence.atlassian.com/bamboo/bamboo-variables-289277087.html
 
-module.exports = {
-  detect({env}) {
+export default {
+  detect({ env }) {
     return Boolean(env.bamboo_agentId);
   },
-  configuration({env}) {
+  configuration({ env }) {
     return {
-      name: 'Bamboo',
-      service: 'bamboo',
+      name: "Bamboo",
+      service: "bamboo",
       commit: env.bamboo_planRepository_1_revision,
       build: env.bamboo_buildNumber,
       buildUrl: env.bamboo_buildResultsUrl,

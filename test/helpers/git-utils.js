@@ -1,6 +1,6 @@
-const tempy = require('tempy');
-const execa = require('execa');
-const fileUrl = require('file-url');
+import { temporaryDirectory } from "tempy";
+import { execa } from "execa";
+import fileUrl from "file-url";
 
 /**
  * Create a temporary git repository.
@@ -11,20 +11,20 @@ const fileUrl = require('file-url');
  * @param {String} [branch='master'] The branch to initialize.
  * @return {String} The path of the clone if `withRemote` is `true`, the path of the repository otherwise.
  */
-async function gitRepo(withRemote, branch = 'master') {
-  let cwd = tempy.directory();
+export async function gitRepo(withRemote, branch = "master") {
+  let cwd = temporaryDirectory();
 
-  await execa('git', ['init'].concat(withRemote ? ['--bare'] : []), {cwd});
+  await execa("git", ["init", ...(withRemote ? ["--bare"] : [])], { cwd });
 
   const repositoryUrl = fileUrl(cwd);
   if (withRemote) {
     await initBareRepo(repositoryUrl, branch);
     cwd = await gitShallowClone(repositoryUrl);
   } else {
-    await gitCheckout(branch, true, {cwd});
+    await gitCheckout(branch, true, { cwd });
   }
 
-  return {cwd, repositoryUrl};
+  return { cwd, repositoryUrl };
 }
 
 /**
@@ -38,12 +38,12 @@ async function gitRepo(withRemote, branch = 'master') {
  * @param {String} origin The URL of the bare repository.
  * @param {String} [branch='master'] the branch to initialize.
  */
-async function initBareRepo(origin, branch = 'master') {
-  const cwd = tempy.directory();
-  await execa('git', ['clone', '--no-hardlinks', origin, cwd], {cwd});
-  await gitCheckout(branch, true, {cwd});
-  await gitCommit('Initial commit', {cwd});
-  await execa('git', ['push', origin, branch], {cwd});
+export async function initBareRepo(origin, branch = "master") {
+  const cwd = temporaryDirectory();
+  await execa("git", ["clone", "--no-hardlinks", origin, cwd], { cwd });
+  await gitCheckout(branch, true, { cwd });
+  await gitCommit("Initial commit", { cwd });
+  await execa("git", ["push", origin, branch], { cwd });
 }
 
 /**
@@ -56,12 +56,30 @@ async function initBareRepo(origin, branch = 'master') {
  *
  * @return {String} The path of the cloned repository.
  */
-async function gitShallowClone(repositoryUrl, branch = 'master', depth = 1) {
-  const cwd = tempy.directory();
+export async function gitShallowClone(
+  repositoryUrl,
+  branch = "master",
+  depth = 1,
+) {
+  const cwd = temporaryDirectory();
 
-  await execa('git', ['clone', '--no-hardlinks', '--no-tags', '-b', branch, '--depth', depth, repositoryUrl, cwd], {
-    cwd,
-  });
+  await execa(
+    "git",
+    [
+      "clone",
+      "--no-hardlinks",
+      "--no-tags",
+      "-b",
+      branch,
+      "--depth",
+      depth,
+      repositoryUrl,
+      cwd,
+    ],
+    {
+      cwd,
+    },
+  );
   return cwd;
 }
 
@@ -72,8 +90,12 @@ async function gitShallowClone(repositoryUrl, branch = 'master', depth = 1) {
  * @param {boolean} create to create the branche ans switch, `false` to only switch.
  * @param {Object} [options] Options to pass to `execa`.
  */
-async function gitCheckout(branch, create, options) {
-  await execa('git', create ? ['checkout', '-b', branch] : ['checkout', branch], options);
+export async function gitCheckout(branch, create, options) {
+  await execa(
+    "git",
+    create ? ["checkout", "-b", branch] : ["checkout", branch],
+    options,
+  );
 }
 
 /**
@@ -84,9 +106,14 @@ async function gitCheckout(branch, create, options) {
  *
  * @returns {String} The created commit sha.
  */
-async function gitCommit(message, options) {
-  await execa('git', ['commit', '-m', message, '--allow-empty', '--no-gpg-sign'], options);
-  return (await execa('git', ['rev-parse', 'HEAD'], options)).stdout;
+export async function gitCommit(message, options) {
+  await execa(
+    "git",
+    ["commit", "-m", message, "--allow-empty", "--no-gpg-sign"],
+    options,
+  );
+  const { stdout } = await execa("git", ["rev-parse", "HEAD"], options);
+  return stdout;
 }
 
 /**
@@ -94,8 +121,7 @@ async function gitCommit(message, options) {
  *
  * @return {String} The sha of the head commit in the current git repository.
  */
-async function gitHead(options) {
-  return (await execa('git', ['rev-parse', 'HEAD'], options)).stdout;
+export async function gitHead(options) {
+  const { stdout } = await execa("git", ["rev-parse", "HEAD"], options);
+  return stdout;
 }
-
-module.exports = {gitRepo, initBareRepo, gitShallowClone, gitCheckout, gitCommit, gitHead};
