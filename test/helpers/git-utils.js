@@ -1,5 +1,5 @@
 import { temporaryDirectory } from "tempy";
-import { execa } from "execa";
+import spawn from "nano-spawn";
 import fileUrl from "file-url";
 
 /**
@@ -14,7 +14,7 @@ import fileUrl from "file-url";
 export async function gitRepo(withRemote, branch = "master") {
   let cwd = temporaryDirectory();
 
-  await execa("git", ["init", ...(withRemote ? ["--bare"] : [])], { cwd });
+  await spawn("git", ["init", ...(withRemote ? ["--bare"] : [])], { cwd });
 
   const repositoryUrl = fileUrl(cwd);
   if (withRemote) {
@@ -40,10 +40,10 @@ export async function gitRepo(withRemote, branch = "master") {
  */
 export async function initBareRepo(origin, branch = "master") {
   const cwd = temporaryDirectory();
-  await execa("git", ["clone", "--no-hardlinks", origin, cwd], { cwd });
+  await spawn("git", ["clone", "--no-hardlinks", origin, cwd], { cwd });
   await gitCheckout(branch, true, { cwd });
   await gitCommit("Initial commit", { cwd });
-  await execa("git", ["push", origin, branch], { cwd });
+  await spawn("git", ["push", origin, branch], { cwd });
 }
 
 /**
@@ -63,7 +63,7 @@ export async function gitShallowClone(
 ) {
   const cwd = temporaryDirectory();
 
-  await execa(
+  await spawn(
     "git",
     [
       "clone",
@@ -72,7 +72,7 @@ export async function gitShallowClone(
       "-b",
       branch,
       "--depth",
-      depth,
+      String(depth),
       repositoryUrl,
       cwd,
     ],
@@ -88,10 +88,10 @@ export async function gitShallowClone(
  *
  * @param {String} branch Branch name.
  * @param {boolean} create to create the branche ans switch, `false` to only switch.
- * @param {Object} [options] Options to pass to `execa`.
+ * @param {Object} [options] Options to pass to `spawn`.
  */
 export async function gitCheckout(branch, create, options) {
-  await execa(
+  await spawn(
     "git",
     create ? ["checkout", "-b", branch] : ["checkout", branch],
     options,
@@ -102,26 +102,26 @@ export async function gitCheckout(branch, create, options) {
  * Create commit on the current git repository.
  *
  * @param {String} message commit message.
- * @param {Object} [options] Options to pass to `execa`.
+ * @param {Object} [options] Options to pass to `spawn`.
  *
  * @returns {String} The created commit sha.
  */
 export async function gitCommit(message, options) {
-  await execa(
+  await spawn(
     "git",
     ["commit", "-m", message, "--allow-empty", "--no-gpg-sign"],
     options,
   );
-  const { stdout } = await execa("git", ["rev-parse", "HEAD"], options);
+  const { stdout } = await spawn("git", ["rev-parse", "HEAD"], options);
   return stdout;
 }
 
 /**
- * @param {Object} [options] Options to pass to `execa`.
+ * @param {Object} [options] Options to pass to `spawn`.
  *
  * @return {String} The sha of the head commit in the current git repository.
  */
 export async function gitHead(options) {
-  const { stdout } = await execa("git", ["rev-parse", "HEAD"], options);
+  const { stdout } = await spawn("git", ["rev-parse", "HEAD"], options);
   return stdout;
 }
