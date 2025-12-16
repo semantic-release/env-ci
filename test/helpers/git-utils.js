@@ -1,6 +1,40 @@
 import { temporaryDirectory } from "tempy";
-import { execa } from "execa";
+import { spawn } from "node:child_process";
 import fileUrl from "file-url";
+
+function exec(bin, args = [], options = {}) {
+  const child = spawn(bin, args, {
+    ...options,
+    encoding: "utf-8",
+  });
+
+  return new Promise((resolve, reject) => {
+    const result = {
+      stdout: "",
+      stderr: "",
+      exitCode: null,
+    };
+
+    child.stdout.on("data", (buffer) => {
+      result.stdout += buffer;
+    });
+    child.stderr.on("data", (buffer) => {
+      result.stderr += buffer;
+    });
+    child.on("exit", (code) => {
+      result.exitCode = code;
+    });
+    child.on("close", (code) => {
+      result.exitCode ??= code;
+      result.stdout = result.stdout.slice(0, -1);
+      result.stderr = result.stderr.slice(0, -1);
+      resolve(result);
+    });
+    child.on("error", (error) => {
+      reject(error);
+    });
+  });
+}
 
 /**
  * Create a temporary git repository.
@@ -14,7 +48,7 @@ import fileUrl from "file-url";
 export async function gitRepo(withRemote, branch = "master") {
   let cwd = temporaryDirectory();
 
-  await execa("git", ["init", ...(withRemote ? ["--bare"] : [])], { cwd });
+  await exec("git", ["init", ...(withRemote ? ["--bare"] : [])], { cwd });
 
   const repositoryUrl = fileUrl(cwd);
   if (withRemote) {
@@ -40,10 +74,10 @@ export async function gitRepo(withRemote, branch = "master") {
  */
 export async function initBareRepo(origin, branch = "master") {
   const cwd = temporaryDirectory();
-  await execa("git", ["clone", "--no-hardlinks", origin, cwd], { cwd });
+  await exec("git", ["clone", "--no-hardlinks", origin, cwd], { cwd });
   await gitCheckout(branch, true, { cwd });
   await gitCommit("Initial commit", { cwd });
-  await execa("git", ["push", origin, branch], { cwd });
+  await exec("git", ["push", origin, branch], { cwd });
 }
 
 /**
@@ -63,7 +97,7 @@ export async function gitShallowClone(
 ) {
   const cwd = temporaryDirectory();
 
-  await execa(
+  await exec(
     "git",
     [
       "clone",
@@ -72,7 +106,7 @@ export async function gitShallowClone(
       "-b",
       branch,
       "--depth",
-      depth,
+      String(depth),
       repositoryUrl,
       cwd,
     ],
@@ -88,10 +122,10 @@ export async function gitShallowClone(
  *
  * @param {String} branch Branch name.
  * @param {boolean} create to create the branche ans switch, `false` to only switch.
- * @param {Object} [options] Options to pass to `execa`.
+ * @param {Object} [options] Options to pass to `exec`.
  */
 export async function gitCheckout(branch, create, options) {
-  await execa(
+  await exec(
     "git",
     create ? ["checkout", "-b", branch] : ["checkout", branch],
     options,
@@ -102,26 +136,26 @@ export async function gitCheckout(branch, create, options) {
  * Create commit on the current git repository.
  *
  * @param {String} message commit message.
- * @param {Object} [options] Options to pass to `execa`.
+ * @param {Object} [options] Options to pass to `exec`.
  *
  * @returns {String} The created commit sha.
  */
 export async function gitCommit(message, options) {
-  await execa(
+  await exec(
     "git",
     ["commit", "-m", message, "--allow-empty", "--no-gpg-sign"],
     options,
   );
-  const { stdout } = await execa("git", ["rev-parse", "HEAD"], options);
+  const { stdout } = await exec("git", ["rev-parse", "HEAD"], options);
   return stdout;
 }
 
 /**
- * @param {Object} [options] Options to pass to `execa`.
+ * @param {Object} [options] Options to pass to `exec`.
  *
  * @return {String} The sha of the head commit in the current git repository.
  */
 export async function gitHead(options) {
-  const { stdout } = await execa("git", ["rev-parse", "HEAD"], options);
+  const { stdout } = await exec("git", ["rev-parse", "HEAD"], options);
   return stdout;
 }
