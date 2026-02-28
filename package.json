@@ -6,7 +6,6 @@
   "type": "module",
   "exports": "./index.js",
   "dependencies": {
-    "execa": "^8.0.0",
     "java-properties": "^1.0.2"
   },
   "devDependencies": {
