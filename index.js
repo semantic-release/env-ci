@@ -16,6 +16,7 @@ import git from "./services/git.js";
 import github from "./services/github.js";
 import gitlab from "./services/gitlab.js";
 import jenkins from "./services/jenkins.js";
+import jetbrainsSpace from "./services/jetbrains-space.js";
 import netlify from "./services/netlify.js";
 import puppet from "./services/puppet.js";
 import sail from "./services/sail.js";
@@ -29,9 +30,8 @@ import vela from "./services/vela.js";
 import vercel from "./services/vercel.js";
 import wercker from "./services/wercker.js";
 import woodpecker from "./services/woodpecker.js";
-import jetbrainsSpace from "./services/jetbrains-space.js";
 
-const services = {
+const services = [
   appveyor,
   azurePipelines,
   bamboo,
@@ -49,6 +49,7 @@ const services = {
   github,
   gitlab,
   jenkins,
+  jetbrainsSpace,
   netlify,
   puppet,
   sail,
@@ -62,15 +63,13 @@ const services = {
   vercel,
   wercker,
   woodpecker,
-  jetbrainsSpace,
-};
+];
 
 export default ({ env = process.env, cwd = process.cwd() } = {}) => {
-  for (const name of Object.keys(services)) {
-    if (services[name].detect({ env, cwd })) {
-      return { isCi: true, ...services[name].configuration({ env, cwd }) };
-    }
-  }
+  const service = services.find((s) => s.detect({ cwd, env })) || git;
 
-  return { isCi: Boolean(env.CI), ...git.configuration({ env, cwd }) };
+  return {
+    isCi: service !== git || Boolean(env.CI),
+    ...service.configuration({ env, cwd }),
+  };
 };
