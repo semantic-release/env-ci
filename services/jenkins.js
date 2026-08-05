@@ -1,4 +1,4 @@
-import { head } from "../lib/git.js";
+import { getSlugFromGitURL, head } from "../lib/git.js";
 
 // https://wiki.jenkins.io/display/JENKINS/Building+a+software+project
 
@@ -18,6 +18,7 @@ export default {
     return {
       name: "Jenkins",
       service: "jenkins",
+      slug: getSlugFromGitURL(env.GIT_URL),
       commit: env.ghprbActualCommit || env.GIT_COMMIT || head({ env, cwd }),
       branch: isPr
         ? env.ghprbTargetBranch || env.gitlabTargetBranch
