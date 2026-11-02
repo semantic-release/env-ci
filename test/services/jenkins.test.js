@@ -3,6 +3,7 @@ import jenkins from "../../services/jenkins.js";
 
 const env = {
   JENKINS_URL: "http://jenkins.jenkins.example/",
+  GIT_URL: "https://github.com/user/repo.git",
   GIT_COMMIT: "5678",
   BUILD_NUMBER: "91011",
   BUILD_URL: "http://jenkins.jenkins.example/buildResult",
@@ -15,6 +16,7 @@ test("Push", (t) => {
     {
       name: "Jenkins",
       service: "jenkins",
+      slug: "user/repo",
       commit: "5678",
       build: "91011",
       buildUrl: "http://jenkins.jenkins.example/buildResult",
@@ -35,6 +37,7 @@ test("PR", (t) => {
     {
       name: "Jenkins",
       service: "jenkins",
+      slug: "user/repo",
       commit: "5678",
       build: "91011",
       buildUrl: "http://jenkins.jenkins.example/buildResult",
@@ -60,6 +63,7 @@ test("PR (PR ghprb-plugin)", (t) => {
     {
       name: "Jenkins",
       service: "jenkins",
+      slug: "user/repo",
       commit: "5678",
       build: "91011",
       buildUrl: "http://jenkins.jenkins.example/buildResult",
@@ -85,6 +89,7 @@ test("PR (gitlab-plugin)", (t) => {
     {
       name: "Jenkins",
       service: "jenkins",
+      slug: "user/repo",
       commit: "5678",
       build: "91011",
       buildUrl: "http://jenkins.jenkins.example/buildResult",
